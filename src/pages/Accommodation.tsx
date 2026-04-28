@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Wind, Wifi, Home, Sun, CheckCircle2, Coffee, Tv, Utensils, UtensilsCrossed, Users, Maximize, Clock, Ban, Cigarette, ShieldCheck, ChevronRight, MapPin } from 'lucide-react';
+import { Wind, Wifi, Home, Sun, CheckCircle2, Coffee, Tv, Utensils, UtensilsCrossed, Users, Maximize, Clock, Ban, Cigarette, ShieldCheck, ChevronRight, MapPin, Calendar } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 
 export default function Accommodation() {

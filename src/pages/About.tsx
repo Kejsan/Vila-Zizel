@@ -1,11 +1,11 @@
 import { motion } from 'motion/react';
-import { Trees, Sun, Heart, MapPin, Car, Camera, Map, ChevronRight } from 'lucide-react';
+import { Trees, Sun, Heart, MapPin, Car, Camera, Map, ChevronRight, ShieldCheck, Globe } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 import { Link } from 'react-router-dom';
 
 const fadeIn = {
   hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } }
+  visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" as const } }
 };
 
 const staggerContainer = {
