@@ -39,7 +39,7 @@ Welcome to the **Vila Zizel** repository. This is a modern React application des
    ```
 
 3. **Configure Environment Variables**:
-   Copy the example environment file and add your Gemini API key (if needed for AI features):
+   Copy the example environment file:
    ```bash
    cp .env.example .env
    ```
