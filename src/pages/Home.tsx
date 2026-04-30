@@ -139,11 +139,11 @@ export default function Home() {
           <span className="text-[#E25A89] font-bold text-xs uppercase tracking-[0.4em] mb-4 block underline underline-offset-8 transition-all hover:tracking-[0.6em] cursor-default">{t.home.exploreSuites}</span>
           <h2 className="text-5xl md:text-7xl font-serif text-[#4A453E] mb-20">{t.rooms.title} <span className="italic font-light text-[#E25A89]">{t.rooms.highlight}</span></h2>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full max-w-6xl">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full max-w-7xl">
             {[
-              { name: t.rooms.zeus, img: "https://images.unsplash.com/photo-1590490360182-c33d57733427?w=800&q=80", color: 'rose' },
-              { name: t.rooms.hera, img: "https://images.unsplash.com/photo-1522771731478-44637043a860?w=800&q=80", color: 'amber' },
-              { name: t.rooms.poseidon, img: "https://images.unsplash.com/photo-1566665797739-1674de7a421a?w=800&q=80", color: 'blue' }
+              { name: t.rooms.aphrodite, img: "/Images/Rooms/Aphrodite/Exterior 1.avif", color: 'rose' },
+              { name: t.rooms.hera, img: "/Images/Rooms/Hera/Exterior 1.avif", color: 'amber' },
+              { name: t.rooms.poseidonHera, img: "/Images/Rooms/Poseidon-Hera/Bedroom A 1.avif", color: 'emerald' }
             ].map((room, i) => (
               <motion.div 
                 key={i}

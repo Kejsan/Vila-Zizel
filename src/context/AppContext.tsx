@@ -41,7 +41,7 @@ export const translations: any = {
     rooms: { 
       tag: 'The Stay', 
       title: 'Mythical', highlight: 'Havens.', 
-      zeus: 'Zeus Suite', hera: 'Hera Room', poseidon: 'Poseidon Studio',
+      hera: 'Hera Room', aphrodite: 'Aphrodite Room', poseidonHera: 'Poseidon-Hera Unit',
       inquire: 'Inquire Availability', learnMore: 'Learn More',
       rulesTitle: 'House Rules',
       checkIn: 'Check-in: 2:00 PM - 8:00 PM',
@@ -76,23 +76,23 @@ export const translations: any = {
       familyLabel: 'Family'
     },
     roomsData: {
-      zeus: {
-        name: 'Zeus Suite',
-        desc: 'A powerful presence with majestic views.',
-        longDesc: 'The Zeus Suite is our most premium offering, featuring handmade wooden furniture and a private terrace overlooking the botanical gardens.',
-        features: ['Private Terrace', 'Handmade Desk', 'King Size Bed']
+      aphrodite: {
+        name: 'Aphrodite Room',
+        desc: 'A complete unit with a king size bed and a small terrace.',
+        longDesc: 'In our apartment complex Vila Zizel, the Aphrodite apartment contains: a bedroom with a king size bed and TV, a bathroom, a kitchen-dining room that has 2 single beds and finally a small terrace. It has internet and air conditioning.',
+        features: ['4 Guests', '1 Bedroom', '3 Beds', 'Full Kitchen']
       },
       hera: {
         name: 'Hera Room',
-        desc: 'Elegant, peaceful, and full of natural light.',
-        longDesc: 'Named after the Queen of Gods, this room offers a serene environment with floral decor and artisanal lighting fixtures.',
-        features: ['Natural Light', 'Floral Decor', 'Artisanal Lighting']
+        desc: 'Wonderful view of nature with a private kitchen and washing machine.',
+        longDesc: 'This place with a wonderful view of nature in Analipsi, Messinia, contains a kitchen with all the essentials, a bedroom with air conditioning and a TV, also a single bed, a bathroom that has a private washing machine and outside a wonderful table to enjoy nature.',
+        features: ['3 Guests', '1 Bedroom', '2 Beds', 'Private Kitchen']
       },
-      poseidon: {
-        name: 'Poseidon Studio',
-        desc: 'Cool tones and refreshing tranquility.',
-        longDesc: 'Our Poseidon Studio brings the freshness of the sea to the garden, with aquatic-inspired textures and a spacious layout.',
-        features: ['Marine Tones', 'Spacious Layout', 'Garden Access']
+      poseidonHera: {
+        name: 'Poseidon-Hera Unit',
+        desc: 'A flexible special space that can be separated or combined, accommodating up to 6 guests.',
+        longDesc: 'This apartment is a special space because it can be separated or combined together. Connected by a internal door, you can enjoy either one or both together. It features 2 bedrooms (each with double bed & TV), 2 fully equipped kitchens, 2 dining areas, and 2 bathrooms (one with a washing machine), plus additional single and drawer beds.',
+        features: ['6 Guests', '2 Bedrooms', '4 Beds', '2 Baths']
       }
     },
     amenities: { 
@@ -146,9 +146,11 @@ export const translations: any = {
       send: 'SEND REQUEST'
     },
     testimonialsList: [
-      { name: "Anna S.", text: "A hidden gem! The garden is breathtaking and the rooms are so peaceful." },
-      { name: "Markos K.", text: "Authentic atmosphere. The BBQ area was perfect for our family dinners. Very close to the beach!" },
-      { name: "Elena V.", text: "Lovely hosts and beautiful surroundings. The flowers everywhere make it feel like a dream." }
+      { name: "Sharon", text: "Great place to stay. Beach bar and restaurant very friendly and well worth a visit. Wouldn't hesitate to return." },
+      { name: "Maria", text: "Spacious studio with all comforts. Beautiful shared garden, ample parking, and even cookies! Well-functioning AC and fridge. Everything was super!" },
+      { name: "Christine", text: "Spotlessly clean and many things seemed brand new. The bedroom felt separated from the kitchen area because of the layout, and it felt very spacious." },
+      { name: "Amanda", text: "Lovely week staying here. Beautifully clean and modern in a perfect location. The apartment had everything we needed for self-catering." },
+      { name: "Tanja", text: "Very friendly hosts. They always responded immediately and were very helpful! The apartment is not far from the beach and equipped with everything you need." }
     ]
   },
   el: {
@@ -188,29 +190,29 @@ export const translations: any = {
       ]
     },
     rooms: { 
-      tag: 'Η Διαμονή', title: 'Μυθικά', highlight: 'Καταφύγια.', zeus: 'Σουίτα Δίας', hera: 'Δωμάτιο Ήρα', poseidon: 'Poseidon Studio', inquire: 'Ερώτηση Διαθεσιμότητας', learnMore: 'Μάθετε Περισσότερα', rulesTitle: 'Κανόνες Σπιτιού', checkIn: 'Check-in: 2:00 μ.μ. - 8:00 μ.μ.', checkOut: 'Checkout πριν τις 11:00 π.μ.', maxGuests: 'Μέγιστο 3 άτομα', noPets: 'Δεν επιτρέπονται κατοικίδια', smoking: 'Το κάπνισμα επιτρέπεται', amenitiesTitle: 'Τι προσφέρει αυτό το μέρος', amenitiesSubtitle: 'Σημείωση: Ορισμένες παροχές ενδέχεται να διαφέρουν ανάλογα με το δωμάτιο.', hostGreets: 'Καλωσόρισμα από host', longTerm: 'Μακροχρόνια διαμονή', olympianExp: 'Η Ολύμπια Εμπειρία', roomAmenities: 'Παροχές Δωματίου', notIncluded: 'Δεν περιλαμβάνονται', smokeWarning: 'Αυτό το μέρος μπορεί να μην έχει ανιχνευτή καπνού ή μονοξειδίου.'
+      tag: 'Η Διαμονή', title: 'Μυθικά', highlight: 'Καταφύγια.', hera: 'Δωμάτιο Ήρα', aphrodite: 'Δωμάτιο Αφροδίτη', poseidonHera: 'Μονάδα Ποσειδώνας-Ήρα', inquire: 'Ερώτηση Διαθεσιμότητας', learnMore: 'Μάθετε Περισσότερα', rulesTitle: 'Κανόνες Σπιτιού', checkIn: 'Check-in: 2:00 μ.μ. - 8:00 μ.μ.', checkOut: 'Checkout πριν τις 11:00 π.μ.', maxGuests: 'Μέγιστο 3 άτομα', noPets: 'Δεν επιτρέπονται κατοικίδια', smoking: 'Το κάπνισμα επιτρέπεται', amenitiesTitle: 'Τι προσφέρει αυτό το μέρος', amenitiesSubtitle: 'Σημείωση: Ορισμένες παροχές ενδέχεται να διαφέρουν ανάλογα με το δωμάτιο.', hostGreets: 'Καλωσόρισμα από host', longTerm: 'Μακροχρόνια διαμονή', olympianExp: 'Η Ολύμπια Εμπειρία', roomAmenities: 'Παροχές Δωματίου', notIncluded: 'Δεν περιλαμβάνονται', smokeWarning: 'Αυτό το μέρος μπορεί να μην έχει ανιχνευτή καπνού ή μονοξειδίου.'
     },
     amenitiesList: {
       bathroom: 'Πιστολάκι, σαμπουάν, ζεστό νερό', laundry: 'Πλυντήριο, απλώστρα, σίδερο', essentials: 'Πετσέτες, σεντόνια, σαπούνι, χαρτί υγείας', family: 'Κούνια, κάθισμα φαγητού, προστατευτικά για μωρά', kitchen: 'Κουζίνα, ψυγείο, φούρνος μικροκυμάτων, καφετιέρα, σκεύη', outdoor: 'Αίθριο/μπαλκόνι, αυλή, ψησταριά BBQ', parking: 'Δωρεάν πάρκινγκ στις εγκαταστάσεις', notIncluded: 'Χωρίς ανιχνευτή καπνού/CO, χωρίς στεγνωτήριο, χωρίς κάμερες', bathLabel: 'Μπάνιο & Πλυντήριο', kitchenLabel: 'Κουζίνα & Φαγητό', outdoorLabel: 'Εξωτερικοί χώροι', safetyLabel: 'Ασφάλεια', safetyDesc: 'Πυροσβεστήρας, Κουτί πρώτων βοηθειών', essentialsLabel: 'Βασικά είδη', familyLabel: 'Οικογένεια'
     },
     roomsData: {
-      zeus: {
-        name: 'Σουίτα Δίας',
-        desc: 'Μια επιβλητική παρουσία με μεγαλοπρεπή θέα.',
-        longDesc: 'Η Σουίτα Δίας είναι η κορυφαία πρότασή μας, με χειροποίητα ξύλινα έπιπλα και ιδιωτική βεράντα με θέα στους βοτανικούς κήπους.',
-        features: ['Ιδιωτική Βεράντα', 'Χειροποίητο Γραφείο', 'King Size Κρεβάτι']
+      aphrodite: {
+        name: 'Δωμάτιο Αφροδίτη',
+        desc: 'Μια πλήρης μονάδα με king size κρεβάτι και μικρή βεράντα.',
+        longDesc: 'Στο συγκρότημα διαμερισμάτων Vila Zizel, το διαμέρισμα Αφροδίτη περιλαμβάνει: ένα υπνοδωμάτιο με king size κρεβάτι και τηλεόραση, ένα μπάνιο, μια κουζίνα-τραπεζαρία που διαθέτει 2 μονά κρεβάτια και τέλος μια μικρή βεράντα. Διαθέτει internet και κλιματισμό.',
+        features: ['4 Επισκέπτες', '1 Υπνοδωμάτιο', '3 Κρεβάτια', 'Πλήρης Κουζίνα']
       },
       hera: {
         name: 'Δωμάτιο Ήρα',
-        desc: 'Κομψό, γαλήνιο και γεμάτο φυσικό φως.',
-        longDesc: 'Με το όνομα της Βασίλισσας των Θεών, αυτό το δωμάτιο προσφέρει ένα ήρεμο περιβάλλον με φλοράλ διακόσμηση και χειροποίητα φωτιστικά.',
-        features: ['Φυσικό Φως', 'Φλοράλ Διακόσμηση', 'Χειροποίητα Φωτιστικά']
+        desc: 'Υπέροχη θέα στη φύση με ιδιωτική κουζίνα και πλυντήριο.',
+        longDesc: 'Αυτό το κατάλυμα με υπέροχη θέα στη φύση στην Ανάληψη Μεσσηνίας, περιλαμβάνει μια κουζίνα με όλα τα απαραίτητα, ένα υπνοδωμάτιο με κλιματισμό και τηλεόραση, επίσης ένα μονό κρεβάτι, ένα μπάνιο που διαθέτει ιδιωτικό πλυντήριο και έξω ένα υπέροχο τραπέζι για να απολαύσετε τη φύση.',
+        features: ['3 Επισκέπτες', '1 Υπνοδωμάτιο', '2 Κρεβάτια', 'Ιδιωτική Κουζίνα']
       },
-      poseidon: {
-        name: 'Poseidon Studio',
-        desc: 'Ψυχροί τόνοι και δροσιστική ηρεμία.',
-        longDesc: 'Το Poseidon Studio φέρνει τη φρεσκάδα της θάλασσας στον κήπο, με υδρόβιες υφές και ευρύχωρη διαρρύθμιση.',
-        features: ['Θαλασσινοί Τόνοι', 'Ευρύχωρο', 'Πρόσβαση στον Κήπο']
+      poseidonHera: {
+        name: 'Μονάδα Ποσειδώνας-Ήρα',
+        desc: 'Ένας ιδιαίτερος χώρος που μπορεί να χωριστεί ή να συνδυαστεί, φιλοξενώντας έως 6 άτομα.',
+        longDesc: 'Αυτό το διαμέρισμα είναι ένας ιδιαίτερος χώρος γιατί μπορεί να χωριστεί ή να συνδυαστεί μαζί. Συνδέονται με μια εσωτερική πόρτα και εξαρτάται από εσάς αν θα έχετε το ένα ή και τα δύο μαζί. Περιλαμβάνει 2 υπνοδωμάτια (με διπλό κρεβάτι & TV), 2 πλήρως εξοπλισμένες κουζίνες, 2 τραπεζαρίες και 2 μπάνια (το ένα με πλυντήριο), καθώς και ένα μονό κρεβάτι και ένα κρεβάτι-συρτάρι.',
+        features: ['6 Επισκέπτες', '2 Υπνοδωμάτια', '4 Κρεβάτια', '2 Μπάνια']
       }
     },
     amenities: { tag: 'Εμπειρία', title: 'Όλα για τη', highlight: 'Διαμονή σας.', desc: 'Ανεξάρτητα κτίρια, πάρκινγκ, και σύντομα BBQ και παιδική χαρά.', estate: '4 Στρέμματα', estateDesc: 'Τεράστια βοτανική έκταση.', secure: 'Περιφραγμένο', secureDesc: 'Ασφαλές και φωτισμένο τη νύχτα.', privacy: 'Ανεξάρτητο', privacyDesc: 'Απόλυτη ιδιωτικότητα.', soon: 'Σύντομα BBQ', soonDesc: 'BBQ & Παιδική χαρά.' },
@@ -257,9 +259,11 @@ export const translations: any = {
       send: 'ΑΠΟΣΤΟΛΗ ΑΙΤΗΜΑΤΟΣ'
     },
     testimonialsList: [
-      { name: "Άννα Σ.", text: "Ένα κρυφό διαμάντι! Ο κήπος είναι μαγευτικός και τα δωμάτια τόσο ήσυχα." },
-      { name: "Μάρκος Κ.", text: "Αυθεντική ατμόσφαιρα. Ο χώρος του BBQ ήταν τέλειος για τα οικογενειακά μας δείπνα. Πολύ κοντά στην παραλία!" },
-      { name: "Έλενα Β.", text: "Υπέροχοι οικοδεσπότες και πανέμορφο περιβάλλον. Τα λουλούδια παντού σε κάνουν να νιώθεις σαν σε όνειρο." }
+      { name: "Sharon", text: "Εξαιρετικό μέρος για διαμονή. Το beach bar και το εστιατόριο είναι πολύ φιλικά και αξίζουν μια επίσκεψη. Θα επέστρεφα χωρίς δισταγμό." },
+      { name: "Maria", text: "Ευρύχωρο στούντιο με όλες τις ανέσεις. Όμορφος κοινόχρηστος κήπος, άφθονος χώρος στάθμευσης, ακόμα και κουλουράκια! Το κλιματιστικό και το ψυγείο λειτουργούσαν τέλεια. Όλα ήταν σούπερ!" },
+      { name: "Christine", text: "Πεντακάθαρα και πολλά πράγματα φαινόταν ολοκαίνουργια. Το υπνοδωμάτιο ένιωθες ότι ήταν ξεχωριστό από την κουζίνα λόγω της διαρρύθμισης, και ο χώρος φαινόταν πολύ ευρύχωρος." },
+      { name: "Amanda", text: "Υπέροχη εβδομάδα διαμονής εδώ. Πανέμορφο, καθαρό και μοντέρνο σε τέλεια τοποθεσία. Το διαμέρισμα είχε όλα όσα χρειαζόμασταν για αυτοεξυπηρέτηση." },
+      { name: "Tanja", text: "Πολύ φιλικοί οικοδεσπότες. Απαντούσαν πάντα αμέσως και ήταν πολύ εξυπηρετικοί! Το διαμέρισμα δεν είναι μακριά από την παραλία και εξοπλισμένο με όλα όσα χρειάζεστε." }
     ]
   },
   it: {
@@ -297,27 +301,27 @@ export const translations: any = {
       ]
     },
     rooms: { 
-      tag: 'Soggiorno', title: 'Rifugi', highlight: 'Mitici.', zeus: 'Suite Zeus', hera: 'Camera Hera', poseidon: 'Studio Poseidon', inquire: 'Disponibilità', learnMore: 'Scopri di Più', rulesTitle: 'Regole della Casa', checkIn: 'Check-in: 14:00 - 20:00', checkOut: 'Checkout entro le 11:00', maxGuests: 'Max 3 ospiti', noPets: 'No animali', smoking: 'Fumo permesso', amenitiesTitle: 'Cosa offre questo posto', amenitiesSubtitle: 'Nota: alcuni servizi variano in base alla camera.', hostGreets: 'L\'host ti accoglie', longTerm: 'Soggiorni lunghi ammessi', olympianExp: 'L\'Esperienza Olimpica', roomAmenities: 'Servizi Camera', notIncluded: 'Non Incluso', smokeWarning: 'Questo posto potrebbe non avere rilevatori di fumo/monossido.'
+      tag: 'Soggiorno', title: 'Rifugi', highlight: 'Mitici.', hera: 'Camera Hera', aphrodite: 'Appartamento Afrodite', poseidonHera: 'Unità Poseidon-Hera', inquire: 'Disponibilità', learnMore: 'Scopri di Più', rulesTitle: 'Regole della Casa', checkIn: 'Check-in: 14:00 - 20:00', checkOut: 'Checkout entro le 11:00', maxGuests: 'Max 3 ospiti', noPets: 'No animali', smoking: 'Fumo permesso', amenitiesTitle: 'Cosa offre questo posto', amenitiesSubtitle: 'Nota: alcuni servizi variano in base alla camera.', hostGreets: 'L\'host ti accoglie', longTerm: 'Soggiorni lunghi ammessi', olympianExp: 'L\'Esperienza Olimpica', roomAmenities: 'Servizi Camera', notIncluded: 'Non Incluso', smokeWarning: 'Questo posto potrebbe non avere rilevatori di fumo/monossido.'
     },
     amenitiesList: { bathroom: 'Asciugacapelli, shampoo, acqua calda', laundry: 'Lavatrice, stendino, ferro', essentials: 'Asciugamani, lenzuola, sapone', family: 'Culla, seggiolone, cancelli di sicurezza', kitchen: 'Cucina, frigo, microonde, caffè', outdoor: 'Patio/balcone, cortile, BBQ', parking: 'Parcheggio gratuito', notIncluded: 'Nessun rilevatore, no asciugatrice, no telecamere', bathLabel: 'Bagno e Lavanderia', kitchenLabel: 'Cucina e Pranzo', outdoorLabel: 'Esterni e Caratteristiche', safetyLabel: 'Sicurezza', safetyDesc: 'Estintore, Kit primo soccorso', essentialsLabel: 'Essenziali', familyLabel: 'Famiglia' },
     roomsData: {
-      zeus: {
-        name: 'Suite Zeus',
-        desc: 'Una presenza potente con viste maestose.',
-        longDesc: 'La Suite Zeus è la nostra offerta più esclusiva, con mobili in legno fatti a mano e una terrazza privata.',
-        features: ['Terrazza Privata', 'Scrivania Artigianale', 'Letto King Size']
-      },
       hera: {
         name: 'Camera Hera',
-        desc: 'Elegante, tranquilla e piena di luce naturale.',
-        longDesc: 'Chiamata come la Regina degli Dei, questa camera offre un ambiente sereno con decorazioni floreali.',
-        features: ['Luce Naturale', 'Decoro Floreale', 'Illuminazione Artigianale']
+        desc: 'Splendida vista sulla natura con cucina privata e lavatrice.',
+        longDesc: "Questo alloggio con una splendida vista sulla natura ad Analipsi, Messenia, comprende una cucina con tutto l'essenziale, una camera da letto con aria condizionata e TV, anche un letto singolo, un bagno con lavatrice privata e all'esterno un meraviglioso tavolo per godersi la natura.",
+        features: ['3 Ospiti', '1 Camera', '2 Letti', 'Cucina Privata']
       },
-      poseidon: {
-        name: 'Studio Poseidon',
-        desc: 'Toni freddi e rinfrescante tranquillità.',
-        longDesc: 'Il nostro Poseidon Studio porta la freschezza del mare in giardino, con texture ispirate all\'acqua.',
-        features: ['Toni Marini', 'Layout Spazioso', 'Accesso al Giardino']
+      aphrodite: {
+        name: 'Appartamento Afrodite',
+        desc: 'Un\'unità completa con letto king size e terrazzino.',
+        longDesc: 'Nel nostro complesso Vila Zizel, l\'appartamento Afrodite comprende: una camera con letto king size e TV, un bagno, una cucina-soggiorno con 2 letti singoli e infine un piccolo terrazzino. Dispone di internet e aria condizionata.',
+        features: ['4 Ospiti', '1 Camera', '3 Letti', 'Cucina Completa']
+      },
+      poseidonHera: {
+        name: 'Unità Poseidon-Hera',
+        desc: 'Uno spazio speciale e flessibile che può essere separato o combiné, per un massimo di 6 ospiti.',
+        longDesc: "Questo appartamento è uno spazio speciale perché può essere separato o combinato. Collegati da una porta interna, puoi goderti uno o entrambi insieme. Dispone di 2 camere da letto (ognuna con letto matrimoniale e TV), 2 cucine attrezzate, 2 zone pranzo e 2 bagni (uno con lavatrice), oltre a un letto singolo e un letto a cassettone extra.",
+        features: ['6 Ospiti', '2 Camere', '4 Letti', '2 Bagni']
       }
     },
     amenities: { tag: 'Esperienza', title: 'Tutto per il', highlight: 'Tuo Soggiorno.', desc: 'Edifici indipendenti, parcheggio, e presto area BBQ e parco giochi.', estate: '4.000 m²', estateDesc: 'Vasta proprietà botanica.', secure: 'Recintato/Illuminato', secureDesc: 'Sicuro e luminoso la notte.', privacy: 'Indipendente', privacyDesc: 'Totale privacy per gli dei.', soon: 'Presto BBQ', soonDesc: 'Area BBQ e Parco giochi.' },
@@ -364,9 +368,11 @@ export const translations: any = {
       send: 'INVIA RICHIESTA'
     },
     testimonialsList: [
-      { name: "Anna S.", text: "Un tesoro nascosto! Il giardino è mozzafiato e le camere sono così tranquille." },
-      { name: "Markos K.", text: "Atmosfera autentica. L'area BBQ era perfetta per le nostre cene in famiglia. Molto vicino alla spiaggia!" },
-      { name: "Elena V.", text: "Host adorabili e dintorni bellissimi. I fiori ovunque lo fanno sembrare un sogno." }
+      { name: "Sharon", text: "Ottimo posto dove stare. Il beach bar e il ristorante sono molto amichevoli e valgono davvero la pena di essere visitati. Non esiterei a tornare." },
+      { name: "Maria", text: "Studio spazioso con tutti i comfort. Bellissimo giardino in comune, ampio parcheggio e persino biscotti! Aria condizionata e frigorifero perfettamente funzionanti. Tutto è stato fantastico!" },
+      { name: "Christine", text: "Pulizia impeccabile e molte cose sembravano nuove di zecca. La camera da letto sembrava separata dalla zona cucina grazie alla disposizione, e l'ambiente era molto spazioso." },
+      { name: "Amanda", text: "Splendida settimana passata qui. Splendidamente pulito e moderno in una posizione perfetta. L'appartamento aveva tutto il necessario per l'auto-gestione." },
+      { name: "Tanja", text: "Host molto cordiali. Hanno sempre risposto immediatamente e sono stati molto utili! L'appartamento non è lontano dalla spiaggia ed è dotato di tutto il necessario." }
     ]
   },
   de: {
@@ -404,27 +410,27 @@ export const translations: any = {
       ]
     },
     rooms: { 
-      tag: 'Aufenthalt', title: 'Göttliche', highlight: 'Zimmer.', zeus: 'Zeus Suite', hera: 'Hera Zimmer', poseidon: 'Poseidon Studio', inquire: 'Verfügbarkeit', learnMore: 'Mehr erfahren', rulesTitle: 'Hausregeln', checkIn: 'Check-in: 14:00 - 20:00', checkOut: 'Check-out bis 11:00', maxGuests: 'Max. 3 Gäste', noPets: 'Keine Haustiere', smoking: 'Rauchen erlaubt', amenitiesTitle: 'Was diese Unterkunft bietet', amenitiesSubtitle: 'Hinweis: Ausstattung kann je nach Zimmer variieren.', hostGreets: 'Gastgeber begrüßt Sie', longTerm: 'Langzeitaufenthalte erlaubt', olympianExp: 'Das Olympische Erlebnis', roomAmenities: 'Zimmerausstattung', notIncluded: 'Nicht enthalten', smokeWarning: 'Kein Rauch- oder Kohlenmonoxidmelder vorhanden.'
+      tag: 'Aufenthalt', title: 'Göttliche', highlight: 'Zimmer.', hera: 'Hera Zimmer', aphrodite: 'Aphrodite Apartment', poseidonHera: 'Poseidon-Hera Einheit', inquire: 'Verfügbarkeit', learnMore: 'Mehr erfahren', rulesTitle: 'Hausregeln', checkIn: 'Check-in: 14:00 - 20:00', checkOut: 'Check-out bis 11:00', maxGuests: 'Max. 3 Gäste', noPets: 'Keine Haustiere', smoking: 'Rauchen erlaubt', amenitiesTitle: 'Was diese Unterkunft bietet', amenitiesSubtitle: 'Hinweis: Ausstattung kann je nach Zimmer variieren.', hostGreets: 'Gastgeber begrüßt Sie', longTerm: 'Langzeitaufenthalte erlaubt', olympianExp: 'Das Olympische Erlebnis', roomAmenities: 'Zimmerausstattung', notIncluded: 'Nicht enthalten', smokeWarning: 'Kein Rauch- oder Kohlenmonoxidmelder vorhanden.'
     },
     amenitiesList: { bathroom: 'Föhn, Shampoo, Warmwasser', laundry: 'Waschmaschine, Wäscheständer, Bügeleisen', essentials: 'Handtücher, Bettwäsche, Seife', family: 'Babybett, Hochstuhl, Schutzgitter', kitchen: 'Herd, Kühlschrank, Mikrowelle, Kaffee', outdoor: 'Patio, Garten, BBQ', parking: 'Gratis Parkplatz', notIncluded: 'Kein Melder, kein Trockner, keine Kameras', bathLabel: 'Bad & Wäsche', kitchenLabel: 'Küche & Essen', outdoorLabel: 'Außenbereich', safetyLabel: 'Sicherheit', safetyDesc: 'Feuerlöscher, Erste-Hilfe-Set', essentialsLabel: 'Grundlagen', familyLabel: 'Familie' },
     roomsData: {
-      zeus: {
-        name: 'Zeus Suite',
-        desc: 'Eine kraftvolle Präsenz mit majestätischer Aussicht.',
-        longDesc: 'Die Zeus Suite ist unser Premium-Angebot mit handgefertigten Holzmöbeln und einer privaten Terrasse.',
-        features: ['Private Terrasse', 'Schreibtisch', 'Kingsize-Bett']
-      },
       hera: {
         name: 'Hera Zimmer',
-        desc: 'Elegant, friedlich und voller natürlichem Licht.',
-        longDesc: 'Benannt nach der Königin der Götter, bietet dieses Zimmer eine ruhige Umgebung mit floralem Dekor.',
-        features: ['Natürliches Licht', 'Florales Dekor', 'Handgefertigte Leuchten']
+        desc: 'Wunderbarer Blick auf die Natur mit privater Küche und Waschmaschine.',
+        longDesc: 'Diese Unterkunft mit herrlichem Blick auf die Natur in Analipsi, Messinia, verfügt über eine Küche mit allen wichtigen Utensilien, ein Schlafzimmer mit Klimaanlage und Fernseher, sowie ein Einzelbett, ein Badezimmer mit eigener Waschmaschine und im Außenbereich einen herrlichen Tisch, um die Natur zu genießen.',
+        features: ['3 Gäste', '1 Schlafzimmer', '2 Betten', 'Private Küche']
       },
-      poseidon: {
-        name: 'Poseidon Studio',
-        desc: 'Kühle Töne und erfrischende Ruhe.',
-        longDesc: 'Unser Poseidon Studio bringt die Frische des Meeres in den Garten, mit aquatisch inspirierten Texturen.',
-        features: ['Marine Töne', 'Grosses Layout', 'Gartenzugang']
+      aphrodite: {
+        name: 'Aphrodite Apartment',
+        desc: 'Eine komplette Wohneinheit mit Kingsize-Bett und kleiner Terrasse.',
+        longDesc: 'In unserem Apartmentkomplex Vila Zizel verfügt das Aphrodite-Apartment über: ein Schlafzimmer mit Kingsize-Bett und TV, ein Badezimmer, eine Wohnküche mit 2 Einzelbetten und schließlich eine kleine Terrasse. Es verfügt über Internet und Klimaanlage.',
+        features: ['4 Gäste', '1 Schlafzimmer', '3 Betten', 'Vollständige Küche']
+      },
+      poseidonHera: {
+        name: 'Poseidon-Hera Einheit',
+        desc: 'Ein flexibler Raum, der getrennt oder kombiniert werden kann, für bis zu 6 Gäste.',
+        longDesc: 'Dieses Apartment ist ein besonderer Ort, da es getrennt oder kombiniert werden kann. Durch eine Innentür verbunden, können Sie entweder eine oder beide Einheiten zusammen nutzen. Es bietet 2 Schlafzimmer (je mit Doppelbett & TV), 2 voll ausgestattete Küchen, 2 Essbereiche, 2 Bäder (eines mit Waschmaschine) sowie ein Einzel- und ein Schubladenbett.',
+        features: ['6 Gäste', '2 Schlafzimmer', '4 Betten', '2 Bäder']
       }
     },
     amenities: { tag: 'Erlebnis', title: 'Alles für den', highlight: 'Aufenthalt.', desc: 'Unabhängige Gebäude, Parkplätze und bald BBQ-Bereich und Spielplatz.', estate: '4.000 m²', estateDesc: 'Großes botanisches Anwesen.', secure: 'Zαun/Licht', secureDesc: 'Sicher und nachts beleuchtet.', privacy: 'Unabhängig', privacyDesc: 'Totale Privatsphäre.', soon: 'Bald BBQ', soonDesc: 'BBQ & Spielplatz.' },
@@ -471,9 +477,11 @@ export const translations: any = {
       send: 'ANFRAGE SENDEN'
     },
     testimonialsList: [
-      { name: "Anna S.", text: "Ein verstecktes Juwel! Der Garten ist atemberaubend und die Zimmer sind so friedlich." },
-      { name: "Markos K.", text: "Authentische Atmosphäre. Der Grillplatz war perfekt für unsere Familienessen. Sehr nah am Strand!" },
-      { name: "Elena V.", text: "Liebevolle Gastgeber und wunderschöne Umgebung. Die Blumen überall lassen es wie einen Traum wirken." }
+      { name: "Sharon", text: "Hervorragende Unterkunft. Die Strandbar und das Restaurant sind sehr freundlich und einen Besuch wert. Ich würde ohne zu zögern wiederkommen." },
+      { name: "Maria", text: "Geräumiges Apartment mit allem Komfort. Schöner Gemeinschaftsgarten, reichlich Parkplätze und sogar Kekse! Klimaanlage und Kühlschrank funktionierten einwandfrei. Alles war perfekt!" },
+      { name: "Christine", text: "Blitzsauber und vieles wirkte brandneu. Durch die Aufteilung fühlte sich das Schlafzimmer vom Küchenbereich getrennt an und es wirkte sehr geräumig." },
+      { name: "Amanda", text: "Wunderschöne Woche hier verbracht. Alles war blitzsauber, modern und in perfekter Lage. Die Wohnung bot alles, was wir für Selbstversorger brauchten." },
+      { name: "Tanja", text: "Sehr freundliche Gastgeber. Sie haben immer sofort geantwortet und waren sehr hilfreich! Die Wohnung liegt nicht weit vom Strand entfernt und ist mit allem ausgestattet, was man braucht." }
     ]
   },
   es: {
@@ -511,27 +519,27 @@ export const translations: any = {
       ]
     },
     rooms: { 
-      tag: 'Estancia', title: 'Refugios', highlight: 'Míticos.', zeus: 'Suite Zeus', hera: 'Habitación Hera', poseidon: 'Estudio Poseidón', inquire: 'Disponibilidad', learnMore: 'Saber Más', rulesTitle: 'Reglas de la Casa', checkIn: 'Check-in: 14:00 - 20:00', checkOut: 'Check-out antes de las 11:00', maxGuests: 'Máx. 3 personas', noPets: 'Sin mascotas', smoking: 'Se permite fumar', amenitiesTitle: 'Lo que este lugar ofrece', amenitiesSubtitle: 'Nota: algunos servicios varían según la habitación.', hostGreets: 'El anfitrión te recibe', longTerm: 'Estancias largas permitidas', olympianExp: 'La Experiencia Olímpica', roomAmenities: 'Servicios', notIncluded: 'No incluido', smokeWarning: 'Este lugar puede no tener detectores de humo/monóxido.'
+      tag: 'Estancia', title: 'Refugios', highlight: 'Míticos.', hera: 'Habitación Hera', aphrodite: 'Apartamento Afrodita', poseidonHera: 'Unidad Poseidón-Hera', inquire: 'Disponibilidad', learnMore: 'Saber Más', rulesTitle: 'Reglas de la Casa', checkIn: 'Check-in: 14:00 - 20:00', checkOut: 'Check-out antes de las 11:00', maxGuests: 'Máx. 3 personas', noPets: 'Sin mascotas', smoking: 'Se permite fumar', amenitiesTitle: 'Lo que este lugar ofrece', amenitiesSubtitle: 'Nota: algunos servicios varían según la habitación.', hostGreets: 'El anfitrión te recibe', longTerm: 'Estancias largas permitidas', olympianExp: 'La Experiencia Olímpica', roomAmenities: 'Servicios', notIncluded: 'No incluido', smokeWarning: 'Este lugar puede no tener detectores de humo/monóxido.'
     },
     amenitiesList: { bathroom: 'Secador, champú, agua caliente', laundry: 'Lavadora, tendedero, plancha', essentials: 'Toallas, sábanas, jabón', family: 'Cuna, silla alta, puertas de seguridad', kitchen: 'Cocina, frigo, microondas, cafetera', outdoor: 'Patio, patio trasero, barbacoa', parking: 'Aparcamiento gratuito', notIncluded: 'Sin detectores, sin secadora, sin cámaras', bathLabel: 'Baño y Lavandería', kitchenLabel: 'Cocina y Comedor', outdoorLabel: 'Exterior y Características', safetyLabel: 'Seguridad', safetyDesc: 'Extintor, Botiquín', essentialsLabel: 'Esenciales', familyLabel: 'Familia' },
     roomsData: {
-      zeus: {
-        name: 'Suite Zeus',
-        desc: 'Una presencia poderosa con vistas majestuosas.',
-        longDesc: 'La Suite Zeus es nuestra oferta más premium, con muebles de madera hechos a mano y terraza privada.',
-        features: ['Terraza Privada', 'Escritorio Artesanal', 'Cama King Size']
-      },
       hera: {
         name: 'Habitación Hera',
-        desc: 'Elegante, pacífica y llena de luz natural.',
-        longDesc: 'Nombrada en honor a la Reina de los Dioses, ofrece un ambiente sereno con decoración floral.',
-        features: ['Luz Natural', 'Decoración Floral', 'Iluminación Artesanal']
+        desc: 'Maravillosas vistas a la naturaleza con cocina privada y lavadora.',
+        longDesc: 'Este lugar con una maravillosa vista de la naturaleza en Analipsi, Messinia, contiene una cocina con todo lo esencial, un dormitorio con aire acondicionado y televisión, también una cama individual, un baño que tiene lavadora privada y fuera una mesa maravillosa para disfrutar de la naturaleza.',
+        features: ['3 Huéspedes', '1 Dormitorio', '2 Camas', 'Cocina Privada']
       },
-      poseidon: {
-        name: 'Estudio Poseidón',
-        desc: 'Tonos fríos y tranquilidad refrescante.',
-        longDesc: 'Nuestro Estudio Poseidón trae la frescura del mar al jardín, con texturas de inspiración acuática.',
-        features: ['Tonos Marinos', 'Espacioso', 'Acceso al Jardín']
+      aphrodite: {
+        name: 'Apartamento Afrodita',
+        desc: 'Una unidad completa con cama king size y terraza pequeña.',
+        longDesc: 'En nuestro complejo Vila Zizel, el apartamento Afrodita contiene: un dormitorio con una cama king size y TV, un baño, una cocina-comedor que tiene 2 camas individuales y finalmente una pequeña terraza. Dispone de internet y aire acondicionado.',
+        features: ['4 Huéspedes', '1 Dormitorio', '3 Camas', 'Cocina Completa']
+      },
+      poseidonHera: {
+        name: 'Unidad Poseidón-Hera',
+        desc: 'Un espacio flexible que puede separarse o combinarse, con capacidad para hasta 6 personas.',
+        longDesc: 'Este apartamento es un espacio especial porque puede separarse o combinarse. Conectados por una puerta interna, puede disfrutar de uno o de ambos juntos. Cuenta con 2 dormitorios (cada uno con cama doble y TV), 2 cocinas equipadas, 2 comedores y 2 baños (uno con lavadora), además de camas individuales y de cajón adicionales.',
+        features: ['6 Huéspedes', '2 Dormitorios', '4 Camas', '2 Baños']
       }
     },
     amenities: { tag: 'Experience', title: 'Todo para su', highlight: 'Estancia.', desc: 'Casas independientes, parking y próximamente barbacoa y zona infantil.', estate: '4.000 m²', estateDesc: 'Vasta propiedad botánica.', secure: 'Valla/Luz', secureDesc: 'Seguro y luminoso de noche.', privacy: 'Independiente', privacyDesc: 'Privacidad total.', soon: 'Pronto BBQ', soonDesc: 'Barbacoa y Juegos.' },
@@ -545,7 +553,7 @@ export const translations: any = {
       rating: 'Valoración',
       reviews: 'Reseñas',
       themeLink: 'Conozca nuestro tema de los 12 Dioses',
-      heaven: 'Un paraíso para jóvenes dioses και viejos amigos.',
+      heaven: 'Un paraíso para jóvenes dioses y viejos amigos.',
       exploreSuites: 'Explorar Suites',
       showAll: 'Ver Todos los Detalles',
       guestJourneys: 'Viajes de Huéspedes.',
@@ -578,9 +586,11 @@ export const translations: any = {
       send: 'ENVIAR SOLICITUD'
     },
     testimonialsList: [
-      { name: "Anna S.", text: "¡Una joya escondida! El jardín es impresionante y las habitaciones son muy tranquilas." },
-      { name: "Markos K.", text: "Atmósfera auténtica. El área de barbacoa fue perfecta para nuestras cenas familiares. ¡Muy cerca de la playa!" },
-      { name: "Elena V.", text: "Anfitriones encantadores y alrededores hermosos. Las flores por todas partes lo hacen sentir como un sueño." }
+      { name: "Sharon", text: "Excelente lugar para alojarse. El bar de la playa y el restaurante son muy acogedores y vale la pena visitarlos. Sin duda volvería." },
+      { name: "Maria", text: "Estudio amplio con todas las comodidades. Un jardín precioso, aparcamiento de sobra ¡y hasta galletas! El aire acondicionado y la nevera funcionaban genial. Todo fue perfecto." },
+      { name: "Christine", text: "Impecable. Muchas cosas parecían nuevas. El dormitorio estaba bien separado de la cocina por la distribución, lo que daba sensación de amplitud." },
+      { name: "Amanda", text: "Una semana encantadora. Limpio, moderno y en una ubicación perfecta. El apartamento tenía todo lo necesario para sentirse como en casa." },
+      { name: "Tanja", text: "Anfitriones muy amables. Siempre dispuestos a ayudar y rápidos en sus respuestas. El apartamento está cerca de la playa y totalmente equipado." }
     ]
   },
   fr: {
@@ -618,27 +628,27 @@ export const translations: any = {
       ]
     },
     rooms: { 
-      tag: 'Le Séjour', title: 'Havres', highlight: 'Mythiques.', zeus: 'Suite Zeus', hera: 'Chambre Héra', poseidon: 'Studio Poséidon', inquire: 'Disponibilité', learnMore: 'En Savoir Plus', rulesTitle: 'Règles de la Maison', checkIn: 'Check-in : 14h - 20h', checkOut: 'Checkout avant 11h', maxGuests: '3 pers. max', noPets: 'Pas d\'animaux', smoking: 'Fumeurs autorisés', amenitiesTitle: 'Ce que ce lieu propose', amenitiesSubtitle: 'Note : certains équipements varient selon la chambre.', hostGreets: 'L\'hôte vous accueille', longTerm: 'Longs séjours autorisés', olympianExp: 'L\'Expérience Olympienne', roomAmenities: 'Équipements', notIncluded: 'Non inclus', smokeWarning: 'Pas de détecteur de fumée/monoxyde.'
+      tag: 'Le Séjour', title: 'Havres', highlight: 'Mythiques.', hera: 'Chambre Héra', aphrodite: 'Appartement Aphrodite', poseidonHera: 'Unité Poséidon-Hera', inquire: 'Disponibilité', learnMore: 'En Savoir Plus', rulesTitle: 'Règles de la Maison', checkIn: 'Check-in : 14h - 20h', checkOut: 'Checkout avant 11h', maxGuests: '3 pers. max', noPets: 'Pas d\'animaux', smoking: 'Fumeurs autorisés', amenitiesTitle: 'Ce que ce lieu propose', amenitiesSubtitle: 'Note : certains équipements varient selon la chambre.', hostGreets: 'L\'hôte vous accueille', longTerm: 'Longs séjours autorisés', olympianExp: 'L\'Expérience Olympienne', roomAmenities: 'Équipements', notIncluded: 'Non inclus', smokeWarning: 'Pas de détecteur de fumée/monoxyde.'
     },
     amenitiesList: { bathroom: 'Sèche-cheveux, shampoing, eau chaude', laundry: 'Lave-linge, étendoir, fer', essentials: 'Serviettes, draps, savon', family: 'Lit bébé, chaise haute, barrières', kitchen: 'Cuisine, frigo, micro-ondes, café', outdoor: 'Patio, arrière-cour, barbecue', parking: 'Parking gratuit', notIncluded: 'Pas de détecteur, pas de séchoir, pas de caméras', bathLabel: 'Salle de bain & Laundry', kitchenLabel: 'Cuisine & Repas', outdoorLabel: 'Extérieur', safetyLabel: 'Sécurité', safetyDesc: 'Extincteur, Premier secours', essentialsLabel: 'Essentiels', familyLabel: 'Famille' },
     roomsData: {
-      zeus: {
-        name: 'Suite Zeus',
-        desc: 'Une présence puissante avec des vues majestueuses.',
-        longDesc: 'La Suite Zeus est notre offre la plus haut de gamme, avec des meubles en bois faits à la main.',
-        features: ['Terrasse Privée', 'Bureau Artisanal', 'Lit King Size']
-      },
       hera: {
         name: 'Chambre Héra',
-        desc: 'Élégante, paisible et baignée de lumière naturelle.',
-        longDesc: 'Nommée d\'après la Reine des Dieux, cette chambre offre un environnement serein.',
-        features: ['Lumière Naturelle', 'Décor Floral', 'Luminaires Artisanaux']
+        desc: 'Magnifique vue sur la nature avec cuisine privée et lave-linge.',
+        longDesc: "Ce lieu avec une vue magnifique sur la nature à Analipsi, Messénie, comprend une cuisine avec tout le nécessaire, une chambre avec climatisation et télévision, également un lit simple, une salle de bain qui dispose d'un lave-linge privé et à l'extérieur une table merveilleuse pour profiter de la nature.",
+        features: ['3 Personnes', '1 Chambre', '2 Lits', 'Cuisine Privée']
       },
-      poseidon: {
-        name: 'Studio Poséidon',
-        desc: 'Tons frais et tranquillité rafraîchissante.',
-        longDesc: 'Notre Studio Poséidon apporte la fraîcheur de la mer au jardin, avec des textures marines.',
-        features: ['Tons Marins', 'Spacieux', 'Accès au Jardin']
+      aphrodite: {
+        name: 'Appartement Aphrodite',
+        desc: 'Une unité de location complète avec un lit king size et une petite terrasse.',
+        longDesc: 'Dans notre complexe d\'appartements Vila Zizel, l\'appartement Aphrodite comprend : une chambre avec un lit king size et une télévision, une salle de bain, une cuisine-salle à manger disposant de 2 lits simples et enfin une petite terrasse. Il dispose d\'internet et de la climatisation.',
+        features: ['4 Personnes', '1 Chambre', '3 Lits', 'Cuisine Complète']
+      },
+      poseidonHera: {
+        name: 'Unité Poséidon-Héra',
+        desc: 'Un espace flexible qui peut être séparé ou combiné, accueillant jusqu\'à 6 personnes.',
+        longDesc: 'Cet appartement est un espace spécial car il peut être séparé ou combiné. Reliés par une porte intérieure, vous pouvez profiter de l\'un ou des deux ensemble. Il comprend 2 chambres (chacune avec lit double & TV), 2 cuisines équipées, 2 zones de repas, 2 salles de bain (une avec lave-linge), ainsi que des lits simples et tiroirs supplémentaires.',
+        features: ['6 Personnes', '2 Chambres', '4 Lits', '2 Salles de bain']
       }
     },
     amenities: { tag: 'Experience', title: 'Tout pour', highlight: 'Votre Séjour.', desc: 'Bâtiments indépendants, parking et bientôt barbecue et jeux pour enfants.', estate: '4 000 m²', estateDesc: 'Vaste terrain botanique.', secure: 'Clôturé/Éclairé', secureDesc: 'Sûr et éclairé la nuit.', privacy: 'Indépendant', privacyDesc: 'Intimité totale.', soon: 'Bientôt BBQ', soonDesc: 'BBQ & Jeux.' },
@@ -685,9 +695,11 @@ export const translations: any = {
       send: 'ENVOYER LA DEMANDE'
     },
     testimonialsList: [
-      { name: "Anna S.", text: "Un bijou caché ! Le jardin est époustouflant et les chambres sont si paisibles." },
-      { name: "Markos K.", text: "Atmosphère authentique. L'espace barbecue était parfait pour nos dîners en famille. Très proche de la plage !" },
-      { name: "Elena V.", text: "Des hôtes adorables et un environnement magnifique. Les fleurs partout donnent l'impression d'être dans un rêve." }
+      { name: "Sharon", text: "Super endroit où séjourner. Le bar de la plage et le restaurant sont très accueillants et valent le détour. Je reviendrais sans hésiter." },
+      { name: "Maria", text: "Studio spacieux avec tout le confort. Beau jardin partagé, grand parking et même des biscuits ! Climatisation et frigo fonctionnant parfaitement. Tout était super !" },
+      { name: "Christine", text: "D'une propreté impeccable et beaucoup de choses semblaient neuves. La chambre semblait séparée de la cuisine grâce à l'agencement, et c'était très spacieux." },
+      { name: "Amanda", text: "Une belle semaine passée ici. Magnifiquement propre et moderne dans un emplacement parfait. L'appartement avait tout ce dont nous avions besoin pour cuisiner." },
+      { name: "Tanja", text: "Hôtes très sympathiques. Ils ont toujours répondu immédiatement et ont été très serviables ! L'appartement n'est pas loin de la plage et équipé de tout ce dont on a besoin." }
     ]
   }
 };

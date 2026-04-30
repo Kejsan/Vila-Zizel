@@ -40,9 +40,9 @@ export default function Footer() {
           <div className="md:col-span-2 space-y-8">
              <h4 className="text-[10px] uppercase tracking-[0.3em] font-bold text-[#4A453E] border-b border-[#E8DCC4] pb-2">{t.footer.stay}</h4>
              <nav className="flex flex-col space-y-4">
-               <Link to="/accommodation" className="text-sm font-bold text-[#8C7B60] hover:text-[#E25A89] transition-colors">{t.roomsData.zeus.name}</Link>
-               <Link to="/accommodation" className="text-sm font-bold text-[#8C7B60] hover:text-[#E25A89] transition-colors">{t.roomsData.hera.name}</Link>
-               <Link to="/accommodation" className="text-sm font-bold text-[#8C7B60] hover:text-[#E25A89] transition-colors">{t.rooms.amenitiesTitle}</Link>
+              <Link to="/accommodation" className="text-sm font-bold text-[#8C7B60] hover:text-[#E25A89] transition-colors">{t.roomsData.aphrodite.name}</Link>
+              <Link to="/accommodation" className="text-sm font-bold text-[#8C7B60] hover:text-[#E25A89] transition-colors">{t.roomsData.hera.name}</Link>
+              <Link to="/accommodation" className="text-sm font-bold text-[#8C7B60] hover:text-[#E25A89] transition-colors">{t.roomsData.poseidonHera.name}</Link>
              </nav>
           </div>
 

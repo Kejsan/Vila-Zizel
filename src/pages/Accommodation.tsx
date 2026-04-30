@@ -8,38 +8,84 @@ export default function Accommodation() {
   const [selectedRoom, setSelectedRoom] = useState<number | null>(null);
 
   const roomsMap = t.roomsData || {
-    zeus: { name: 'Zeus Suite', desc: '', longDesc: '', features: [] },
     hera: { name: 'Hera Room', desc: '', longDesc: '', features: [] },
-    poseidon: { name: 'Poseidon Studio', desc: '', longDesc: '', features: [] }
+    aphrodite: { name: 'Aphrodite Room', desc: '', longDesc: '', features: [] },
+    poseidonHera: { name: 'Poseidon-Hera Unit', desc: '', longDesc: '', features: [] }
   };
 
   const rooms = [
     { 
       id: 1, 
-      name: roomsMap.zeus.name, 
-      img: "https://images.unsplash.com/photo-1590490360182-c33d57733427?w=1200&q=80",
-      price: "From €95",
-      desc: roomsMap.zeus.desc,
-      features: roomsMap.zeus.features,
-      longDesc: roomsMap.zeus.longDesc
+      name: roomsMap.aphrodite.name, 
+      img: "/Images/Rooms/Aphrodite/Exterior 1.avif",
+      price: "From €80",
+      desc: roomsMap.aphrodite.desc,
+      features: roomsMap.aphrodite.features,
+      longDesc: roomsMap.aphrodite.longDesc,
+      sleeping: [
+        { title: lang === 'el' ? 'Υπνοδωμάτιο' : 'Bedroom', desc: lang === 'el' ? '1 υπέρδιπλο κρεβάτι' : '1 king size bed' },
+        { title: lang === 'el' ? 'Κουζίνα-Τραπεζαρία' : 'Kitchen-Dining', desc: lang === 'el' ? '2 μονά κρεβάτια' : '2 single beds' }
+      ],
+      gallery: [
+        "/Images/Rooms/Aphrodite/Exterior 1.avif",
+        "/Images/Rooms/Aphrodite/Master Bedroom 1.avif",
+        "/Images/Rooms/Aphrodite/Full Kitchen.avif",
+        "/Images/Rooms/Aphrodite/Bathroom 1.avif",
+        "/Images/Rooms/Aphrodite/Exterior 2.avif"
+      ]
     },
     { 
       id: 2, 
       name: roomsMap.hera.name, 
-      img: "https://images.unsplash.com/photo-1522771731478-44637043a860?w=1200&q=80",
+      img: "/Images/Rooms/Hera/Exterior 1.avif",
       price: "From €85",
       desc: roomsMap.hera.desc,
       features: roomsMap.hera.features,
-      longDesc: roomsMap.hera.longDesc
+      longDesc: roomsMap.hera.longDesc,
+      sleeping: [
+        { title: lang === 'el' ? 'Υπνοδωμάτιο' : 'Bedroom', desc: lang === 'el' ? '1 διπλό κρεβάτι' : '1 double bed' },
+        { title: lang === 'el' ? 'Κοινόχρηστος χώρος' : 'Living area', desc: lang === 'el' ? '1 μονό κρεβάτι' : '1 single bed' }
+      ],
+      gallery: [
+        "/Images/Rooms/Hera/Exterior 1.avif",
+        "/Images/Rooms/Hera/Bedroom 1.avif",
+        "/Images/Rooms/Hera/Living Room 1.avif",
+        "/Images/Rooms/Hera/Small Kitchen 1.avif",
+        "/Images/Rooms/Hera/Bathroom 1.avif"
+      ]
     },
     { 
-      id: 3, 
-      name: roomsMap.poseidon.name, 
-      img: "https://images.unsplash.com/photo-1566665797739-1674de7a421a?w=1200&q=80",
-      price: "From €80",
-      desc: roomsMap.poseidon.desc,
-      features: roomsMap.poseidon.features,
-      longDesc: roomsMap.poseidon.longDesc
+      id: 4, 
+      name: roomsMap.poseidonHera.name, 
+      img: "/Images/Rooms/Poseidon-Hera/Bedroom A 1.avif",
+      price: "From €150",
+      desc: roomsMap.poseidonHera.desc,
+      features: roomsMap.poseidonHera.features,
+      longDesc: roomsMap.poseidonHera.longDesc,
+      sleeping: [
+        { title: lang === 'el' ? 'Υπνοδωμάτιο 1' : 'Bedroom 1', desc: lang === 'el' ? '1 διπλό κρεβάτι & 1 μονό κρεβάτι' : '1 double bed & 1 single bed' },
+        { title: lang === 'el' ? 'Υπνοδωμάτιο 2' : 'Bedroom 2', desc: lang === 'el' ? '1 διπλό κρεβάτι & 1 κρεβάτι-συρτάρι' : '1 double bed & 1 drawer bed' }
+      ],
+      gallery: [
+        "/Images/Rooms/Poseidon-Hera/Bedroom A 1.avif",
+        "/Images/Rooms/Poseidon-Hera/Bedroom A 2.avif",
+        "/Images/Rooms/Poseidon-Hera/Bedroom A 3.avif",
+        "/Images/Rooms/Poseidon-Hera/Bedroom A 4.avif",
+        "/Images/Rooms/Poseidon-Hera/Bedroom B 1.avif",
+        "/Images/Rooms/Poseidon-Hera/Bedroom B 2.avif",
+        "/Images/Rooms/Poseidon-Hera/Bedroom B 3.avif",
+        "/Images/Rooms/Poseidon-Hera/Bedroom B 4.avif",
+        "/Images/Rooms/Poseidon-Hera/Kitchen 1.avif",
+        "/Images/Rooms/Poseidon-Hera/Kitchen 2.avif",
+        "/Images/Rooms/Poseidon-Hera/Kitchen 3.avif",
+        "/Images/Rooms/Poseidon-Hera/Kitchen 4.avif",
+        "/Images/Rooms/Poseidon-Hera/Dining Area.avif",
+        "/Images/Rooms/Poseidon-Hera/Bathroom A 1.avif",
+        "/Images/Rooms/Poseidon-Hera/Bathroom A 2.avif",
+        "/Images/Rooms/Poseidon-Hera/Bathroom A 3.avif",
+        "/Images/Rooms/Poseidon-Hera/Bathroom B 1.avif",
+        "/Images/Rooms/Poseidon-Hera/Bathroom B 2.avif"
+      ]
     }
   ];
 
@@ -105,7 +151,7 @@ export default function Accommodation() {
                   >
                     <img src={room.img} className="w-full h-full object-cover" alt={room.name} />
                     <div className="absolute top-8 left-8 px-6 py-3 bg-white/90 backdrop-blur-md rounded-full text-xs font-bold text-[#E25A89] shadow-lg">
-                      {lang === 'el' ? 'Από €80' : 'From €80'}
+                      {room.price}
                     </div>
                   </motion.div>
                 </div>
@@ -142,68 +188,117 @@ export default function Accommodation() {
                     transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
                     className="overflow-hidden"
                   >
-                    <div className="p-10 lg:p-16 bg-[#FCF9F2] rounded-[4rem] border border-[#E8DCC4] grid grid-cols-1 md:grid-cols-2 gap-16 shadow-inner">
-                      <div className="space-y-6">
-                        <h4 className="font-serif text-3xl text-[#E25A89] mb-6 italic">{t.rooms.olympianExp}</h4>
-                        <p className="text-[#8C7B60] leading-relaxed text-lg font-medium">{room.longDesc}</p>
-                        <div className="space-y-4">
-                           <div className="flex items-center gap-4 text-[#4A453E]">
-                              <ShieldCheck className="w-6 h-6 text-[#E25A89]" />
-                              <span className="font-bold text-sm tracking-wide uppercase">{t.about.renovated}</span>
-                           </div>
-                           <div className="flex items-center gap-4 text-[#4A453E]">
-                              <Maximize className="w-6 h-6 text-[#E25A89]" />
-                              <span className="font-bold text-sm tracking-wide uppercase">{t.about.standalone}</span>
-                           </div>
+                    <div className="p-10 lg:p-16 bg-[#FCF9F2] rounded-[4rem] border border-[#E8DCC4] flex flex-col gap-16 shadow-inner">
+                      
+                      {/* Top Info Grid */}
+                      <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
+                        <div className="space-y-8">
+                          <div className="space-y-4">
+                            <h4 className="font-serif text-3xl text-[#E25A89] italic">{t.rooms.olympianExp}</h4>
+                            <p className="text-[#8C7B60] leading-relaxed text-lg font-medium">{room.longDesc}</p>
+                          </div>
+                          
+                          {/* Sleeping Arrangement */}
+                          <div className="space-y-6 pt-8 border-t border-[#E8DCC4]">
+                             <h4 className="text-xl font-serif text-[#4A453E]">{lang === 'el' ? 'Πού θα κοιμηθείτε' : 'Where you\'ll sleep'}</h4>
+                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                {room.sleeping.map((s, i) => (
+                                  <div key={i} className="p-8 bg-white rounded-[2rem] border border-[#E8DCC4] flex flex-col gap-3 shadow-sm">
+                                     <Home className="w-6 h-6 text-[#E25A89]" />
+                                     <div className="space-y-1">
+                                       <p className="font-bold text-[#4A453E] text-sm">{s.title}</p>
+                                       <p className="text-[#8C7B60] text-xs font-medium">{s.desc}</p>
+                                     </div>
+                                  </div>
+                                ))}
+                             </div>
+                          </div>
+
+                          <div className="space-y-4 pt-4">
+                             <div className="flex items-center gap-4 text-[#4A453E]">
+                                <ShieldCheck className="w-6 h-6 text-[#E25A89]" />
+                                <span className="font-bold text-sm tracking-wide uppercase">{t.about.renovated}</span>
+                             </div>
+                             <div className="flex items-center gap-4 text-[#4A453E]">
+                                <Maximize className="w-6 h-6 text-[#E25A89]" />
+                                <span className="font-bold text-sm tracking-wide uppercase">{t.about.standalone}</span>
+                             </div>
+                          </div>
+                        </div>
+
+                        <div className="space-y-10">
+                          <h4 className="font-serif text-3xl text-[#4A453E]">{t.rooms.roomAmenities}</h4>
+                          <div className="grid grid-cols-2 gap-6 pb-8 border-b border-[#E8DCC4]">
+                             <div className="flex flex-col gap-2 p-6 bg-white rounded-[2rem] border border-[#E8DCC4]">
+                                <Wifi className="w-8 h-8 text-[#E25A89] mb-2" />
+                                <span className="text-[10px] font-bold uppercase tracking-widest text-[#4A453E]">WiFi</span>
+                             </div>
+                             <div className="flex flex-col gap-2 p-6 bg-white rounded-[2rem] border border-[#E8DCC4]">
+                                <Wind className="w-8 h-8 text-[#E25A89] mb-2" />
+                                <span className="text-[10px] font-bold uppercase tracking-widest text-[#4A453E]">A/C</span>
+                             </div>
+                             <div className="flex flex-col gap-2 p-6 bg-white rounded-[2rem] border border-[#E8DCC4]">
+                                <Tv className="w-8 h-8 text-[#E25A89] mb-2" />
+                                <span className="text-[10px] font-bold uppercase tracking-widest text-[#4A453E]">Smart TV</span>
+                             </div>
+                             <div className="flex flex-col gap-2 p-6 bg-white rounded-[2rem] border border-[#E8DCC4]">
+                                <Utensils className="w-8 h-8 text-[#E25A89] mb-2" />
+                                <span className="text-[10px] font-bold uppercase tracking-widest text-[#4A453E]">{lang === 'el' ? 'Κουζίνα' : 'Kitchen'}</span>
+                             </div>
+                          </div>
+                          <div className="space-y-4">
+                            <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#E25A89] mb-4">{t.rooms.amenitiesSubtitle}</p>
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-6 text-[11px] font-medium text-[#8C7B60] italic">
+                               <div className="space-y-2">
+                                 <p className="font-bold text-[#4A453E] not-italic text-[9px] uppercase tracking-widest">{t.amenitiesList.bathLabel}</p>
+                                 <p>• {t.amenitiesList.bathroom}, {t.amenitiesList.laundry}</p>
+                                 <p className="font-bold text-[#4A453E] not-italic text-[9px] uppercase tracking-widest pt-2">{t.amenitiesList.essentialsLabel}</p>
+                                 <p>• {t.amenitiesList.essentials}</p>
+                                 <p className="font-bold text-[#4A453E] not-italic text-[9px] uppercase tracking-widest pt-2">{t.amenitiesList.familyLabel}</p>
+                                 <p>• {t.amenitiesList.family}</p>
+                               </div>
+                               <div className="space-y-2">
+                                 <p className="font-bold text-[#4A453E] not-italic text-[9px] uppercase tracking-widest">{t.amenitiesList.kitchenLabel}</p>
+                                 <p>• {t.amenitiesList.kitchen}</p>
+                                 <p className="font-bold text-[#4A453E] not-italic text-[9px] uppercase tracking-widest pt-2">{t.amenitiesList.outdoorLabel}</p>
+                                 <p>• {t.amenitiesList.outdoor}, {t.amenitiesList.parking}</p>
+                                 <p className="font-bold text-[#4A453E] not-italic text-[9px] uppercase tracking-widest pt-2">{t.amenitiesList.safetyLabel}</p>
+                                 <p>• {t.amenitiesList.safetyDesc}</p>
+                               </div>
+                            </div>
+                            <div className="pt-6 border-t border-[#E8DCC4] mt-6">
+                               <p className="text-[9px] font-bold uppercase tracking-[0.2em] text-[#4A453E] mb-2 opacity-50">{t.rooms.notIncluded}</p>
+                               <p className="text-[11px] text-[#8C7B60] opacity-70 italic leading-relaxed">{t.amenitiesList.notIncluded}</p>
+                               <p className="text-[9px] text-[#8C7B60] opacity-50 mt-2 italic">{t.rooms.smokeWarning}</p>
+                            </div>
+                          </div>
                         </div>
                       </div>
-                      <div className="space-y-10">
-                         <h4 className="font-serif text-3xl text-[#4A453E]">{t.rooms.roomAmenities}</h4>
-                         <div className="grid grid-cols-2 gap-6 pb-8 border-b border-[#E8DCC4]">
-                            <div className="flex flex-col gap-2 p-6 bg-white rounded-[2rem] border border-[#E8DCC4]">
-                               <Wifi className="w-8 h-8 text-[#E25A89] mb-2" />
-                               <span className="text-[10px] font-bold uppercase tracking-widest text-[#4A453E]">WiFi</span>
-                            </div>
-                            <div className="flex flex-col gap-2 p-6 bg-white rounded-[2rem] border border-[#E8DCC4]">
-                               <Wind className="w-8 h-8 text-[#E25A89] mb-2" />
-                               <span className="text-[10px] font-bold uppercase tracking-widest text-[#4A453E]">A/C</span>
-                            </div>
-                            <div className="flex flex-col gap-2 p-6 bg-white rounded-[2rem] border border-[#E8DCC4]">
-                               <Tv className="w-8 h-8 text-[#E25A89] mb-2" />
-                               <span className="text-[10px] font-bold uppercase tracking-widest text-[#4A453E]">Smart TV</span>
-                            </div>
-                            <div className="flex flex-col gap-2 p-6 bg-white rounded-[2rem] border border-[#E8DCC4]">
-                               <Coffee className="w-8 h-8 text-[#E25A89] mb-2" />
-                               <span className="text-[10px] font-bold uppercase tracking-widest text-[#4A453E]">Coffee</span>
-                            </div>
-                         </div>
-                         <div className="space-y-4">
-                           <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#E25A89] mb-4">{t.rooms.amenitiesSubtitle}</p>
-                           <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-6 text-[11px] font-medium text-[#8C7B60] italic">
-                              <div className="space-y-2">
-                                <p className="font-bold text-[#4A453E] not-italic text-[9px] uppercase tracking-widest">{t.amenitiesList.bathLabel}</p>
-                                <p>• {t.amenitiesList.bathroom}, {t.amenitiesList.laundry}</p>
-                                <p className="font-bold text-[#4A453E] not-italic text-[9px] uppercase tracking-widest pt-2">{t.amenitiesList.essentialsLabel}</p>
-                                <p>• {t.amenitiesList.essentials}</p>
-                                <p className="font-bold text-[#4A453E] not-italic text-[9px] uppercase tracking-widest pt-2">{t.amenitiesList.familyLabel}</p>
-                                <p>• {t.amenitiesList.family}</p>
-                              </div>
-                              <div className="space-y-2">
-                                <p className="font-bold text-[#4A453E] not-italic text-[9px] uppercase tracking-widest">{t.amenitiesList.kitchenLabel}</p>
-                                <p>• {t.amenitiesList.kitchen}</p>
-                                <p className="font-bold text-[#4A453E] not-italic text-[9px] uppercase tracking-widest pt-2">{t.amenitiesList.outdoorLabel}</p>
-                                <p>• {t.amenitiesList.outdoor}, {t.amenitiesList.parking}</p>
-                                <p className="font-bold text-[#4A453E] not-italic text-[9px] uppercase tracking-widest pt-2">{t.amenitiesList.safetyLabel}</p>
-                                <p>• {t.amenitiesList.safetyDesc}</p>
+
+                      {/* Photo Gallery */}
+                      {room.gallery.length > 0 && (
+                        <div className="space-y-8 pt-8 border-t border-[#E8DCC4]">
+                           <div className="flex items-center justify-between">
+                              <h4 className="text-3xl font-serif text-[#4A453E]">{lang === 'el' ? 'Φωτογραφίες' : 'Photo Gallery'}</h4>
+                              <div className="flex gap-2">
+                                 <Camera className="w-5 h-5 text-[#E25A89]" />
+                                 <span className="text-[10px] font-bold uppercase tracking-widest text-[#8C7B60]">{room.gallery.length} {lang === 'el' ? 'ΦΩΤΟΓΡΑΦΙΕΣ' : 'IMAGES'}</span>
                               </div>
                            </div>
-                           <div className="pt-6 border-t border-[#E8DCC4] mt-6">
-                              <p className="text-[9px] font-bold uppercase tracking-[0.2em] text-[#4A453E] mb-2 opacity-50">{t.rooms.notIncluded}</p>
-                              <p className="text-[11px] text-[#8C7B60] opacity-70 italic leading-relaxed">{t.amenitiesList.notIncluded}</p>
-                              <p className="text-[9px] text-[#8C7B60] opacity-50 mt-2 italic">{t.rooms.smokeWarning}</p>
+                           <div className="flex gap-6 overflow-x-auto pb-8 no-scrollbar -mx-4 px-4 snap-x">
+                              {room.gallery.map((img, i) => (
+                                <motion.div 
+                                  key={i} 
+                                  whileHover={{ scale: 1.02 }}
+                                  className="flex-shrink-0 w-[300px] md:w-[450px] h-[250px] md:h-[350px] rounded-[2.5rem] overflow-hidden shadow-lg border border-[#E8DCC4] snap-center"
+                                >
+                                  <img src={img} className="w-full h-full object-cover" alt={`${room.name} gallery ${i}`} />
+                                </motion.div>
+                              ))}
                            </div>
-                         </div>
-                      </div>
+                        </div>
+                      )}
+
                     </div>
                   </motion.div>
                 )}
