@@ -143,7 +143,10 @@ export default function Home() {
             {[
               { name: t.rooms.aphrodite, img: "/Images/Rooms/Aphrodite/Exterior 1.avif", color: 'rose' },
               { name: t.rooms.hera, img: "/Images/Rooms/Hera/Exterior 1.avif", color: 'amber' },
-              { name: t.rooms.poseidonHera, img: "/Images/Rooms/Poseidon-Hera/Bedroom A 1.avif", color: 'emerald' }
+              { name: t.rooms.poseidonHera, img: "/Images/Rooms/Poseidon-Hera/Bedroom A 1.avif", color: 'emerald' },
+              { name: t.rooms.zeus, img: "/Images/Rooms/Zeus/Exterior 1.avif", color: 'blue' },
+              { name: t.rooms.athina, img: "/Images/Rooms/Athina/Exterior 1.avif", color: 'purple' },
+              { name: t.rooms.artemis, img: "/Images/Rooms/Artemis/Exterior 1.avif", color: 'orange' }
             ].map((room, i) => (
               <motion.div 
                 key={i}

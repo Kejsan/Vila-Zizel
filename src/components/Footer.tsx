@@ -43,6 +43,9 @@ export default function Footer() {
               <Link to="/accommodation" className="text-sm font-bold text-[#8C7B60] hover:text-[#E25A89] transition-colors">{t.roomsData.aphrodite.name}</Link>
               <Link to="/accommodation" className="text-sm font-bold text-[#8C7B60] hover:text-[#E25A89] transition-colors">{t.roomsData.hera.name}</Link>
               <Link to="/accommodation" className="text-sm font-bold text-[#8C7B60] hover:text-[#E25A89] transition-colors">{t.roomsData.poseidonHera.name}</Link>
+              <Link to="/accommodation" className="text-sm font-bold text-[#8C7B60] hover:text-[#E25A89] transition-colors">{t.roomsData.zeus.name}</Link>
+              <Link to="/accommodation" className="text-sm font-bold text-[#8C7B60] hover:text-[#E25A89] transition-colors">{t.roomsData.athina.name}</Link>
+              <Link to="/accommodation" className="text-sm font-bold text-[#8C7B60] hover:text-[#E25A89] transition-colors">{t.roomsData.artemis.name}</Link>
              </nav>
           </div>
 

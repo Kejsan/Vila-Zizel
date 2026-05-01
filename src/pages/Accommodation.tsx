@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Wind, Wifi, Home, Sun, CheckCircle2, Coffee, Tv, Utensils, UtensilsCrossed, Users, Maximize, Clock, Ban, Cigarette, ShieldCheck, ChevronRight, MapPin, Calendar } from 'lucide-react';
+import { Wind, Wifi, Home, Sun, CheckCircle2, Coffee, Tv, Utensils, UtensilsCrossed, Users, Maximize, Clock, Ban, Cigarette, ShieldCheck, ChevronRight, MapPin, Calendar, Camera } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 
 export default function Accommodation() {
@@ -10,7 +10,10 @@ export default function Accommodation() {
   const roomsMap = t.roomsData || {
     hera: { name: 'Hera Room', desc: '', longDesc: '', features: [] },
     aphrodite: { name: 'Aphrodite Room', desc: '', longDesc: '', features: [] },
-    poseidonHera: { name: 'Poseidon-Hera Unit', desc: '', longDesc: '', features: [] }
+    poseidonHera: { name: 'Poseidon-Hera Unit', desc: '', longDesc: '', features: [] },
+    zeus: { name: 'Zeus Apartment', desc: '', longDesc: '', features: [] },
+    athina: { name: 'Athina Room', desc: '', longDesc: '', features: [] },
+    artemis: { name: 'Artemis Room', desc: '', longDesc: '', features: [] }
   };
 
   const rooms = [
@@ -85,6 +88,54 @@ export default function Accommodation() {
         "/Images/Rooms/Poseidon-Hera/Bathroom A 3.avif",
         "/Images/Rooms/Poseidon-Hera/Bathroom B 1.avif",
         "/Images/Rooms/Poseidon-Hera/Bathroom B 2.avif"
+      ]
+    },
+    { 
+      id: 5, 
+      name: roomsMap.zeus.name, 
+      img: "/Images/Rooms/Zeus/Exterior 1.avif",
+      price: "From €140",
+      desc: roomsMap.zeus.desc,
+      features: roomsMap.zeus.features,
+      longDesc: roomsMap.zeus.longDesc,
+      sleeping: [
+        { title: lang === 'el' ? 'Υπνοδωμάτιο 1' : 'Bedroom 1', desc: lang === 'el' ? '1 μεγάλο διπλό χτιστό κρεβάτι' : '1 large double built-in bed' },
+        { title: lang === 'el' ? 'Υπνοδωμάτιο 2' : 'Bedroom 2', desc: lang === 'el' ? '2 μονά κρεβάτια' : '2 single beds' }
+      ],
+      gallery: [
+        "/Images/Rooms/Zeus/Exterior 1.avif"
+      ]
+    },
+    { 
+      id: 6, 
+      name: roomsMap.athina.name, 
+      img: "/Images/Rooms/Athina/Exterior 1.avif",
+      price: "From €90",
+      desc: roomsMap.athina.desc,
+      features: roomsMap.athina.features,
+      longDesc: roomsMap.athina.longDesc,
+      sleeping: [
+        { title: lang === 'el' ? 'Υπνοδωμάτιο' : 'Bedroom', desc: lang === 'el' ? '1 υπέρδιπλο χτιστό κρεβάτι' : '1 super double built-in bed' },
+        { title: lang === 'el' ? 'Καθιστικό' : 'Living area', desc: lang === 'el' ? '1 διπλό κρεβάτι' : '1 double bed' }
+      ],
+      gallery: [
+        "/Images/Rooms/Athina/Exterior 1.avif"
+      ]
+    },
+    { 
+      id: 7, 
+      name: roomsMap.artemis.name, 
+      img: "/Images/Rooms/Artemis/Exterior 1.avif",
+      price: "From €85",
+      desc: roomsMap.artemis.desc,
+      features: roomsMap.artemis.features,
+      longDesc: roomsMap.artemis.longDesc,
+      sleeping: [
+        { title: lang === 'el' ? 'Υπνοδωμάτιο' : 'Bedroom', desc: lang === 'el' ? '1 υπέρδιπλο κρεβάτι (King Size)' : '1 king size bed' },
+        { title: lang === 'el' ? 'Καθιστικό' : 'Living area', desc: lang === 'el' ? '1 μονό κρεβάτι' : '1 single bed' }
+      ],
+      gallery: [
+        "/Images/Rooms/Artemis/Exterior 1.avif"
       ]
     }
   ];

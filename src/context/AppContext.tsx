@@ -42,6 +42,7 @@ export const translations: any = {
       tag: 'The Stay', 
       title: 'Mythical', highlight: 'Havens.', 
       hera: 'Hera Room', aphrodite: 'Aphrodite Room', poseidonHera: 'Poseidon-Hera Unit',
+      zeus: 'Zeus Apartment', athina: 'Athina Room', artemis: 'Artemis Room',
       inquire: 'Inquire Availability', learnMore: 'Learn More',
       rulesTitle: 'House Rules',
       checkIn: 'Check-in: 2:00 PM - 8:00 PM',
@@ -93,6 +94,24 @@ export const translations: any = {
         desc: 'A flexible special space that can be separated or combined, accommodating up to 6 guests.',
         longDesc: 'This apartment is a special space because it can be separated or combined together. Connected by a internal door, you can enjoy either one or both together. It features 2 bedrooms (each with double bed & TV), 2 fully equipped kitchens, 2 dining areas, and 2 bathrooms (one with a washing machine), plus additional single and drawer beds.',
         features: ['6 Guests', '2 Bedrooms', '4 Beds', '2 Baths']
+      },
+      zeus: {
+        name: 'Zeus Apartment',
+        desc: 'Entire condo in Analipsi with a large terrace and incredible views.',
+        longDesc: 'In the Vila Zizel rental complex, the apartment of Zeus contains: a fully equipped kitchen, dining room, comfortable large built-in living room with TV and air conditioning, 2 bedrooms (the first has a large double built-in bed with TV and air conditioning and the second has 2 single beds with air conditioning), bathroom with full toiletries, drying rack and finally the large terrace with the incredible view.',
+        features: ['5 Guests', '2 Bedrooms', '4 Beds', '1 Bath']
+      },
+      athina: {
+        name: 'Athina Room',
+        desc: 'A cozy retreat with a super double built-in bed and nature views.',
+        longDesc: 'In our apartment complex Vila Zizel, the apartment Athina has: 1 super double built-in comfortable bed that is connected to the dining room and kitchen, bathroom. There is also an outdoor area where you can relax in nature. Finally, there is wifi and also air conditioning.',
+        features: ['4 Guests', '1 Bedroom', '2 Beds', '1 Bath']
+      },
+      artemis: {
+        name: 'Artemis Room',
+        desc: 'A king-size haven in Messinia surrounded by nature.',
+        longDesc: 'In our rental complex Vila Zizel, in the Artemis apartment there is a king size comfortable bed, a kitchen that is connected to the bedroom and contains all the necessities and a bathroom. Outside you can enjoy nature.',
+        features: ['3 Guests', '1 Bedroom', '2 Beds', '1 Bath']
       }
     },
     amenities: { 
@@ -190,7 +209,7 @@ export const translations: any = {
       ]
     },
     rooms: { 
-      tag: 'Η Διαμονή', title: 'Μυθικά', highlight: 'Καταφύγια.', hera: 'Δωμάτιο Ήρα', aphrodite: 'Δωμάτιο Αφροδίτη', poseidonHera: 'Μονάδα Ποσειδώνας-Ήρα', inquire: 'Ερώτηση Διαθεσιμότητας', learnMore: 'Μάθετε Περισσότερα', rulesTitle: 'Κανόνες Σπιτιού', checkIn: 'Check-in: 2:00 μ.μ. - 8:00 μ.μ.', checkOut: 'Checkout πριν τις 11:00 π.μ.', maxGuests: 'Μέγιστο 3 άτομα', noPets: 'Δεν επιτρέπονται κατοικίδια', smoking: 'Το κάπνισμα επιτρέπεται', amenitiesTitle: 'Τι προσφέρει αυτό το μέρος', amenitiesSubtitle: 'Σημείωση: Ορισμένες παροχές ενδέχεται να διαφέρουν ανάλογα με το δωμάτιο.', hostGreets: 'Καλωσόρισμα από host', longTerm: 'Μακροχρόνια διαμονή', olympianExp: 'Η Ολύμπια Εμπειρία', roomAmenities: 'Παροχές Δωματίου', notIncluded: 'Δεν περιλαμβάνονται', smokeWarning: 'Αυτό το μέρος μπορεί να μην έχει ανιχνευτή καπνού ή μονοξειδίου.'
+      tag: 'Η Διαμονή', title: 'Μυθικά', highlight: 'Καταφύγια.', hera: 'Δωμάτιο Ήρα', aphrodite: 'Δωμάτιο Αφροδίτη', poseidonHera: 'Μονάδα Ποσειδώνας-Ήρα', zeus: 'Διαμέρισμα Ζεύς', athina: 'Δωμάτιο Αθηνά', artemis: 'Δωμάτιο Άρτεμις', inquire: 'Ερώτηση Διαθεσιμότητας', learnMore: 'Μάθετε Περισσότερα', rulesTitle: 'Κανόνες Σπιτιού', checkIn: 'Check-in: 2:00 μ.μ. - 8:00 μ.μ.', checkOut: 'Checkout πριν τις 11:00 π.μ.', maxGuests: 'Μέγιστο 3 άτομα', noPets: 'Δεν επιτρέπονται κατοικίδια', smoking: 'Το κάπνισμα επιτρέπεται', amenitiesTitle: 'Τι προσφέρει αυτό το μέρος', amenitiesSubtitle: 'Σημείωση: Ορισμένες παροχές ενδέχεται να διαφέρουν ανάλογα με το δωμάτιο.', hostGreets: 'Καλωσόρισμα από host', longTerm: 'Μακροχρόνια διαμονή', olympianExp: 'Η Ολύμπια Εμπειρία', roomAmenities: 'Παροχές Δωματίου', notIncluded: 'Δεν περιλαμβάνονται', smokeWarning: 'Αυτό το μέρος μπορεί να μην έχει ανιχνευτή καπνού ή μονοξειδίου.'
     },
     amenitiesList: {
       bathroom: 'Πιστολάκι, σαμπουάν, ζεστό νερό', laundry: 'Πλυντήριο, απλώστρα, σίδερο', essentials: 'Πετσέτες, σεντόνια, σαπούνι, χαρτί υγείας', family: 'Κούνια, κάθισμα φαγητού, προστατευτικά για μωρά', kitchen: 'Κουζίνα, ψυγείο, φούρνος μικροκυμάτων, καφετιέρα, σκεύη', outdoor: 'Αίθριο/μπαλκόνι, αυλή, ψησταριά BBQ', parking: 'Δωρεάν πάρκινγκ στις εγκαταστάσεις', notIncluded: 'Χωρίς ανιχνευτή καπνού/CO, χωρίς στεγνωτήριο, χωρίς κάμερες', bathLabel: 'Μπάνιο & Πλυντήριο', kitchenLabel: 'Κουζίνα & Φαγητό', outdoorLabel: 'Εξωτερικοί χώροι', safetyLabel: 'Ασφάλεια', safetyDesc: 'Πυροσβεστήρας, Κουτί πρώτων βοηθειών', essentialsLabel: 'Βασικά είδη', familyLabel: 'Οικογένεια'
@@ -213,6 +232,24 @@ export const translations: any = {
         desc: 'Ένας ιδιαίτερος χώρος που μπορεί να χωριστεί ή να συνδυαστεί, φιλοξενώντας έως 6 άτομα.',
         longDesc: 'Αυτό το διαμέρισμα είναι ένας ιδιαίτερος χώρος γιατί μπορεί να χωριστεί ή να συνδυαστεί μαζί. Συνδέονται με μια εσωτερική πόρτα και εξαρτάται από εσάς αν θα έχετε το ένα ή και τα δύο μαζί. Περιλαμβάνει 2 υπνοδωμάτια (με διπλό κρεβάτι & TV), 2 πλήρως εξοπλισμένες κουζίνες, 2 τραπεζαρίες και 2 μπάνια (το ένα με πλυντήριο), καθώς και ένα μονό κρεβάτι και ένα κρεβάτι-συρτάρι.',
         features: ['6 Επισκέπτες', '2 Υπνοδωμάτια', '4 Κρεβάτια', '2 Μπάνια']
+      },
+      zeus: {
+        name: 'Διαμέρισμα Ζεύς',
+        desc: 'Ολόκληρο διαμέρισμα στην Ανάληψη με μεγάλη βεράντα και απίστευτη θέα.',
+        longDesc: 'Στο συγκρότημα ενοικιαζόμενων διαμερισμάτων Vila Zizel, το διαμέρισμα Zeus περιλαμβάνει: πλήρως εξοπλισμένη κουζίνα, τραπεζαρία, άνετο μεγάλο χτιστό σαλόνι με τηλεόραση και κλιματισμό, 2 υπνοδωμάτια (το πρώτο διαθέτει ένα μεγάλο διπλό χτιστό κρεβάτι με τηλεόραση και κλιματισμό και το δεύτερο διαθέτει 2 μονά κρεβάτια με κλιματισμό), μπάνιο με πλήρη είδη περιποίησης, απλώστρα και τέλος τη μεγάλη βεράντα με την απίστευτη θέα.',
+        features: ['5 Επισκέπτες', '2 Υπνοδωμάτια', '4 Κρεβάτια', '1 Μπάνιο']
+      },
+      athina: {
+        name: 'Δωμάτιο Αθηνά',
+        desc: 'Ένα άνετο καταφύγιο με υπέρδιπλο χτιστό κρεβάτι και θέα στη φύση.',
+        longDesc: 'Στο συγκρότημα διαμερισμάτων μας Vila Zizel, το διαμέρισμα Αθηνά διαθέτει: 1 υπέρδιπλο χτιστό άνετο κρεβάτι που συνδέεται με την τραπεζαρία και την κουζίνα, μπάνιο. Υπάρχει επίσης ένας εξωτερικός χώρος όπου μπορείτε να χαλαρώσετε στη φύση. Τέλος, υπάρχει wifi και κλιματισμός.',
+        features: ['4 Επισκέπτες', '1 Υπνοδωμάτιο', '2 Κρεβάτια', '1 Μπάνιο']
+      },
+      artemis: {
+        name: 'Δωμάτιο Άρτεμις',
+        desc: 'Ένας king-size παράδεισος στη Μεσσηνία περιτριγυρισμένος από τη φύση.',
+        longDesc: 'Στο συγκρότημα ενοικιαζόμενων διαμερισμάτων Vila Zizel, στο διαμέρισμα Άρτεμις υπάρχει ένα king size άνετο κρεβάτι, μια κουζίνα που συνδέεται με το υπνοδωμάτιο και περιέχει όλα τα απαραίτητα και ένα μπάνιο. Έξω μπορείτε να απολαύσετε τη φύση.',
+        features: ['3 Επισκέπτες', '1 Υπνοδωμάτιο', '2 Κρεβάτια', '1 Μπάνιο']
       }
     },
     amenities: { tag: 'Εμπειρία', title: 'Όλα για τη', highlight: 'Διαμονή σας.', desc: 'Ανεξάρτητα κτίρια, πάρκινγκ, και σύντομα BBQ και παιδική χαρά.', estate: '4 Στρέμματα', estateDesc: 'Τεράστια βοτανική έκταση.', secure: 'Περιφραγμένο', secureDesc: 'Ασφαλές και φωτισμένο τη νύχτα.', privacy: 'Ανεξάρτητο', privacyDesc: 'Απόλυτη ιδιωτικότητα.', soon: 'Σύντομα BBQ', soonDesc: 'BBQ & Παιδική χαρά.' },
@@ -301,7 +338,7 @@ export const translations: any = {
       ]
     },
     rooms: { 
-      tag: 'Soggiorno', title: 'Rifugi', highlight: 'Mitici.', hera: 'Camera Hera', aphrodite: 'Appartamento Afrodite', poseidonHera: 'Unità Poseidon-Hera', inquire: 'Disponibilità', learnMore: 'Scopri di Più', rulesTitle: 'Regole della Casa', checkIn: 'Check-in: 14:00 - 20:00', checkOut: 'Checkout entro le 11:00', maxGuests: 'Max 3 ospiti', noPets: 'No animali', smoking: 'Fumo permesso', amenitiesTitle: 'Cosa offre questo posto', amenitiesSubtitle: 'Nota: alcuni servizi variano in base alla camera.', hostGreets: 'L\'host ti accoglie', longTerm: 'Soggiorni lunghi ammessi', olympianExp: 'L\'Esperienza Olimpica', roomAmenities: 'Servizi Camera', notIncluded: 'Non Incluso', smokeWarning: 'Questo posto potrebbe non avere rilevatori di fumo/monossido.'
+      tag: 'Soggiorno', title: 'Rifugi', highlight: 'Mitici.', hera: 'Camera Hera', aphrodite: 'Appartamento Afrodite', poseidonHera: 'Unità Poseidon-Hera', zeus: 'Appartamento Zeus', athina: 'Camera Athina', artemis: 'Camera Artemis', inquire: 'Disponibilità', learnMore: 'Scopri di Più', rulesTitle: 'Regole della Casa', checkIn: 'Check-in: 14:00 - 20:00', checkOut: 'Checkout entro le 11:00', maxGuests: 'Max 3 ospiti', noPets: 'No animali', smoking: 'Fumo permesso', amenitiesTitle: 'Cosa offre questo posto', amenitiesSubtitle: 'Nota: alcuni servizi variano in base alla camera.', hostGreets: 'L\'host ti accoglie', longTerm: 'Soggiorni lunghi ammessi', olympianExp: 'L\'Esperienza Olimpica', roomAmenities: 'Servizi Camera', notIncluded: 'Non Incluso', smokeWarning: 'Questo posto potrebbe non avere rilevatori di fumo/monossido.'
     },
     amenitiesList: { bathroom: 'Asciugacapelli, shampoo, acqua calda', laundry: 'Lavatrice, stendino, ferro', essentials: 'Asciugamani, lenzuola, sapone', family: 'Culla, seggiolone, cancelli di sicurezza', kitchen: 'Cucina, frigo, microonde, caffè', outdoor: 'Patio/balcone, cortile, BBQ', parking: 'Parcheggio gratuito', notIncluded: 'Nessun rilevatore, no asciugatrice, no telecamere', bathLabel: 'Bagno e Lavanderia', kitchenLabel: 'Cucina e Pranzo', outdoorLabel: 'Esterni e Caratteristiche', safetyLabel: 'Sicurezza', safetyDesc: 'Estintore, Kit primo soccorso', essentialsLabel: 'Essenziali', familyLabel: 'Famiglia' },
     roomsData: {
@@ -322,6 +359,24 @@ export const translations: any = {
         desc: 'Uno spazio speciale e flessibile che può essere separato o combiné, per un massimo di 6 ospiti.',
         longDesc: "Questo appartamento è uno spazio speciale perché può essere separato o combinato. Collegati da una porta interna, puoi goderti uno o entrambi insieme. Dispone di 2 camere da letto (ognuna con letto matrimoniale e TV), 2 cucine attrezzate, 2 zone pranzo e 2 bagni (uno con lavatrice), oltre a un letto singolo e un letto a cassettone extra.",
         features: ['6 Ospiti', '2 Camere', '4 Letti', '2 Bagni']
+      },
+      zeus: {
+        name: 'Appartamento Zeus',
+        desc: 'Intero condominio ad Analipsi con un\'ampia terrazza e viste incredibili.',
+        longDesc: 'Nel complesso residenziale Vila Zizel, l\'appartamento Zeus dispone di: una cucina completamente attrezzata, sala da pranzo, un ampio e confortevole soggiorno in muratura con TV e aria condizionata, 2 camere da letto (la prima ha un grande letto matrimoniale in muratura con TV e aria condizionata, la seconda ha 2 letti singoli con aria condizionata), bagno con set di cortesia completo, stendibiancheria e infine la grande terrazza con una vista incredibile.',
+        features: ['5 Ospiti', '2 Camere', '4 Letti', '1 Bagno']
+      },
+      athina: {
+        name: 'Camera Athina',
+        desc: 'Un rifugio accogliente con un letto super matrimoniale in muratura e vista sulla natura.',
+        longDesc: 'Nel nostro complesso Vila Zizel, l\'appartamento Athina dispone di: 1 letto super matrimoniale in muratura che è collegato alla sala da pranzo e alla cucina, bagno. C\'è anche un\'area esterna dove ci si può rilassare nella natura. Infine, c\'è il wifi e anche l\'aria condizionata.',
+        features: ['2 Ospiti', '1 Camera', '1 Letto', '1 Bagno']
+      },
+      artemis: {
+        name: 'Camera Artemis',
+        desc: 'Un paradiso king-size in Messenia immerso nella natura.',
+        longDesc: 'Nel nostro complesso Vila Zizel, nell\'appartamento Artemis c\'è un letto king size, una cucina collegata alla camera da letto che contiene tutto il necessario e un bagno. All\'esterno si può godere della natura.',
+        features: ['2 Ospiti', '1 Camera', '1 Letto', '1 Bagno']
       }
     },
     amenities: { tag: 'Esperienza', title: 'Tutto per il', highlight: 'Tuo Soggiorno.', desc: 'Edifici indipendenti, parcheggio, e presto area BBQ e parco giochi.', estate: '4.000 m²', estateDesc: 'Vasta proprietà botanica.', secure: 'Recintato/Illuminato', secureDesc: 'Sicuro e luminoso la notte.', privacy: 'Indipendente', privacyDesc: 'Totale privacy per gli dei.', soon: 'Presto BBQ', soonDesc: 'Area BBQ e Parco giochi.' },
@@ -410,7 +465,7 @@ export const translations: any = {
       ]
     },
     rooms: { 
-      tag: 'Aufenthalt', title: 'Göttliche', highlight: 'Zimmer.', hera: 'Hera Zimmer', aphrodite: 'Aphrodite Apartment', poseidonHera: 'Poseidon-Hera Einheit', inquire: 'Verfügbarkeit', learnMore: 'Mehr erfahren', rulesTitle: 'Hausregeln', checkIn: 'Check-in: 14:00 - 20:00', checkOut: 'Check-out bis 11:00', maxGuests: 'Max. 3 Gäste', noPets: 'Keine Haustiere', smoking: 'Rauchen erlaubt', amenitiesTitle: 'Was diese Unterkunft bietet', amenitiesSubtitle: 'Hinweis: Ausstattung kann je nach Zimmer variieren.', hostGreets: 'Gastgeber begrüßt Sie', longTerm: 'Langzeitaufenthalte erlaubt', olympianExp: 'Das Olympische Erlebnis', roomAmenities: 'Zimmerausstattung', notIncluded: 'Nicht enthalten', smokeWarning: 'Kein Rauch- oder Kohlenmonoxidmelder vorhanden.'
+      tag: 'Aufenthalt', title: 'Göttliche', highlight: 'Zimmer.', hera: 'Hera Zimmer', aphrodite: 'Aphrodite Apartment', poseidonHera: 'Poseidon-Hera Einheit', zeus: 'Zeus Apartment', athina: 'Athina Zimmer', artemis: 'Artemis Zimmer', inquire: 'Verfügbarkeit', learnMore: 'Mehr erfahren', rulesTitle: 'Hausregeln', checkIn: 'Check-in: 14:00 - 20:00', checkOut: 'Check-out bis 11:00', maxGuests: 'Max. 3 Gäste', noPets: 'Keine Haustiere', smoking: 'Rauchen erlaubt', amenitiesTitle: 'Was diese Unterkunft bietet', amenitiesSubtitle: 'Hinweis: Ausstattung kann je nach Zimmer variieren.', hostGreets: 'Gastgeber begrüßt Sie', longTerm: 'Langzeitaufenthalte erlaubt', olympianExp: 'Das Olympische Erlebnis', roomAmenities: 'Zimmerausstattung', notIncluded: 'Nicht enthalten', smokeWarning: 'Kein Rauch- oder Kohlenmonoxidmelder vorhanden.'
     },
     amenitiesList: { bathroom: 'Föhn, Shampoo, Warmwasser', laundry: 'Waschmaschine, Wäscheständer, Bügeleisen', essentials: 'Handtücher, Bettwäsche, Seife', family: 'Babybett, Hochstuhl, Schutzgitter', kitchen: 'Herd, Kühlschrank, Mikrowelle, Kaffee', outdoor: 'Patio, Garten, BBQ', parking: 'Gratis Parkplatz', notIncluded: 'Kein Melder, kein Trockner, keine Kameras', bathLabel: 'Bad & Wäsche', kitchenLabel: 'Küche & Essen', outdoorLabel: 'Außenbereich', safetyLabel: 'Sicherheit', safetyDesc: 'Feuerlöscher, Erste-Hilfe-Set', essentialsLabel: 'Grundlagen', familyLabel: 'Familie' },
     roomsData: {
@@ -431,6 +486,24 @@ export const translations: any = {
         desc: 'Ein flexibler Raum, der getrennt oder kombiniert werden kann, für bis zu 6 Gäste.',
         longDesc: 'Dieses Apartment ist ein besonderer Ort, da es getrennt oder kombiniert werden kann. Durch eine Innentür verbunden, können Sie entweder eine oder beide Einheiten zusammen nutzen. Es bietet 2 Schlafzimmer (je mit Doppelbett & TV), 2 voll ausgestattete Küchen, 2 Essbereiche, 2 Bäder (eines mit Waschmaschine) sowie ein Einzel- und ein Schubladenbett.',
         features: ['6 Gäste', '2 Schlafzimmer', '4 Betten', '2 Bäder']
+      },
+      zeus: {
+        name: 'Zeus Apartment',
+        desc: 'Gesamte Eigentumswohnung in Analipsi mit großer Terrasse und unglaublicher Aussicht.',
+        longDesc: 'In der Ferienanlage Vila Zizel verfügt das Apartment Zeus über: eine voll ausgestattete Küche, ein Esszimmer, ein komfortables großes gemauertes Wohnzimmer με Fernseher und Klimaanlage, 2 Schlafzimmer (das erste hat ein großes gemauertes Doppelbett mit Fernseher und Klimaanlage und das zweite hat 2 Einzelbetten mit Klimaanlage), ein Badezimmer mit kompletten Toilettenartikeln, einen Wäscheständer und schließlich die große Terrasse mit der unglaublichen Aussicht.',
+        features: ['5 Gäste', '2 Schlafzimmer', '4 Betten', '1 Bad']
+      },
+      athina: {
+        name: 'Athina Zimmer',
+        desc: 'Ein gemütlicher Rückzugsort mit einem gemauerten Super-Doppelbett und Blick ins Grüne.',
+        longDesc: 'In unserer Apartmentanlage Vila Zizel verfügt das Apartment Athina über: 1 gemauertes Super-Doppelbett, das mit dem Esszimmer und der Küche verbunden ist, sowie ein Badezimmer. Es gibt auch einen Außenbereich, in dem Sie in der Natur entspannen können. Schließlich gibt es WLAN und eine Klimaanlage.',
+        features: ['4 Gäste', '1 Schlafzimmer', '2 Betten', '1 Bad']
+      },
+      artemis: {
+        name: 'Artemis Zimmer',
+        desc: 'Eine King-Size-Oase in Messenien, umgeben von Natur.',
+        longDesc: 'In unserer Ferienanlage Vila Zizel gibt es im Apartment Artemis ein komfortables Kingsize-Bett, eine Küche, die mit dem Schlafzimmer verbunden ist und alles Notwendige enthält, sowie ein Badezimmer. Draußen können Sie die Natur genießen.',
+        features: ['3 Gäste', '1 Schlafzimmer', '2 Betten', '1 Bad']
       }
     },
     amenities: { tag: 'Erlebnis', title: 'Alles für den', highlight: 'Aufenthalt.', desc: 'Unabhängige Gebäude, Parkplätze und bald BBQ-Bereich und Spielplatz.', estate: '4.000 m²', estateDesc: 'Großes botanisches Anwesen.', secure: 'Zαun/Licht', secureDesc: 'Sicher und nachts beleuchtet.', privacy: 'Unabhängig', privacyDesc: 'Totale Privatsphäre.', soon: 'Bald BBQ', soonDesc: 'BBQ & Spielplatz.' },
@@ -519,7 +592,7 @@ export const translations: any = {
       ]
     },
     rooms: { 
-      tag: 'Estancia', title: 'Refugios', highlight: 'Míticos.', hera: 'Habitación Hera', aphrodite: 'Apartamento Afrodita', poseidonHera: 'Unidad Poseidón-Hera', inquire: 'Disponibilidad', learnMore: 'Saber Más', rulesTitle: 'Reglas de la Casa', checkIn: 'Check-in: 14:00 - 20:00', checkOut: 'Check-out antes de las 11:00', maxGuests: 'Máx. 3 personas', noPets: 'Sin mascotas', smoking: 'Se permite fumar', amenitiesTitle: 'Lo que este lugar ofrece', amenitiesSubtitle: 'Nota: algunos servicios varían según la habitación.', hostGreets: 'El anfitrión te recibe', longTerm: 'Estancias largas permitidas', olympianExp: 'La Experiencia Olímpica', roomAmenities: 'Servicios', notIncluded: 'No incluido', smokeWarning: 'Este lugar puede no tener detectores de humo/monóxido.'
+      tag: 'Estancia', title: 'Refugios', highlight: 'Míticos.', hera: 'Habitación Hera', aphrodite: 'Apartamento Afrodita', poseidonHera: 'Unidad Poseidón-Hera', zeus: 'Apartamento Zeus', athina: 'Habitación Athina', artemis: 'Habitación Artemis', inquire: 'Disponibilidad', learnMore: 'Saber Más', rulesTitle: 'Reglas de la Casa', checkIn: 'Check-in: 14:00 - 20:00', checkOut: 'Check-out antes de las 11:00', maxGuests: 'Máx. 3 personas', noPets: 'Sin mascotas', smoking: 'Se permite fumar', amenitiesTitle: 'Lo que este lugar ofrece', amenitiesSubtitle: 'Nota: algunos servicios varían según la habitación.', hostGreets: 'El anfitrión te recibe', longTerm: 'Estancias largas permitidas', olympianExp: 'La Experiencia Olímpica', roomAmenities: 'Servicios', notIncluded: 'No incluido', smokeWarning: 'Este lugar puede no tener detectores de humo/monóxido.'
     },
     amenitiesList: { bathroom: 'Secador, champú, agua caliente', laundry: 'Lavadora, tendedero, plancha', essentials: 'Toallas, sábanas, jabón', family: 'Cuna, silla alta, puertas de seguridad', kitchen: 'Cocina, frigo, microondas, cafetera', outdoor: 'Patio, patio trasero, barbacoa', parking: 'Aparcamiento gratuito', notIncluded: 'Sin detectores, sin secadora, sin cámaras', bathLabel: 'Baño y Lavandería', kitchenLabel: 'Cocina y Comedor', outdoorLabel: 'Exterior y Características', safetyLabel: 'Seguridad', safetyDesc: 'Extintor, Botiquín', essentialsLabel: 'Esenciales', familyLabel: 'Familia' },
     roomsData: {
@@ -540,6 +613,24 @@ export const translations: any = {
         desc: 'Un espacio flexible que puede separarse o combinarse, con capacidad para hasta 6 personas.',
         longDesc: 'Este apartamento es un espacio especial porque puede separarse o combinarse. Conectados por una puerta interna, puede disfrutar de uno o de ambos juntos. Cuenta con 2 dormitorios (cada uno con cama doble y TV), 2 cocinas equipadas, 2 comedores y 2 baños (uno con lavadora), además de camas individuales y de cajón adicionales.',
         features: ['6 Huéspedes', '2 Dormitorios', '4 Camas', '2 Baños']
+      },
+      zeus: {
+        name: 'Apartamento Zeus',
+        desc: 'Condominio entero en Analipsi con una gran terraza e increíbles vistas.',
+        longDesc: 'En el complejo de alquiler Vila Zizel, el apartamento Zeus contiene: una cocina totalmente equipada, comedor, amplio y cómodo salón de obra con TV y aire acondicionado, 2 dormitorios (el primero tiene una gran cama doble de obra con TV y aire acondicionado y el segundo tiene 2 camas individuales con aire acondicionado), baño con artículos de tocador completos, tendedero y, por último, la gran terraza con las increíbles vistas.',
+        features: ['5 Huéspedes', '2 Dormitorios', '4 Camas', '1 Baño']
+      },
+      athina: {
+        name: 'Habitación Athina',
+        desc: 'Un refugio acogedor con una cama super doble de obra y vistas a la naturaleza.',
+        longDesc: 'En nuestro complejo de apartamentos Vila Zizel, el apartamento Athina tiene: 1 cama super doble de obra muy cómoda que está conectada con el comedor y la cocina, baño. También hay una zona exterior donde podrá relajarse en la naturaleza. Por último, hay wifi y aire acondicionado.',
+        features: ['4 Huéspedes', '1 Dormitorio', '2 Camas', '1 Baño']
+      },
+      artemis: {
+        name: 'Habitación Artemis',
+        desc: 'Un paraíso king-size en Mesenia rodeado de naturaleza.',
+        longDesc: 'En nuestro complejo de alquiler Vila Zizel, en el apartamento Artemis hay una cómoda cama king size, una cocina conectada con el dormitorio que contiene todo lo necesario y un baño. Fuera podrá disfrutar de la naturaleza.',
+        features: ['3 Huéspedes', '1 Dormitorio', '2 Camas', '1 Baño']
       }
     },
     amenities: { tag: 'Experience', title: 'Todo para su', highlight: 'Estancia.', desc: 'Casas independientes, parking y próximamente barbacoa y zona infantil.', estate: '4.000 m²', estateDesc: 'Vasta propiedad botánica.', secure: 'Valla/Luz', secureDesc: 'Seguro y luminoso de noche.', privacy: 'Independiente', privacyDesc: 'Privacidad total.', soon: 'Pronto BBQ', soonDesc: 'Barbacoa y Juegos.' },
@@ -628,7 +719,7 @@ export const translations: any = {
       ]
     },
     rooms: { 
-      tag: 'Le Séjour', title: 'Havres', highlight: 'Mythiques.', hera: 'Chambre Héra', aphrodite: 'Appartement Aphrodite', poseidonHera: 'Unité Poséidon-Hera', inquire: 'Disponibilité', learnMore: 'En Savoir Plus', rulesTitle: 'Règles de la Maison', checkIn: 'Check-in : 14h - 20h', checkOut: 'Checkout avant 11h', maxGuests: '3 pers. max', noPets: 'Pas d\'animaux', smoking: 'Fumeurs autorisés', amenitiesTitle: 'Ce que ce lieu propose', amenitiesSubtitle: 'Note : certains équipements varient selon la chambre.', hostGreets: 'L\'hôte vous accueille', longTerm: 'Longs séjours autorisés', olympianExp: 'L\'Expérience Olympienne', roomAmenities: 'Équipements', notIncluded: 'Non inclus', smokeWarning: 'Pas de détecteur de fumée/monoxyde.'
+      tag: 'Le Séjour', title: 'Havres', highlight: 'Mythiques.', hera: 'Chambre Héra', aphrodite: 'Appartement Aphrodite', poseidonHera: 'Unité Poséidon-Hera', zeus: 'Appartement Zeus', athina: 'Chambre Athina', artemis: 'Chambre Artemis', inquire: 'Disponibilité', learnMore: 'En Savoir Plus', rulesTitle: 'Règles de la Maison', checkIn: 'Check-in : 14h - 20h', checkOut: 'Checkout avant 11h', maxGuests: '3 pers. max', noPets: 'Pas d\'animaux', smoking: 'Fumeurs autorisés', amenitiesTitle: 'Ce que ce lieu propose', amenitiesSubtitle: 'Note : certains équipements varient selon la chambre.', hostGreets: 'L\'hôte vous accueille', longTerm: 'Longs séjours autorisés', olympianExp: 'L\'Expérience Olympienne', roomAmenities: 'Équipements', notIncluded: 'Non inclus', smokeWarning: 'Pas de détecteur de fumée/monoxyde.'
     },
     amenitiesList: { bathroom: 'Sèche-cheveux, shampoing, eau chaude', laundry: 'Lave-linge, étendoir, fer', essentials: 'Serviettes, draps, savon', family: 'Lit bébé, chaise haute, barrières', kitchen: 'Cuisine, frigo, micro-ondes, café', outdoor: 'Patio, arrière-cour, barbecue', parking: 'Parking gratuit', notIncluded: 'Pas de détecteur, pas de séchoir, pas de caméras', bathLabel: 'Salle de bain & Laundry', kitchenLabel: 'Cuisine & Repas', outdoorLabel: 'Extérieur', safetyLabel: 'Sécurité', safetyDesc: 'Extincteur, Premier secours', essentialsLabel: 'Essentiels', familyLabel: 'Famille' },
     roomsData: {
@@ -649,6 +740,24 @@ export const translations: any = {
         desc: 'Un espace flexible qui peut être séparé ou combiné, accueillant jusqu\'à 6 personnes.',
         longDesc: 'Cet appartement est un espace spécial car il peut être séparé ou combiné. Reliés par une porte intérieure, vous pouvez profiter de l\'un ou des deux ensemble. Il comprend 2 chambres (chacune avec lit double & TV), 2 cuisines équipées, 2 zones de repas, 2 salles de bain (une avec lave-linge), ainsi que des lits simples et tiroirs supplémentaires.',
         features: ['6 Personnes', '2 Chambres', '4 Lits', '2 Salles de bain']
+      },
+      zeus: {
+        name: 'Appartement Zeus',
+        desc: 'Condo entier à Analipsi avec une grande terrasse et des vues incroyables.',
+        longDesc: 'Dans le complexe locatif Vila Zizel, l\'appartement de Zeus contient : une cuisine entièrement équipée, une salle à manger, un grand salon confortable en maçonnerie avec TV et climatisation, 2 chambres (la première dispose d\'un grand lit double en maçonnerie avec TV et climatisation et la seconde de 2 lits simples avec climatisation), une salle de bain avec articles de toilette complets, un étendoir et enfin la grande terrasse avec la vue incroyable.',
+        features: ['5 Personnes', '2 Chambres', '4 Lits', '1 Salle de bain']
+      },
+      athina: {
+        name: 'Chambre Athina',
+        desc: 'Une retraite confortable avec un lit super double en maçonnerie et vue sur la nature.',
+        longDesc: 'Dans notre complexe d\'appartements Vila Zizel, l\'appartement Athina dispose de : 1 lit super double en maçonnerie très confortable relié à la salle à manger et à la cuisine, une salle de bain. Il y a aussi un espace extérieur où vous pourrez vous détendre dans la nature. Enfin, il y a le wifi et la climatisation.',
+        features: ['4 Personnes', '1 Chambre', '2 Lits', '1 Salle de bain']
+      },
+      artemis: {
+        name: 'Chambre Artemis',
+        desc: 'Un havre de paix king-size en Messénie entouré de nature.',
+        longDesc: 'Dans notre complexe locatif Vila Zizel, dans l\'appartement Artemis, vous trouverez un lit king size confortable, une cuisine reliée à la chambre contenant tout le nécessaire et une salle de bain. À l\'extérieur, vous pourrez profiter de la nature.',
+        features: ['3 Personnes', '1 Chambre', '2 Lits', '1 Salle de bain']
       }
     },
     amenities: { tag: 'Experience', title: 'Tout pour', highlight: 'Votre Séjour.', desc: 'Bâtiments indépendants, parking et bientôt barbecue et jeux pour enfants.', estate: '4 000 m²', estateDesc: 'Vaste terrain botanique.', secure: 'Clôturé/Éclairé', secureDesc: 'Sûr et éclairé la nuit.', privacy: 'Indépendant', privacyDesc: 'Intimité totale.', soon: 'Bientôt BBQ', soonDesc: 'BBQ & Jeux.' },
