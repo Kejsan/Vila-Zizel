@@ -141,25 +141,25 @@ export default function Accommodation() {
   ];
 
   const rules = [
-    { icon: <Clock className="w-5 h-5 text-[#E25A89]" />, label: t.rooms.checkIn },
-    { icon: <Clock className="w-5 h-5 text-[#E25A89]" />, label: t.rooms.checkOut },
-    { icon: <Users className="w-5 h-5 text-[#E25A89]" />, label: t.rooms.maxGuests },
-    { icon: <Ban className="w-5 h-5 text-[#E25A89]" />, label: t.rooms.noPets },
-    { icon: <Cigarette className="w-5 h-5 text-[#E25A89]" />, label: t.rooms.smoking },
-    { icon: <ShieldCheck className="w-5 h-5 text-[#E25A89]" />, label: t.rooms.hostGreets },
-    { icon: <Calendar className="w-5 h-5 text-[#E25A89]" />, label: t.rooms.longTerm },
+    { icon: <Clock className="w-5 h-5 text-sky-deep" />, label: t.rooms.checkIn },
+    { icon: <Clock className="w-5 h-5 text-sky-deep" />, label: t.rooms.checkOut },
+    { icon: <Users className="w-5 h-5 text-sky-deep" />, label: t.rooms.maxGuests },
+    { icon: <Ban className="w-5 h-5 text-sky-deep" />, label: t.rooms.noPets },
+    { icon: <Cigarette className="w-5 h-5 text-sky-deep" />, label: t.rooms.smoking },
+    { icon: <ShieldCheck className="w-5 h-5 text-sky-deep" />, label: t.rooms.hostGreets },
+    { icon: <Calendar className="w-5 h-5 text-sky-deep" />, label: t.rooms.longTerm },
   ];
 
   return (
     <div className="flex flex-col pt-20">
       {/* Hero */}
-      <section className="relative py-24 bg-[#FCF9F2] border-b border-[#E8DCC4] overflow-hidden">
+      <section className="relative py-24 bg-sand-light border-b border-sand-medium overflow-hidden">
         <div className="max-w-6xl mx-auto px-6 relative z-10">
-          <motion.span initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="text-[#E25A89] font-bold text-xs uppercase tracking-[0.4em] mb-4 block">{t.rooms.tag}</motion.span>
-          <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="text-5xl md:text-7xl font-serif text-[#4A453E] mb-8 leading-tight">
-            {t.rooms.title} <span className="italic font-light text-[#E25A89]">{t.rooms.highlight}</span>
+          <motion.span initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="text-sky-deep font-bold text-xs uppercase tracking-[0.4em] mb-4 block">{t.rooms.tag}</motion.span>
+          <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="text-5xl md:text-7xl font-serif text-botanical mb-8 leading-tight">
+            {t.rooms.title} <span className="italic font-light text-sky-deep">{t.rooms.highlight}</span>
           </motion.h1>
-          <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="text-[#8C7B60] max-w-2xl text-lg leading-relaxed font-medium">
+          <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="text-earth/80 max-w-2xl text-lg leading-relaxed font-medium">
             {lang === 'el' ? 'Ανακαλύψτε τα πρόσφατα ανακαινισμένα δωμάτιά μας, με χειροποίητο σχεδιασμό εμπνευσμένο από τη μυθολογία.' : 
              lang === 'it' ? 'Scopri le nostre camere recentemente rinnovate, con design fatti a mano ispirati alla mitologia.' :
              lang === 'de' ? 'Entdecken Sie unsere renovierten Zimmer mit handgefertigtem Design, inspiriert von der Mythologie.' :
@@ -171,13 +171,13 @@ export default function Accommodation() {
       </section>
 
       {/* House Rules Bar */}
-      <section className="py-12 bg-white border-b border-[#E8DCC4] shadow-sm relative z-20">
+      <section className="py-12 bg-white/50 backdrop-blur-md border-b border-sand-medium shadow-sm relative z-20">
         <div className="max-w-6xl mx-auto px-6 overflow-x-auto no-scrollbar">
           <div className="flex items-center gap-12 whitespace-nowrap min-w-max">
-             <h4 className="text-[10px] uppercase tracking-[0.3em] font-bold text-[#4A453E] pr-8 border-r border-[#E8DCC4]">{t.rooms.rulesTitle}</h4>
+             <h4 className="text-[10px] uppercase tracking-[0.3em] font-bold text-botanical pr-8 border-r border-sand-medium">{t.rooms.rulesTitle}</h4>
              <div className="flex gap-10">
                 {rules.map((rule, idx) => (
-                  <div key={idx} className="flex items-center gap-3 text-[#8C7B60]">
+                  <div key={idx} className="flex items-center gap-3 text-earth/80">
                     {rule.icon}
                     <span className="text-[10px] font-bold uppercase tracking-widest">{rule.label}</span>
                   </div>
@@ -188,7 +188,7 @@ export default function Accommodation() {
       </section>
 
       {/* Rooms Slider/List */}
-      <section className="py-24 px-6 md:px-12 bg-white">
+      <section className="py-24 px-6 md:px-12 relative">
         <div className="max-w-6xl mx-auto space-y-32">
           {rooms.map((room, idx) => (
             <div key={room.id} id={`room-${room.id}`} className="flex flex-col gap-12">
@@ -201,19 +201,19 @@ export default function Accommodation() {
                     className="relative h-[450px] md:h-[600px] rounded-[4rem] overflow-hidden shadow-2xl"
                   >
                     <img src={room.img} className="w-full h-full object-cover" alt={room.name} />
-                    <div className="absolute top-8 left-8 px-6 py-3 bg-white/90 backdrop-blur-md rounded-full text-xs font-bold text-[#E25A89] shadow-lg">
+                    <div className="absolute top-8 left-8 px-6 py-3 bg-white/90 backdrop-blur-md rounded-full text-xs font-bold text-sky-deep shadow-lg">
                       {room.price}
                     </div>
                   </motion.div>
                 </div>
                 <div className={`${idx % 2 === 1 ? 'lg:order-1' : ''}`}>
-                  <span className="text-[#E25A89] font-bold text-xs uppercase tracking-[0.4em] mb-4 block">{t.about.handmade}</span>
-                  <h2 className="text-5xl md:text-6xl font-serif text-[#4A453E] mb-6 leading-tight">{room.name}</h2>
-                  <p className="text-[#8C7B60] text-lg leading-relaxed mb-8 italic font-medium">{room.desc}</p>
+                  <span className="text-sky-deep font-bold text-xs uppercase tracking-[0.4em] mb-4 block">{t.about.handmade}</span>
+                  <h2 className="text-5xl md:text-6xl font-serif text-botanical mb-6 leading-tight">{room.name}</h2>
+                  <p className="text-earth/80 text-lg leading-relaxed mb-8 italic font-medium">{room.desc}</p>
                   
                   <div className="flex flex-wrap gap-3 mb-10">
                     {room.features.map((feat, i) => (
-                      <span key={i} className="px-4 py-2 bg-[#FCF9F2] rounded-xl text-[10px] font-bold uppercase tracking-widest text-[#8C7B60] border border-[#E8DCC4]">
+                      <span key={i} className="px-4 py-2 bg-white/60 backdrop-blur-sm rounded-xl text-[10px] font-bold uppercase tracking-widest text-botanical border border-sand-medium shadow-sm">
                         {feat}
                       </span>
                     ))}
@@ -221,7 +221,7 @@ export default function Accommodation() {
 
                   <button 
                     onClick={() => setSelectedRoom(selectedRoom === room.id ? null : room.id)}
-                    className="group inline-flex items-center gap-3 px-10 py-5 bg-[#4A453E] text-white rounded-full uppercase tracking-widest text-xs font-bold hover:bg-[#E25A89] transition-all shadow-xl shadow-rose-100"
+                    className="group inline-flex items-center gap-3 px-10 py-5 bg-botanical text-sand-light rounded-full uppercase tracking-widest text-xs font-bold hover:bg-sky-deep transition-all shadow-xl hover:shadow-sky-deep/30"
                   >
                     {selectedRoom === room.id ? (lang === 'el' ? 'Λιγότερα' : lang === 'it' ? 'Meno' : lang === 'fr' ? 'Moins' : 'Show Less') : t.rooms.learnMore}
                     <ChevronRight className={`w-4 h-4 transition-transform ${selectedRoom === room.id ? 'rotate-90' : 'group-hover:translate-x-1'}`} />
@@ -239,26 +239,26 @@ export default function Accommodation() {
                     transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
                     className="overflow-hidden"
                   >
-                    <div className="p-10 lg:p-16 bg-[#FCF9F2] rounded-[4rem] border border-[#E8DCC4] flex flex-col gap-16 shadow-inner">
+                    <div className="p-10 lg:p-16 glass-panel rounded-[4rem] flex flex-col gap-16">
                       
                       {/* Top Info Grid */}
                       <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
                         <div className="space-y-8">
                           <div className="space-y-4">
-                            <h4 className="font-serif text-3xl text-[#E25A89] italic">{t.rooms.olympianExp}</h4>
-                            <p className="text-[#8C7B60] leading-relaxed text-lg font-medium">{room.longDesc}</p>
+                            <h4 className="font-serif text-3xl text-sky-deep italic">{t.rooms.olympianExp}</h4>
+                            <p className="text-earth/80 leading-relaxed text-lg font-medium">{room.longDesc}</p>
                           </div>
                           
                           {/* Sleeping Arrangement */}
-                          <div className="space-y-6 pt-8 border-t border-[#E8DCC4]">
-                             <h4 className="text-xl font-serif text-[#4A453E]">{lang === 'el' ? 'Πού θα κοιμηθείτε' : 'Where you\'ll sleep'}</h4>
+                          <div className="space-y-6 pt-8 border-t border-sand-medium">
+                             <h4 className="text-xl font-serif text-botanical">{lang === 'el' ? 'Πού θα κοιμηθείτε' : 'Where you\'ll sleep'}</h4>
                              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                 {room.sleeping.map((s, i) => (
-                                  <div key={i} className="p-8 bg-white rounded-[2rem] border border-[#E8DCC4] flex flex-col gap-3 shadow-sm">
-                                     <Home className="w-6 h-6 text-[#E25A89]" />
+                                  <div key={i} className="p-8 bg-white/70 backdrop-blur-sm rounded-[2rem] border border-sand-medium flex flex-col gap-3 shadow-sm">
+                                     <Home className="w-6 h-6 text-sky-deep" />
                                      <div className="space-y-1">
-                                       <p className="font-bold text-[#4A453E] text-sm">{s.title}</p>
-                                       <p className="text-[#8C7B60] text-xs font-medium">{s.desc}</p>
+                                       <p className="font-bold text-botanical text-sm">{s.title}</p>
+                                       <p className="text-earth/70 text-xs font-medium">{s.desc}</p>
                                      </div>
                                   </div>
                                 ))}
@@ -266,61 +266,61 @@ export default function Accommodation() {
                           </div>
 
                           <div className="space-y-4 pt-4">
-                             <div className="flex items-center gap-4 text-[#4A453E]">
-                                <ShieldCheck className="w-6 h-6 text-[#E25A89]" />
+                             <div className="flex items-center gap-4 text-botanical">
+                                <ShieldCheck className="w-6 h-6 text-sky-deep" />
                                 <span className="font-bold text-sm tracking-wide uppercase">{t.about.renovated}</span>
                              </div>
-                             <div className="flex items-center gap-4 text-[#4A453E]">
-                                <Maximize className="w-6 h-6 text-[#E25A89]" />
+                             <div className="flex items-center gap-4 text-botanical">
+                                <Maximize className="w-6 h-6 text-sky-deep" />
                                 <span className="font-bold text-sm tracking-wide uppercase">{t.about.standalone}</span>
                              </div>
                           </div>
                         </div>
 
                         <div className="space-y-10">
-                          <h4 className="font-serif text-3xl text-[#4A453E]">{t.rooms.roomAmenities}</h4>
-                          <div className="grid grid-cols-2 gap-6 pb-8 border-b border-[#E8DCC4]">
-                             <div className="flex flex-col gap-2 p-6 bg-white rounded-[2rem] border border-[#E8DCC4]">
-                                <Wifi className="w-8 h-8 text-[#E25A89] mb-2" />
-                                <span className="text-[10px] font-bold uppercase tracking-widest text-[#4A453E]">WiFi</span>
+                          <h4 className="font-serif text-3xl text-botanical">{t.rooms.roomAmenities}</h4>
+                          <div className="grid grid-cols-2 gap-6 pb-8 border-b border-sand-medium">
+                             <div className="flex flex-col gap-2 p-6 bg-white/70 backdrop-blur-sm rounded-[2rem] border border-sand-medium">
+                                <Wifi className="w-8 h-8 text-sky-deep mb-2" />
+                                <span className="text-[10px] font-bold uppercase tracking-widest text-botanical">WiFi</span>
                              </div>
-                             <div className="flex flex-col gap-2 p-6 bg-white rounded-[2rem] border border-[#E8DCC4]">
-                                <Wind className="w-8 h-8 text-[#E25A89] mb-2" />
-                                <span className="text-[10px] font-bold uppercase tracking-widest text-[#4A453E]">A/C</span>
+                             <div className="flex flex-col gap-2 p-6 bg-white/70 backdrop-blur-sm rounded-[2rem] border border-sand-medium">
+                                <Wind className="w-8 h-8 text-sky-deep mb-2" />
+                                <span className="text-[10px] font-bold uppercase tracking-widest text-botanical">A/C</span>
                              </div>
-                             <div className="flex flex-col gap-2 p-6 bg-white rounded-[2rem] border border-[#E8DCC4]">
-                                <Tv className="w-8 h-8 text-[#E25A89] mb-2" />
-                                <span className="text-[10px] font-bold uppercase tracking-widest text-[#4A453E]">Smart TV</span>
+                             <div className="flex flex-col gap-2 p-6 bg-white/70 backdrop-blur-sm rounded-[2rem] border border-sand-medium">
+                                <Tv className="w-8 h-8 text-sky-deep mb-2" />
+                                <span className="text-[10px] font-bold uppercase tracking-widest text-botanical">Smart TV</span>
                              </div>
-                             <div className="flex flex-col gap-2 p-6 bg-white rounded-[2rem] border border-[#E8DCC4]">
-                                <Utensils className="w-8 h-8 text-[#E25A89] mb-2" />
-                                <span className="text-[10px] font-bold uppercase tracking-widest text-[#4A453E]">{lang === 'el' ? 'Κουζίνα' : 'Kitchen'}</span>
+                             <div className="flex flex-col gap-2 p-6 bg-white/70 backdrop-blur-sm rounded-[2rem] border border-sand-medium">
+                                <Utensils className="w-8 h-8 text-sky-deep mb-2" />
+                                <span className="text-[10px] font-bold uppercase tracking-widest text-botanical">{lang === 'el' ? 'Κουζίνα' : 'Kitchen'}</span>
                              </div>
                           </div>
                           <div className="space-y-4">
-                            <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#E25A89] mb-4">{t.rooms.amenitiesSubtitle}</p>
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-6 text-[11px] font-medium text-[#8C7B60] italic">
+                            <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-floral mb-4">{t.rooms.amenitiesSubtitle}</p>
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-6 text-[11px] font-medium text-earth/80 italic">
                                <div className="space-y-2">
-                                 <p className="font-bold text-[#4A453E] not-italic text-[9px] uppercase tracking-widest">{t.amenitiesList.bathLabel}</p>
+                                 <p className="font-bold text-botanical not-italic text-[9px] uppercase tracking-widest">{t.amenitiesList.bathLabel}</p>
                                  <p>• {t.amenitiesList.bathroom}, {t.amenitiesList.laundry}</p>
-                                 <p className="font-bold text-[#4A453E] not-italic text-[9px] uppercase tracking-widest pt-2">{t.amenitiesList.essentialsLabel}</p>
+                                 <p className="font-bold text-botanical not-italic text-[9px] uppercase tracking-widest pt-2">{t.amenitiesList.essentialsLabel}</p>
                                  <p>• {t.amenitiesList.essentials}</p>
-                                 <p className="font-bold text-[#4A453E] not-italic text-[9px] uppercase tracking-widest pt-2">{t.amenitiesList.familyLabel}</p>
+                                 <p className="font-bold text-botanical not-italic text-[9px] uppercase tracking-widest pt-2">{t.amenitiesList.familyLabel}</p>
                                  <p>• {t.amenitiesList.family}</p>
                                </div>
                                <div className="space-y-2">
-                                 <p className="font-bold text-[#4A453E] not-italic text-[9px] uppercase tracking-widest">{t.amenitiesList.kitchenLabel}</p>
+                                 <p className="font-bold text-botanical not-italic text-[9px] uppercase tracking-widest">{t.amenitiesList.kitchenLabel}</p>
                                  <p>• {t.amenitiesList.kitchen}</p>
-                                 <p className="font-bold text-[#4A453E] not-italic text-[9px] uppercase tracking-widest pt-2">{t.amenitiesList.outdoorLabel}</p>
+                                 <p className="font-bold text-botanical not-italic text-[9px] uppercase tracking-widest pt-2">{t.amenitiesList.outdoorLabel}</p>
                                  <p>• {t.amenitiesList.outdoor}, {t.amenitiesList.parking}</p>
-                                 <p className="font-bold text-[#4A453E] not-italic text-[9px] uppercase tracking-widest pt-2">{t.amenitiesList.safetyLabel}</p>
+                                 <p className="font-bold text-botanical not-italic text-[9px] uppercase tracking-widest pt-2">{t.amenitiesList.safetyLabel}</p>
                                  <p>• {t.amenitiesList.safetyDesc}</p>
                                </div>
                             </div>
-                            <div className="pt-6 border-t border-[#E8DCC4] mt-6">
-                               <p className="text-[9px] font-bold uppercase tracking-[0.2em] text-[#4A453E] mb-2 opacity-50">{t.rooms.notIncluded}</p>
-                               <p className="text-[11px] text-[#8C7B60] opacity-70 italic leading-relaxed">{t.amenitiesList.notIncluded}</p>
-                               <p className="text-[9px] text-[#8C7B60] opacity-50 mt-2 italic">{t.rooms.smokeWarning}</p>
+                            <div className="pt-6 border-t border-sand-medium mt-6">
+                               <p className="text-[9px] font-bold uppercase tracking-[0.2em] text-botanical mb-2 opacity-50">{t.rooms.notIncluded}</p>
+                               <p className="text-[11px] text-earth/80 opacity-70 italic leading-relaxed">{t.amenitiesList.notIncluded}</p>
+                               <p className="text-[9px] text-earth/80 opacity-50 mt-2 italic">{t.rooms.smokeWarning}</p>
                             </div>
                           </div>
                         </div>
@@ -328,12 +328,12 @@ export default function Accommodation() {
 
                       {/* Photo Gallery */}
                       {room.gallery.length > 0 && (
-                        <div className="space-y-8 pt-8 border-t border-[#E8DCC4]">
+                        <div className="space-y-8 pt-8 border-t border-sand-medium">
                            <div className="flex items-center justify-between">
-                              <h4 className="text-3xl font-serif text-[#4A453E]">{lang === 'el' ? 'Φωτογραφίες' : 'Photo Gallery'}</h4>
+                              <h4 className="text-3xl font-serif text-botanical">{lang === 'el' ? 'Φωτογραφίες' : 'Photo Gallery'}</h4>
                               <div className="flex gap-2">
-                                 <Camera className="w-5 h-5 text-[#E25A89]" />
-                                 <span className="text-[10px] font-bold uppercase tracking-widest text-[#8C7B60]">{room.gallery.length} {lang === 'el' ? 'ΦΩΤΟΓΡΑΦΙΕΣ' : 'IMAGES'}</span>
+                                 <Camera className="w-5 h-5 text-sky-deep" />
+                                 <span className="text-[10px] font-bold uppercase tracking-widest text-earth/80">{room.gallery.length} {lang === 'el' ? 'ΦΩΤΟΓΡΑΦΙΕΣ' : 'IMAGES'}</span>
                               </div>
                            </div>
                            <div className="flex gap-6 overflow-x-auto pb-8 no-scrollbar -mx-4 px-4 snap-x">
@@ -341,7 +341,7 @@ export default function Accommodation() {
                                 <motion.div 
                                   key={i} 
                                   whileHover={{ scale: 1.02 }}
-                                  className="flex-shrink-0 w-[300px] md:w-[450px] h-[250px] md:h-[350px] rounded-[2.5rem] overflow-hidden shadow-lg border border-[#E8DCC4] snap-center"
+                                  className="flex-shrink-0 w-[300px] md:w-[450px] h-[250px] md:h-[350px] rounded-[2.5rem] overflow-hidden shadow-lg border border-sand-medium snap-center"
                                 >
                                   <img src={img} className="w-full h-full object-cover" alt={`${room.name} gallery ${i}`} />
                                 </motion.div>
@@ -360,25 +360,25 @@ export default function Accommodation() {
       </section>
 
       {/* Estate Features */}
-      <section className="py-32 px-6 md:px-12 bg-[#FCF9F2] relative">
+      <section className="py-32 px-6 md:px-12 bg-white relative">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-20 space-y-4">
-            <span className="text-[#E25A89] font-bold text-xs uppercase tracking-[0.4em] mb-4 block underline underline-offset-[12px] decoration-rose-200">{t.amenities.tag}</span>
-            <h2 className="text-5xl md:text-6xl font-serif text-[#4A453E]">{t.amenities.title} <span className="italic font-light text-[#E25A89]">{t.amenities.highlight}</span></h2>
-            <p className="mt-8 text-[#8C7B60] max-w-2xl mx-auto font-medium text-lg leading-relaxed">{t.amenities.desc}</p>
+            <span className="text-sky-deep font-bold text-xs uppercase tracking-[0.4em] mb-4 block underline underline-offset-[12px] decoration-sky-200">{t.amenities.tag}</span>
+            <h2 className="text-5xl md:text-6xl font-serif text-botanical">{t.amenities.title} <span className="italic font-light text-sky-deep">{t.amenities.highlight}</span></h2>
+            <p className="mt-8 text-earth/80 max-w-2xl mx-auto font-medium text-lg leading-relaxed">{t.amenities.desc}</p>
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
              {[
-               { icon: <MapPin className="w-8 h-8" />, title: t.amenities.estate, desc: t.amenities.estateDesc, color: 'bg-green-50 text-green-600' },
-               { icon: <ShieldCheck className="w-8 h-8" />, title: t.amenities.secure, desc: t.amenities.secureDesc, color: 'bg-blue-50 text-blue-600' },
-               { icon: <Home className="w-8 h-8" />, title: t.amenities.privacy, desc: t.amenities.privacyDesc, color: 'bg-rose-50 text-[#E25A89]' },
+               { icon: <MapPin className="w-8 h-8" />, title: t.amenities.estate, desc: t.amenities.estateDesc, color: 'bg-botanical-light/30 text-botanical' },
+               { icon: <ShieldCheck className="w-8 h-8" />, title: t.amenities.secure, desc: t.amenities.secureDesc, color: 'bg-sky-deep/10 text-sky-deep' },
+               { icon: <Home className="w-8 h-8" />, title: t.amenities.privacy, desc: t.amenities.privacyDesc, color: 'bg-floral/10 text-floral' },
                { icon: <Sun className="w-8 h-8" />, title: t.amenities.soon, desc: t.amenities.soonDesc, color: 'bg-amber-50 text-amber-600' },
              ].map((item, i) => (
-                <div key={i} className="bg-white p-10 rounded-[3rem] shadow-xl border border-[#E8DCC4] flex flex-col items-center text-center group hover:-translate-y-2 transition-all">
+                <div key={i} className="glass-panel p-10 rounded-[3rem] flex flex-col items-center text-center group hover:-translate-y-2 transition-all">
                   <div className={`w-20 h-20 ${item.color} rounded-3xl flex items-center justify-center mb-8 group-hover:scale-110 transition-transform shadow-sm`}>{item.icon}</div>
-                  <h3 className="text-2xl font-serif text-[#4A453E] mb-2">{item.title}</h3>
-                  <p className="text-sm text-[#8C7B60] font-bold tracking-tight">{item.desc}</p>
+                  <h3 className="text-2xl font-serif text-botanical mb-2">{item.title}</h3>
+                  <p className="text-sm text-earth/80 font-bold tracking-tight">{item.desc}</p>
                 </div>
              ))}
           </div>

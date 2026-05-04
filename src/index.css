@@ -4,6 +4,16 @@
 @theme {
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
   --font-serif: "Playfair Display", Georgia, serif;
+
+  --color-sand-light: hsl(40, 40%, 96%);
+  --color-sand-medium: hsl(40, 30%, 90%);
+  --color-sky: hsl(210, 80%, 75%);
+  --color-sky-deep: hsl(210, 60%, 50%);
+  --color-botanical: hsl(147, 33%, 27%);
+  --color-botanical-light: hsl(147, 25%, 85%);
+  --color-floral: hsl(339, 70%, 62%);
+  --color-floral-dark: hsl(339, 70%, 50%);
+  --color-earth: hsl(35, 15%, 20%);
 }
 
 @utility no-scrollbar {
@@ -12,4 +22,16 @@
   }
   -ms-overflow-style: none;
   scrollbar-width: none;
+}
+
+@utility glass-panel {
+  @apply bg-sand-light/60 backdrop-blur-md border border-white/40 shadow-xl;
+}
+
+@utility glass-nav {
+  @apply bg-sand-light/80 backdrop-blur-lg border-b border-sand-medium/50;
+}
+
+@utility text-gradient {
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-botanical to-sky-deep;
 }

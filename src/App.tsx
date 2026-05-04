@@ -31,10 +31,13 @@ export default function App() {
   return (
     <AppProvider>
       <Router>
-        <div className="font-sans bg-[#FCF9F2] text-[#4A453E] min-h-screen selection:bg-rose-200 selection:text-rose-900 flex flex-col overflow-x-hidden">
+        <div className="font-sans bg-sand-light text-earth min-h-screen selection:bg-floral/30 selection:text-botanical flex flex-col overflow-x-hidden relative">
+          {/* Subtle global gradient background to blend sand and sky */}
+          <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(ellipse_at_top,_var(--color-sky)_0%,_transparent_50%)] opacity-20"></div>
+          
           <ScrollToTop />
           <Navbar />
-          <main className="flex-grow">
+          <main className="flex-grow relative z-10">
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/about" element={<About />} />
@@ -43,7 +46,9 @@ export default function App() {
             </Routes>
           </main>
           <WeatherWidget />
-          <Footer />
+          <div className="relative z-10">
+             <Footer />
+          </div>
         </div>
       </Router>
     </AppProvider>
