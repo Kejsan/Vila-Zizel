@@ -1,0 +1,5 @@
+# Vila Zizel
+
+Canonical AI context file: https://vilazizel.com/llms.txt
+
+Full AI context file: https://vilazizel.com/llms-full.txt

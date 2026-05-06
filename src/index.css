@@ -1,19 +1,44 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Inter:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Cinzel:wght@400;500;600;700&display=swap');
 @import "tailwindcss";
 
 @theme {
-  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "DM Sans", ui-sans-serif, system-ui, sans-serif;
   --font-serif: "Playfair Display", Georgia, serif;
+  --font-mythic: "Cinzel", Georgia, serif;
 
-  --color-sand-light: hsl(40, 40%, 96%);
-  --color-sand-medium: hsl(40, 30%, 90%);
-  --color-sky: hsl(210, 80%, 75%);
-  --color-sky-deep: hsl(210, 60%, 50%);
-  --color-botanical: hsl(147, 33%, 27%);
-  --color-botanical-light: hsl(147, 25%, 85%);
-  --color-floral: hsl(339, 70%, 62%);
-  --color-floral-dark: hsl(339, 70%, 50%);
-  --color-earth: hsl(35, 15%, 20%);
+  --color-alabaster: #F6F4F0;
+  --color-marble-shadow: #E8E5DF;
+  --color-obsidian: #2B2723;
+  --color-divine: #D4AF37;
+  --color-divine-glow: rgba(212, 175, 55, 0.15);
+  --color-laurel: #627A53;
+
+  --color-sand-light: #F6F4F0;
+  --color-sand-medium: #E8E5DF;
+  --color-sky: #D4AF37;
+  --color-sky-deep: #D4AF37;
+  --color-botanical: #2B2723;
+  --color-botanical-light: #E8E5DF;
+  --color-floral: #D4AF37;
+  --color-floral-dark: #B89225;
+  --color-earth: #2B2723;
+  --color-divine-gold: #D4AF37;
+  --color-divine-gold-light: #E7C85B;
+  --color-parchment: #E8E5DF;
+  --color-olympus-dark: #2B2723;
+}
+
+html {
+  background: #F6F4F0;
+  color: #2B2723;
+}
+
+body {
+  background:
+    linear-gradient(rgba(43, 39, 35, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(43, 39, 35, 0.02) 1px, transparent 1px),
+    #F6F4F0;
+  background-size: 48px 48px;
 }
 
 @utility no-scrollbar {
@@ -25,13 +50,67 @@
 }
 
 @utility glass-panel {
-  @apply bg-sand-light/60 backdrop-blur-md border border-white/40 shadow-xl;
+  @apply bg-alabaster/80 backdrop-blur-xl border border-divine/15 shadow-xl;
 }
 
 @utility glass-nav {
-  @apply bg-sand-light/80 backdrop-blur-lg border-b border-sand-medium/50;
+  @apply bg-alabaster/85 backdrop-blur-xl border border-divine/15 shadow-glass;
 }
 
 @utility text-gradient {
-  @apply bg-clip-text text-transparent bg-gradient-to-r from-botanical to-sky-deep;
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-obsidian via-laurel to-divine;
+}
+
+@utility text-divine {
+  background: linear-gradient(135deg, hsl(43, 74%, 49%) 0%, hsl(43, 90%, 70%) 40%, hsl(43, 74%, 49%) 70%, hsl(43, 90%, 75%) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+@utility meander-divider {
+  position: relative;
+  height: 18px;
+  opacity: 0.14;
+  background-image:
+    linear-gradient(90deg, #D4AF37 10px, transparent 10px),
+    linear-gradient(90deg, #D4AF37 10px, transparent 10px),
+    linear-gradient(#D4AF37 10px, transparent 10px),
+    linear-gradient(#D4AF37 10px, transparent 10px);
+  background-size: 32px 2px, 32px 2px, 2px 16px, 2px 16px;
+  background-position: 0 0, 16px 16px, 0 0, 16px 2px;
+  background-repeat: repeat-x;
+}
+
+@utility font-mythic {
+  font-family: "Cinzel", Georgia, serif;
+}
+
+@utility shadow-divine {
+  box-shadow: 0 10px 40px -10px rgba(212, 175, 55, 0.25);
+}
+
+@utility shadow-glass {
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+}
+
+@utility temple-card {
+  @apply bg-obsidian text-alabaster border border-divine/10 shadow-xl transition-all duration-700;
+  border-radius: 4rem 4rem 0.5rem 0.5rem;
+}
+
+@utility temple-card-hover {
+  @apply hover:-translate-y-2 hover:border-divine/70 hover:shadow-divine;
+}
+
+@utility summon-button {
+  @apply inline-flex items-center justify-center gap-3 rounded-full bg-obsidian px-8 py-4 font-mythic text-[10px] font-bold uppercase tracking-[0.28em] text-divine border border-divine/30 transition-all duration-500 hover:-translate-y-1 hover:border-divine hover:shadow-divine;
+}
+
+@utility section-shell {
+  @apply px-6 md:px-12 py-24 md:py-32;
+}
+
+@utility overline {
+  @apply font-mythic text-[10px] font-bold uppercase tracking-[0.4em] text-divine;
 }

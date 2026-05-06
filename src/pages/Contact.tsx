@@ -1,7 +1,17 @@
 import React, { useState } from 'react';
 import { motion } from 'motion/react';
-import { Phone, Mail, Instagram, Send, Calendar, Users, MapPin, MessageSquare } from 'lucide-react';
+import type { Variants } from 'motion/react';
+import { Calendar, Instagram, Mail, MapPin, MessageSquare, Phone, Send, Users } from 'lucide-react';
 import { useApp } from '../context/AppContext';
+
+const fadeUp: Variants = {
+  hidden: { opacity: 0, y: 40 },
+  visible: (i = 0) => ({
+    opacity: 1,
+    y: 0,
+    transition: { duration: 1, delay: i * 0.1, ease: [0.22, 1, 0.36, 1] as const },
+  }),
+};
 
 export default function Contact() {
   const { lang, t } = useApp();
@@ -11,7 +21,7 @@ export default function Contact() {
     guests: '2',
     name: '',
     email: '',
-    message: ''
+    message: '',
   });
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -19,135 +29,93 @@ export default function Contact() {
     alert(`Thank you ${bookingData.name}! Your request has been received. We will contact you soon.`);
   };
 
+  const contactItems = [
+    { icon: Phone, label: t.contactForm.phone, value: '+30 693 715 7283' },
+    { icon: Mail, label: t.contactForm.email, value: 'hermancoku@gmail.com' },
+    { icon: Instagram, label: 'Instagram', value: '@vilazizel' },
+    { icon: MapPin, label: t.contactForm.location, value: 'Vila Zizel, Analipsi 240 01, Messenia, Greece' },
+  ];
+
   return (
-    <div className="flex flex-col pt-20 bg-sand-light">
-      {/* Hero Section */}
-      <section className="relative py-24 bg-sand-light overflow-hidden">
-        <div className="absolute top-0 right-0 w-1/3 h-full bg-sky/10 -skew-x-12 translate-x-20"></div>
-        <div className="absolute bottom-0 left-0 w-1/4 h-full bg-floral/5 skew-x-12 -translate-x-20"></div>
-        <div className="max-w-6xl mx-auto px-6 relative z-10">
-          <motion.span 
-            initial={{ opacity: 0, y: 10 }} 
-            animate={{ opacity: 1, y: 0 }} 
-            className="text-sky-deep font-bold text-xs uppercase tracking-[0.4em] mb-4 block"
-          >
-            {t.contact.tag}
-          </motion.span>
-          <motion.h1 
-            initial={{ opacity: 0, y: 20 }} 
-            animate={{ opacity: 1, y: 0 }} 
-            transition={{ delay: 0.1 }} 
-            className="text-5xl md:text-7xl font-serif text-botanical mb-6"
-          >
-            {t.contact.title} <span className="italic font-light text-floral">{t.contact.highlight}</span>
-          </motion.h1>
-          <motion.p 
-            initial={{ opacity: 0, y: 20 }} 
-            animate={{ opacity: 1, y: 0 }} 
-            transition={{ delay: 0.2 }} 
-            className="text-earth max-w-2xl text-lg font-medium"
-          >
+    <div className="bg-alabaster pt-24 text-obsidian">
+      <section className="px-6 md:px-12 pt-14 pb-20 md:pt-20 md:pb-28">
+        <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-end">
+          <motion.div initial="hidden" animate="visible" variants={fadeUp}>
+            <span className="overline">{t.contact.tag}</span>
+            <h1 className="mt-5 font-serif text-6xl leading-[0.95] md:text-8xl">
+              {t.contact.title} <span className="italic text-laurel">{t.contact.highlight}</span>
+            </h1>
+          </motion.div>
+          <motion.p initial="hidden" animate="visible" variants={fadeUp} custom={1} className="text-lg leading-8 text-obsidian/72">
             {t.contact.desc}
           </motion.p>
         </div>
       </section>
 
-      {/* Main Content */}
-      <section className="py-24 px-6 md:px-12 bg-sand-light relative">
-        <div className="max-w-6xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
-            {/* Contact Info */}
-            <div className="lg:col-span-5 space-y-12">
-              <div>
-                <h3 className="text-2xl font-serif text-botanical mb-6">{t.contactForm.direct}</h3>
-                <div className="space-y-6">
-                  <motion.div whileHover={{ x: 10 }} className="flex items-center gap-4 text-earth p-6 glass-panel rounded-3xl group">
-                    <div className="w-12 h-12 bg-white/80 rounded-2xl flex items-center justify-center text-sky-deep shadow-sm group-hover:text-floral transition-colors duration-300"><Phone className="w-6 h-6" /></div>
-                    <div>
-                      <p className="text-[10px] uppercase tracking-widest font-bold opacity-60 mb-1">{t.contactForm.phone}</p>
-                      <span className="font-bold text-botanical">+30 693 715 7283</span>
-                    </div>
-                  </motion.div>
-                  <motion.div whileHover={{ x: 10 }} className="flex items-center gap-4 text-earth p-6 glass-panel rounded-3xl group">
-                    <div className="w-12 h-12 bg-white/80 rounded-2xl flex items-center justify-center text-sky-deep shadow-sm group-hover:text-floral transition-colors duration-300"><Mail className="w-6 h-6" /></div>
-                    <div>
-                      <p className="text-[10px] uppercase tracking-widest font-bold opacity-60 mb-1">{t.contactForm.email}</p>
-                      <span className="font-bold text-botanical">hermancoku@gmail.com</span>
-                    </div>
-                  </motion.div>
-                  <motion.div whileHover={{ x: 10 }} className="flex items-center gap-4 text-earth p-6 glass-panel rounded-3xl group">
-                    <div className="w-12 h-12 bg-white/80 rounded-2xl flex items-center justify-center text-sky-deep shadow-sm group-hover:text-floral transition-colors duration-300"><Instagram className="w-6 h-6" /></div>
-                    <div>
-                      <p className="text-[10px] uppercase tracking-widest font-bold opacity-60 mb-1">Instagram</p>
-                      <span className="font-bold text-botanical">@vilazizel</span>
-                    </div>
-                  </motion.div>
+      <div className="meander-divider mx-6 md:mx-16" />
+
+      <section className="section-shell pt-14">
+        <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-12">
+          <aside className="space-y-5 lg:col-span-5">
+            <h2 className="font-serif text-4xl">{t.contactForm.direct}</h2>
+            {contactItems.map((item) => (
+              <motion.div key={item.label} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="flex gap-5 border border-obsidian/10 bg-marble-shadow/45 p-6">
+                <item.icon className="mt-1 h-6 w-6 shrink-0 text-divine" />
+                <div>
+                  <p className="font-mythic text-[10px] uppercase tracking-[0.24em] text-obsidian/50">{item.label}</p>
+                  <p className="mt-2 text-base font-medium text-obsidian">{item.value}</p>
                 </div>
-              </div>
-
-              <div>
-                <h3 className="text-2xl font-serif text-botanical mb-6">{t.contactForm.location}</h3>
-                <div className="flex items-start gap-4 text-earth group cursor-pointer glass-panel p-6 rounded-3xl">
-                  <div className="w-12 h-12 bg-white/80 rounded-2xl flex items-center justify-center text-sky-deep shadow-sm shrink-0 group-hover:text-floral transition-colors duration-300">
-                    <MapPin className="w-6 h-6 group-hover:animate-bounce" />
-                  </div>
-                  <p className="font-medium self-center">Vila Zizel, Analipsi 240 01, Messenia, Greece</p>
-                </div>
-              </div>
-            </div>
-
-            {/* Form */}
-            <div className="lg:col-span-7">
-              <motion.div 
-                initial={{ opacity: 0, y: 30 }} 
-                animate={{ opacity: 1, y: 0 }} 
-                className="glass-panel p-8 md:p-12 rounded-[4rem]"
-              >
-                <form className="space-y-8" onSubmit={handleSubmit}>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <div className="space-y-2">
-                       <label className="text-[10px] uppercase tracking-widest font-bold text-earth flex items-center gap-2"><Calendar className="w-3 h-3 text-sky-deep" /> {t.contactForm.checkIn}</label>
-                       <input type="date" value={bookingData.checkIn} onChange={(e) => setBookingData({...bookingData, checkIn: e.target.value})} required className="w-full bg-white/60 backdrop-blur-sm border border-white p-4 rounded-2xl focus:outline-none focus:ring-2 focus:ring-sky-deep/40 transition-all text-botanical" />
-                    </div>
-                    <div className="space-y-2">
-                       <label className="text-[10px] uppercase tracking-widest font-bold text-earth flex items-center gap-2"><Calendar className="w-3 h-3 text-sky-deep" /> {t.contactForm.checkOut}</label>
-                       <input type="date" value={bookingData.checkOut} onChange={(e) => setBookingData({...bookingData, checkOut: e.target.value})} required className="w-full bg-white/60 backdrop-blur-sm border border-white p-4 rounded-2xl focus:outline-none focus:ring-2 focus:ring-sky-deep/40 transition-all text-botanical" />
-                    </div>
-                  </div>
-
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <div className="space-y-2">
-                       <label className="text-[10px] uppercase tracking-widest font-bold text-earth flex items-center gap-2"><Users className="w-3 h-3 text-sky-deep" /> {t.contactForm.guests}</label>
-                       <select value={bookingData.guests} onChange={(e) => setBookingData({...bookingData, guests: e.target.value})} className="w-full bg-white/60 backdrop-blur-sm border border-white p-4 rounded-2xl focus:outline-none focus:ring-2 focus:ring-sky-deep/40 transition-all text-botanical text-sm">
-                         <option value="1">1 {lang === 'el' ? 'Επισκέπτης' : 'Guest'}</option>
-                         <option value="2">2 {lang === 'el' ? 'Επισκέπτες' : 'Guests'}</option>
-                         <option value="3">3 {lang === 'el' ? 'Επισκέπτες' : 'Guests'}</option>
-                         <option value="4+">4+ {lang === 'el' ? 'Επισκέπτες' : 'Guests'}</option>
-                       </select>
-                    </div>
-                    <div className="space-y-2">
-                       <label className="text-[10px] uppercase tracking-widest font-bold text-earth">{t.contactForm.name}</label>
-                       <input type="text" placeholder={t.contactForm.placeholderName} value={bookingData.name} onChange={(e) => setBookingData({...bookingData, name: e.target.value})} required className="w-full bg-white/60 backdrop-blur-sm border border-white p-4 rounded-2xl focus:outline-none focus:ring-2 focus:ring-sky-deep/40 transition-all text-botanical text-sm" />
-                    </div>
-                  </div>
-
-                  <div className="space-y-2">
-                     <label className="text-[10px] uppercase tracking-widest font-bold text-earth">{t.contactForm.emailLabel}</label>
-                     <input type="email" placeholder={t.contactForm.placeholderEmail} value={bookingData.email} onChange={(e) => setBookingData({...bookingData, email: e.target.value})} required className="w-full bg-white/60 backdrop-blur-sm border border-white p-4 rounded-2xl focus:outline-none focus:ring-2 focus:ring-sky-deep/40 transition-all text-botanical text-sm" />
-                  </div>
-
-                  <div className="space-y-2">
-                     <label className="text-[10px] uppercase tracking-widest font-bold text-earth flex items-center gap-2"><MessageSquare className="w-3 h-3 text-sky-deep" /> {t.contactForm.message}</label>
-                     <textarea rows={4} placeholder={t.contactForm.placeholderMessage} value={bookingData.message} onChange={(e) => setBookingData({...bookingData, message: e.target.value})} className="w-full bg-white/60 backdrop-blur-sm border border-white p-4 rounded-2xl focus:outline-none focus:ring-2 focus:ring-sky-deep/40 transition-all text-botanical text-sm resize-none" />
-                  </div>
-
-                  <button type="submit" className="w-full bg-gradient-to-r from-sky-deep to-floral text-white py-6 rounded-3xl font-bold uppercase tracking-[0.2em] text-xs shadow-xl shadow-sky-deep/30 hover:shadow-floral/40 hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center justify-center gap-3">
-                     <Send className="w-4 h-4" /> {t.contactForm.send}
-                  </button>
-                </form>
               </motion.div>
-            </div>
-          </div>
+            ))}
+          </aside>
+
+          <motion.div initial="hidden" animate="visible" variants={fadeUp} custom={1} className="lg:col-span-7">
+            <form className="border border-divine/20 bg-obsidian p-8 text-alabaster shadow-divine md:p-12" onSubmit={handleSubmit}>
+              <div className="mb-10">
+                <span className="overline">{t.booking.tag}</span>
+                <h2 className="mt-4 font-serif text-4xl">{t.booking.title} <span className="italic text-divine">{t.booking.highlight}</span></h2>
+              </div>
+
+              <div className="grid gap-6 md:grid-cols-2">
+                <label className="space-y-2">
+                  <span className="flex items-center gap-2 font-mythic text-[10px] uppercase tracking-[0.22em] text-divine"><Calendar className="h-3.5 w-3.5" /> {t.contactForm.checkIn}</span>
+                  <input type="date" value={bookingData.checkIn} onChange={(e) => setBookingData({ ...bookingData, checkIn: e.target.value })} required className="w-full border border-divine/20 bg-alabaster/10 p-4 text-alabaster outline-none transition focus:border-divine" />
+                </label>
+                <label className="space-y-2">
+                  <span className="flex items-center gap-2 font-mythic text-[10px] uppercase tracking-[0.22em] text-divine"><Calendar className="h-3.5 w-3.5" /> {t.contactForm.checkOut}</span>
+                  <input type="date" value={bookingData.checkOut} onChange={(e) => setBookingData({ ...bookingData, checkOut: e.target.value })} required className="w-full border border-divine/20 bg-alabaster/10 p-4 text-alabaster outline-none transition focus:border-divine" />
+                </label>
+                <label className="space-y-2">
+                  <span className="flex items-center gap-2 font-mythic text-[10px] uppercase tracking-[0.22em] text-divine"><Users className="h-3.5 w-3.5" /> {t.contactForm.guests}</span>
+                  <select value={bookingData.guests} onChange={(e) => setBookingData({ ...bookingData, guests: e.target.value })} className="w-full border border-divine/20 bg-obsidian p-4 text-alabaster outline-none transition focus:border-divine">
+                    <option value="1">1 {lang === 'el' ? 'Επισκέπτης' : 'Guest'}</option>
+                    <option value="2">2 {lang === 'el' ? 'Επισκέπτες' : 'Guests'}</option>
+                    <option value="3">3 {lang === 'el' ? 'Επισκέπτες' : 'Guests'}</option>
+                    <option value="4+">4+ {lang === 'el' ? 'Επισκέπτες' : 'Guests'}</option>
+                  </select>
+                </label>
+                <label className="space-y-2">
+                  <span className="font-mythic text-[10px] uppercase tracking-[0.22em] text-divine">{t.contactForm.name}</span>
+                  <input type="text" placeholder={t.contactForm.placeholderName} value={bookingData.name} onChange={(e) => setBookingData({ ...bookingData, name: e.target.value })} required className="w-full border border-divine/20 bg-alabaster/10 p-4 text-alabaster outline-none transition placeholder:text-alabaster/35 focus:border-divine" />
+                </label>
+              </div>
+
+              <label className="mt-6 block space-y-2">
+                <span className="font-mythic text-[10px] uppercase tracking-[0.22em] text-divine">{t.contactForm.emailLabel}</span>
+                <input type="email" placeholder={t.contactForm.placeholderEmail} value={bookingData.email} onChange={(e) => setBookingData({ ...bookingData, email: e.target.value })} required className="w-full border border-divine/20 bg-alabaster/10 p-4 text-alabaster outline-none transition placeholder:text-alabaster/35 focus:border-divine" />
+              </label>
+
+              <label className="mt-6 block space-y-2">
+                <span className="flex items-center gap-2 font-mythic text-[10px] uppercase tracking-[0.22em] text-divine"><MessageSquare className="h-3.5 w-3.5" /> {t.contactForm.message}</span>
+                <textarea rows={5} placeholder={t.contactForm.placeholderMessage} value={bookingData.message} onChange={(e) => setBookingData({ ...bookingData, message: e.target.value })} className="w-full resize-none border border-divine/20 bg-alabaster/10 p-4 text-alabaster outline-none transition placeholder:text-alabaster/35 focus:border-divine" />
+              </label>
+
+              <button type="submit" className="summon-button mt-8 w-full bg-alabaster text-obsidian hover:bg-alabaster">
+                <Send className="h-4 w-4" />
+                {t.contactForm.send}
+              </button>
+            </form>
+          </motion.div>
         </div>
       </section>
     </div>

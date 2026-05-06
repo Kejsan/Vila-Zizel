@@ -1,386 +1,125 @@
-import { useState } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
-import { Wind, Wifi, Home, Sun, CheckCircle2, Coffee, Tv, Utensils, UtensilsCrossed, Users, Maximize, Clock, Ban, Cigarette, ShieldCheck, ChevronRight, MapPin, Calendar, Camera } from 'lucide-react';
+import { motion } from 'motion/react';
+import type { Variants } from 'motion/react';
+import { Ban, Calendar, ChevronRight, Cigarette, Clock, Home, MapPin, ShieldCheck, Users } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { useApp } from '../context/AppContext';
+import { localizedRoom, roomDefinitions } from '../lib/rooms';
+
+const fadeUp: Variants = {
+  hidden: { opacity: 0, y: 40 },
+  visible: (i = 0) => ({
+    opacity: 1,
+    y: 0,
+    transition: { duration: 1, delay: i * 0.1, ease: [0.22, 1, 0.36, 1] as const },
+  }),
+};
 
 export default function Accommodation() {
   const { lang, t } = useApp();
-  const [selectedRoom, setSelectedRoom] = useState<number | null>(null);
-
-  const roomsMap = t.roomsData || {
-    hera: { name: 'Hera Room', desc: '', longDesc: '', features: [] },
-    aphrodite: { name: 'Aphrodite Room', desc: '', longDesc: '', features: [] },
-    poseidonHera: { name: 'Poseidon-Hera Unit', desc: '', longDesc: '', features: [] },
-    zeus: { name: 'Zeus Apartment', desc: '', longDesc: '', features: [] },
-    athina: { name: 'Athina Room', desc: '', longDesc: '', features: [] },
-    artemis: { name: 'Artemis Room', desc: '', longDesc: '', features: [] }
-  };
-
-  const rooms = [
-    { 
-      id: 1, 
-      name: roomsMap.aphrodite.name, 
-      img: "/Images/Rooms/Aphrodite/Exterior 1.avif",
-      price: "From €80",
-      desc: roomsMap.aphrodite.desc,
-      features: roomsMap.aphrodite.features,
-      longDesc: roomsMap.aphrodite.longDesc,
-      sleeping: [
-        { title: lang === 'el' ? 'Υπνοδωμάτιο' : 'Bedroom', desc: lang === 'el' ? '1 υπέρδιπλο κρεβάτι' : '1 king size bed' },
-        { title: lang === 'el' ? 'Κουζίνα-Τραπεζαρία' : 'Kitchen-Dining', desc: lang === 'el' ? '2 μονά κρεβάτια' : '2 single beds' }
-      ],
-      gallery: [
-        "/Images/Rooms/Aphrodite/Exterior 1.avif",
-        "/Images/Rooms/Aphrodite/Master Bedroom 1.avif",
-        "/Images/Rooms/Aphrodite/Full Kitchen.avif",
-        "/Images/Rooms/Aphrodite/Bathroom 1.avif",
-        "/Images/Rooms/Aphrodite/Exterior 2.avif"
-      ]
-    },
-    { 
-      id: 2, 
-      name: roomsMap.hera.name, 
-      img: "/Images/Rooms/Hera/Exterior 1.avif",
-      price: "From €85",
-      desc: roomsMap.hera.desc,
-      features: roomsMap.hera.features,
-      longDesc: roomsMap.hera.longDesc,
-      sleeping: [
-        { title: lang === 'el' ? 'Υπνοδωμάτιο' : 'Bedroom', desc: lang === 'el' ? '1 διπλό κρεβάτι' : '1 double bed' },
-        { title: lang === 'el' ? 'Κοινόχρηστος χώρος' : 'Living area', desc: lang === 'el' ? '1 μονό κρεβάτι' : '1 single bed' }
-      ],
-      gallery: [
-        "/Images/Rooms/Hera/Exterior 1.avif",
-        "/Images/Rooms/Hera/Bedroom 1.avif",
-        "/Images/Rooms/Hera/Living Room 1.avif",
-        "/Images/Rooms/Hera/Small Kitchen 1.avif",
-        "/Images/Rooms/Hera/Bathroom 1.avif"
-      ]
-    },
-    { 
-      id: 4, 
-      name: roomsMap.poseidonHera.name, 
-      img: "/Images/Rooms/Poseidon-Hera/Bedroom A 1.avif",
-      price: "From €150",
-      desc: roomsMap.poseidonHera.desc,
-      features: roomsMap.poseidonHera.features,
-      longDesc: roomsMap.poseidonHera.longDesc,
-      sleeping: [
-        { title: lang === 'el' ? 'Υπνοδωμάτιο 1' : 'Bedroom 1', desc: lang === 'el' ? '1 διπλό κρεβάτι & 1 μονό κρεβάτι' : '1 double bed & 1 single bed' },
-        { title: lang === 'el' ? 'Υπνοδωμάτιο 2' : 'Bedroom 2', desc: lang === 'el' ? '1 διπλό κρεβάτι & 1 κρεβάτι-συρτάρι' : '1 double bed & 1 drawer bed' }
-      ],
-      gallery: [
-        "/Images/Rooms/Poseidon-Hera/Bedroom A 1.avif",
-        "/Images/Rooms/Poseidon-Hera/Bedroom A 2.avif",
-        "/Images/Rooms/Poseidon-Hera/Bedroom A 3.avif",
-        "/Images/Rooms/Poseidon-Hera/Bedroom A 4.avif",
-        "/Images/Rooms/Poseidon-Hera/Bedroom B 1.avif",
-        "/Images/Rooms/Poseidon-Hera/Bedroom B 2.avif",
-        "/Images/Rooms/Poseidon-Hera/Bedroom B 3.avif",
-        "/Images/Rooms/Poseidon-Hera/Bedroom B 4.avif",
-        "/Images/Rooms/Poseidon-Hera/Kitchen 1.avif",
-        "/Images/Rooms/Poseidon-Hera/Kitchen 2.avif",
-        "/Images/Rooms/Poseidon-Hera/Kitchen 3.avif",
-        "/Images/Rooms/Poseidon-Hera/Kitchen 4.avif",
-        "/Images/Rooms/Poseidon-Hera/Dining Area.avif",
-        "/Images/Rooms/Poseidon-Hera/Bathroom A 1.avif",
-        "/Images/Rooms/Poseidon-Hera/Bathroom A 2.avif",
-        "/Images/Rooms/Poseidon-Hera/Bathroom A 3.avif",
-        "/Images/Rooms/Poseidon-Hera/Bathroom B 1.avif",
-        "/Images/Rooms/Poseidon-Hera/Bathroom B 2.avif"
-      ]
-    },
-    { 
-      id: 5, 
-      name: roomsMap.zeus.name, 
-      img: "/Images/Rooms/Zeus/Exterior 1.avif",
-      price: "From €140",
-      desc: roomsMap.zeus.desc,
-      features: roomsMap.zeus.features,
-      longDesc: roomsMap.zeus.longDesc,
-      sleeping: [
-        { title: lang === 'el' ? 'Υπνοδωμάτιο 1' : 'Bedroom 1', desc: lang === 'el' ? '1 μεγάλο διπλό χτιστό κρεβάτι' : '1 large double built-in bed' },
-        { title: lang === 'el' ? 'Υπνοδωμάτιο 2' : 'Bedroom 2', desc: lang === 'el' ? '2 μονά κρεβάτια' : '2 single beds' }
-      ],
-      gallery: [
-        "/Images/Rooms/Zeus/Exterior 1.avif"
-      ]
-    },
-    { 
-      id: 6, 
-      name: roomsMap.athina.name, 
-      img: "/Images/Rooms/Athina/Exterior 1.avif",
-      price: "From €90",
-      desc: roomsMap.athina.desc,
-      features: roomsMap.athina.features,
-      longDesc: roomsMap.athina.longDesc,
-      sleeping: [
-        { title: lang === 'el' ? 'Υπνοδωμάτιο' : 'Bedroom', desc: lang === 'el' ? '1 υπέρδιπλο χτιστό κρεβάτι' : '1 super double built-in bed' },
-        { title: lang === 'el' ? 'Καθιστικό' : 'Living area', desc: lang === 'el' ? '1 διπλό κρεβάτι' : '1 double bed' }
-      ],
-      gallery: [
-        "/Images/Rooms/Athina/Exterior 1.avif"
-      ]
-    },
-    { 
-      id: 7, 
-      name: roomsMap.artemis.name, 
-      img: "/Images/Rooms/Artemis/Exterior 1.avif",
-      price: "From €85",
-      desc: roomsMap.artemis.desc,
-      features: roomsMap.artemis.features,
-      longDesc: roomsMap.artemis.longDesc,
-      sleeping: [
-        { title: lang === 'el' ? 'Υπνοδωμάτιο' : 'Bedroom', desc: lang === 'el' ? '1 υπέρδιπλο κρεβάτι (King Size)' : '1 king size bed' },
-        { title: lang === 'el' ? 'Καθιστικό' : 'Living area', desc: lang === 'el' ? '1 μονό κρεβάτι' : '1 single bed' }
-      ],
-      gallery: [
-        "/Images/Rooms/Artemis/Exterior 1.avif"
-      ]
-    }
-  ];
+  const rooms = roomDefinitions.map((room) => localizedRoom(room, t.roomsData));
 
   const rules = [
-    { icon: <Clock className="w-5 h-5 text-sky-deep" />, label: t.rooms.checkIn },
-    { icon: <Clock className="w-5 h-5 text-sky-deep" />, label: t.rooms.checkOut },
-    { icon: <Users className="w-5 h-5 text-sky-deep" />, label: t.rooms.maxGuests },
-    { icon: <Ban className="w-5 h-5 text-sky-deep" />, label: t.rooms.noPets },
-    { icon: <Cigarette className="w-5 h-5 text-sky-deep" />, label: t.rooms.smoking },
-    { icon: <ShieldCheck className="w-5 h-5 text-sky-deep" />, label: t.rooms.hostGreets },
-    { icon: <Calendar className="w-5 h-5 text-sky-deep" />, label: t.rooms.longTerm },
+    { icon: Clock, label: t.rooms.checkIn },
+    { icon: Clock, label: t.rooms.checkOut },
+    { icon: Users, label: t.rooms.maxGuests },
+    { icon: Ban, label: t.rooms.noPets },
+    { icon: Cigarette, label: t.rooms.smoking },
+    { icon: ShieldCheck, label: t.rooms.hostGreets },
+    { icon: Calendar, label: t.rooms.longTerm },
   ];
 
   return (
-    <div className="flex flex-col pt-20">
-      {/* Hero */}
-      <section className="relative py-24 bg-sand-light border-b border-sand-medium overflow-hidden">
-        <div className="max-w-6xl mx-auto px-6 relative z-10">
-          <motion.span initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="text-sky-deep font-bold text-xs uppercase tracking-[0.4em] mb-4 block">{t.rooms.tag}</motion.span>
-          <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="text-5xl md:text-7xl font-serif text-botanical mb-8 leading-tight">
-            {t.rooms.title} <span className="italic font-light text-sky-deep">{t.rooms.highlight}</span>
-          </motion.h1>
-          <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="text-earth/80 max-w-2xl text-lg leading-relaxed font-medium">
-            {lang === 'el' ? 'Ανακαλύψτε τα πρόσφατα ανακαινισμένα δωμάτιά μας, με χειροποίητο σχεδιασμό εμπνευσμένο από τη μυθολογία.' : 
-             lang === 'it' ? 'Scopri le nostre camere recentemente rinnovate, con design fatti a mano ispirati alla mitologia.' :
-             lang === 'de' ? 'Entdecken Sie unsere renovierten Zimmer mit handgefertigtem Design, inspiriert von der Mythologie.' :
-             lang === 'es' ? 'Descubra nuestras habitaciones recién renovadas, con diseños hechos a mano inspirados en la mitología.' :
-             lang === 'fr' ? 'Découvrez nos chambres récemment rénovées, aux designs artisanaux inspirés de la mythologie.' :
-             'Explore our recently renovated rooms, featuring handmade designs inspired by the 12 Gods of Olympus.'}
-          </motion.p>
+    <div className="bg-alabaster pt-24 text-obsidian">
+      <section className="px-6 md:px-12 pt-14 pb-20 md:pt-20 md:pb-28">
+        <div className="mx-auto max-w-7xl">
+          <motion.span initial="hidden" animate="visible" variants={fadeUp} className="overline block">{t.rooms.tag}</motion.span>
+          <motion.div initial="hidden" animate="visible" variants={fadeUp} custom={1} className="mt-6 grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-end">
+            <h1 className="font-serif text-6xl leading-[0.95] md:text-8xl">
+              {t.rooms.title} <span className="italic text-laurel">{t.rooms.highlight}</span>
+            </h1>
+            <p className="max-w-2xl text-lg leading-8 text-obsidian/70">
+              {lang === 'el'
+                ? 'Ανακαλύψτε τα πρόσφατα ανακαινισμένα δωμάτιά μας, με χειροποίητο σχεδιασμό εμπνευσμένο από τη μυθολογία.'
+                : 'Explore recently renovated rooms and apartments shaped around handmade details, garden privacy, and the quiet ritual of staying near the Messinian coast.'}
+            </p>
+          </motion.div>
         </div>
       </section>
 
-      {/* House Rules Bar */}
-      <section className="py-12 bg-white/50 backdrop-blur-md border-b border-sand-medium shadow-sm relative z-20">
-        <div className="max-w-6xl mx-auto px-6 overflow-x-auto no-scrollbar">
-          <div className="flex items-center gap-12 whitespace-nowrap min-w-max">
-             <h4 className="text-[10px] uppercase tracking-[0.3em] font-bold text-botanical pr-8 border-r border-sand-medium">{t.rooms.rulesTitle}</h4>
-             <div className="flex gap-10">
-                {rules.map((rule, idx) => (
-                  <div key={idx} className="flex items-center gap-3 text-earth/80">
-                    {rule.icon}
-                    <span className="text-[10px] font-bold uppercase tracking-widest">{rule.label}</span>
-                  </div>
-                ))}
-             </div>
+      <div className="meander-divider mx-6 md:mx-16" />
+
+      <section className="px-6 py-12 md:px-12">
+        <div className="mx-auto max-w-7xl overflow-x-auto no-scrollbar border-y border-divine/20 py-6">
+          <div className="flex min-w-max items-center gap-10">
+            <h2 className="font-mythic text-[10px] uppercase tracking-[0.3em] text-divine">{t.rooms.rulesTitle}</h2>
+            {rules.map((rule) => (
+              <div key={rule.label} className="flex items-center gap-3 text-obsidian/68">
+                <rule.icon className="h-4 w-4 text-divine" />
+                <span className="font-mythic text-[10px] uppercase tracking-[0.18em]">{rule.label}</span>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* Rooms Slider/List */}
-      <section className="py-24 px-6 md:px-12 relative">
-        <div className="max-w-6xl mx-auto space-y-32">
-          {rooms.map((room, idx) => (
-            <div key={room.id} id={`room-${room.id}`} className="flex flex-col gap-12">
-              <div className={`grid grid-cols-1 lg:grid-cols-2 gap-16 items-center`}>
-                <div className={`${idx % 2 === 1 ? 'lg:order-2' : ''}`}>
-                  <motion.div 
-                    initial={{ opacity: 0, scale: 0.95 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ once: true }}
-                    className="relative h-[450px] md:h-[600px] rounded-[4rem] overflow-hidden shadow-2xl"
-                  >
-                    <img src={room.img} className="w-full h-full object-cover" alt={room.name} />
-                    <div className="absolute top-8 left-8 px-6 py-3 bg-white/90 backdrop-blur-md rounded-full text-xs font-bold text-sky-deep shadow-lg">
-                      {room.price}
-                    </div>
-                  </motion.div>
+      <section className="section-shell pt-12">
+        <div className="mx-auto grid max-w-7xl gap-8 md:grid-cols-2 xl:grid-cols-3">
+          {rooms.map((room, index) => (
+            <motion.article key={room.slug} id={room.slug} initial="hidden" whileInView="visible" viewport={{ once: true }} custom={index % 3} variants={fadeUp} className="scroll-mt-32">
+              <Link to={`/rooms/${room.slug}`} className="temple-card temple-card-hover group relative block h-[520px] overflow-hidden">
+                <img
+                  src={room.image}
+                  alt={room.name}
+                  className="absolute inset-0 h-full w-full object-cover opacity-80 transition-transform duration-[1200ms] group-hover:scale-[1.08]"
+                  onError={(event) => {
+                    event.currentTarget.src = room.fallbackImage;
+                  }}
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-obsidian via-obsidian/48 to-transparent" />
+                <div className="absolute left-7 right-7 top-8 flex items-center justify-between">
+                  <span className="font-mythic text-[10px] uppercase tracking-[0.3em] text-divine">{room.price}</span>
+                  <span className="rounded-full border border-divine/25 px-3 py-1 font-mythic text-[9px] uppercase tracking-[0.2em] text-alabaster/70">{room.sleeps}</span>
                 </div>
-                <div className={`${idx % 2 === 1 ? 'lg:order-1' : ''}`}>
-                  <span className="text-sky-deep font-bold text-xs uppercase tracking-[0.4em] mb-4 block">{t.about.handmade}</span>
-                  <h2 className="text-5xl md:text-6xl font-serif text-botanical mb-6 leading-tight">{room.name}</h2>
-                  <p className="text-earth/80 text-lg leading-relaxed mb-8 italic font-medium">{room.desc}</p>
-                  
-                  <div className="flex flex-wrap gap-3 mb-10">
-                    {room.features.map((feat, i) => (
-                      <span key={i} className="px-4 py-2 bg-white/60 backdrop-blur-sm rounded-xl text-[10px] font-bold uppercase tracking-widest text-botanical border border-sand-medium shadow-sm">
-                        {feat}
-                      </span>
+                <div className="absolute bottom-8 left-7 right-7">
+                  <p className="font-mythic text-[10px] uppercase tracking-[0.34em] text-divine/80">{room.greekName}</p>
+                  <h2 className="mt-3 font-serif text-4xl italic text-alabaster">{room.name}</h2>
+                  <p className="mt-4 text-sm leading-7 text-alabaster/68">{room.desc}</p>
+                  <div className="mt-6 flex flex-wrap gap-3">
+                    {[room.sleeps, room.beds, room.baths].map((item) => (
+                      <span key={item} className="rounded-full border border-divine/20 px-3 py-1 font-mythic text-[9px] uppercase tracking-[0.18em] text-alabaster/62">{item}</span>
                     ))}
                   </div>
-
-                  <button 
-                    onClick={() => setSelectedRoom(selectedRoom === room.id ? null : room.id)}
-                    className="group inline-flex items-center gap-3 px-10 py-5 bg-botanical text-sand-light rounded-full uppercase tracking-widest text-xs font-bold hover:bg-sky-deep transition-all shadow-xl hover:shadow-sky-deep/30"
-                  >
-                    {selectedRoom === room.id ? (lang === 'el' ? 'Λιγότερα' : lang === 'it' ? 'Meno' : lang === 'fr' ? 'Moins' : 'Show Less') : t.rooms.learnMore}
-                    <ChevronRight className={`w-4 h-4 transition-transform ${selectedRoom === room.id ? 'rotate-90' : 'group-hover:translate-x-1'}`} />
-                  </button>
+                  <div className="mt-7 flex items-center gap-2 font-mythic text-[10px] uppercase tracking-[0.26em] text-divine">
+                    {t.rooms.learnMore}
+                    <ChevronRight className="h-3.5 w-3.5" />
+                  </div>
                 </div>
-              </div>
-
-              {/* Expandable Details Section */}
-              <AnimatePresence>
-                {selectedRoom === room.id && (
-                  <motion.div 
-                    initial={{ opacity: 0, height: 0 }}
-                    animate={{ opacity: 1, height: 'auto' }}
-                    exit={{ opacity: 0, height: 0 }}
-                    transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-                    className="overflow-hidden"
-                  >
-                    <div className="p-10 lg:p-16 glass-panel rounded-[4rem] flex flex-col gap-16">
-                      
-                      {/* Top Info Grid */}
-                      <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
-                        <div className="space-y-8">
-                          <div className="space-y-4">
-                            <h4 className="font-serif text-3xl text-sky-deep italic">{t.rooms.olympianExp}</h4>
-                            <p className="text-earth/80 leading-relaxed text-lg font-medium">{room.longDesc}</p>
-                          </div>
-                          
-                          {/* Sleeping Arrangement */}
-                          <div className="space-y-6 pt-8 border-t border-sand-medium">
-                             <h4 className="text-xl font-serif text-botanical">{lang === 'el' ? 'Πού θα κοιμηθείτε' : 'Where you\'ll sleep'}</h4>
-                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                {room.sleeping.map((s, i) => (
-                                  <div key={i} className="p-8 bg-white/70 backdrop-blur-sm rounded-[2rem] border border-sand-medium flex flex-col gap-3 shadow-sm">
-                                     <Home className="w-6 h-6 text-sky-deep" />
-                                     <div className="space-y-1">
-                                       <p className="font-bold text-botanical text-sm">{s.title}</p>
-                                       <p className="text-earth/70 text-xs font-medium">{s.desc}</p>
-                                     </div>
-                                  </div>
-                                ))}
-                             </div>
-                          </div>
-
-                          <div className="space-y-4 pt-4">
-                             <div className="flex items-center gap-4 text-botanical">
-                                <ShieldCheck className="w-6 h-6 text-sky-deep" />
-                                <span className="font-bold text-sm tracking-wide uppercase">{t.about.renovated}</span>
-                             </div>
-                             <div className="flex items-center gap-4 text-botanical">
-                                <Maximize className="w-6 h-6 text-sky-deep" />
-                                <span className="font-bold text-sm tracking-wide uppercase">{t.about.standalone}</span>
-                             </div>
-                          </div>
-                        </div>
-
-                        <div className="space-y-10">
-                          <h4 className="font-serif text-3xl text-botanical">{t.rooms.roomAmenities}</h4>
-                          <div className="grid grid-cols-2 gap-6 pb-8 border-b border-sand-medium">
-                             <div className="flex flex-col gap-2 p-6 bg-white/70 backdrop-blur-sm rounded-[2rem] border border-sand-medium">
-                                <Wifi className="w-8 h-8 text-sky-deep mb-2" />
-                                <span className="text-[10px] font-bold uppercase tracking-widest text-botanical">WiFi</span>
-                             </div>
-                             <div className="flex flex-col gap-2 p-6 bg-white/70 backdrop-blur-sm rounded-[2rem] border border-sand-medium">
-                                <Wind className="w-8 h-8 text-sky-deep mb-2" />
-                                <span className="text-[10px] font-bold uppercase tracking-widest text-botanical">A/C</span>
-                             </div>
-                             <div className="flex flex-col gap-2 p-6 bg-white/70 backdrop-blur-sm rounded-[2rem] border border-sand-medium">
-                                <Tv className="w-8 h-8 text-sky-deep mb-2" />
-                                <span className="text-[10px] font-bold uppercase tracking-widest text-botanical">Smart TV</span>
-                             </div>
-                             <div className="flex flex-col gap-2 p-6 bg-white/70 backdrop-blur-sm rounded-[2rem] border border-sand-medium">
-                                <Utensils className="w-8 h-8 text-sky-deep mb-2" />
-                                <span className="text-[10px] font-bold uppercase tracking-widest text-botanical">{lang === 'el' ? 'Κουζίνα' : 'Kitchen'}</span>
-                             </div>
-                          </div>
-                          <div className="space-y-4">
-                            <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-floral mb-4">{t.rooms.amenitiesSubtitle}</p>
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-6 text-[11px] font-medium text-earth/80 italic">
-                               <div className="space-y-2">
-                                 <p className="font-bold text-botanical not-italic text-[9px] uppercase tracking-widest">{t.amenitiesList.bathLabel}</p>
-                                 <p>• {t.amenitiesList.bathroom}, {t.amenitiesList.laundry}</p>
-                                 <p className="font-bold text-botanical not-italic text-[9px] uppercase tracking-widest pt-2">{t.amenitiesList.essentialsLabel}</p>
-                                 <p>• {t.amenitiesList.essentials}</p>
-                                 <p className="font-bold text-botanical not-italic text-[9px] uppercase tracking-widest pt-2">{t.amenitiesList.familyLabel}</p>
-                                 <p>• {t.amenitiesList.family}</p>
-                               </div>
-                               <div className="space-y-2">
-                                 <p className="font-bold text-botanical not-italic text-[9px] uppercase tracking-widest">{t.amenitiesList.kitchenLabel}</p>
-                                 <p>• {t.amenitiesList.kitchen}</p>
-                                 <p className="font-bold text-botanical not-italic text-[9px] uppercase tracking-widest pt-2">{t.amenitiesList.outdoorLabel}</p>
-                                 <p>• {t.amenitiesList.outdoor}, {t.amenitiesList.parking}</p>
-                                 <p className="font-bold text-botanical not-italic text-[9px] uppercase tracking-widest pt-2">{t.amenitiesList.safetyLabel}</p>
-                                 <p>• {t.amenitiesList.safetyDesc}</p>
-                               </div>
-                            </div>
-                            <div className="pt-6 border-t border-sand-medium mt-6">
-                               <p className="text-[9px] font-bold uppercase tracking-[0.2em] text-botanical mb-2 opacity-50">{t.rooms.notIncluded}</p>
-                               <p className="text-[11px] text-earth/80 opacity-70 italic leading-relaxed">{t.amenitiesList.notIncluded}</p>
-                               <p className="text-[9px] text-earth/80 opacity-50 mt-2 italic">{t.rooms.smokeWarning}</p>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-
-                      {/* Photo Gallery */}
-                      {room.gallery.length > 0 && (
-                        <div className="space-y-8 pt-8 border-t border-sand-medium">
-                           <div className="flex items-center justify-between">
-                              <h4 className="text-3xl font-serif text-botanical">{lang === 'el' ? 'Φωτογραφίες' : 'Photo Gallery'}</h4>
-                              <div className="flex gap-2">
-                                 <Camera className="w-5 h-5 text-sky-deep" />
-                                 <span className="text-[10px] font-bold uppercase tracking-widest text-earth/80">{room.gallery.length} {lang === 'el' ? 'ΦΩΤΟΓΡΑΦΙΕΣ' : 'IMAGES'}</span>
-                              </div>
-                           </div>
-                           <div className="flex gap-6 overflow-x-auto pb-8 no-scrollbar -mx-4 px-4 snap-x">
-                              {room.gallery.map((img, i) => (
-                                <motion.div 
-                                  key={i} 
-                                  whileHover={{ scale: 1.02 }}
-                                  className="flex-shrink-0 w-[300px] md:w-[450px] h-[250px] md:h-[350px] rounded-[2.5rem] overflow-hidden shadow-lg border border-sand-medium snap-center"
-                                >
-                                  <img src={img} className="w-full h-full object-cover" alt={`${room.name} gallery ${i}`} />
-                                </motion.div>
-                              ))}
-                           </div>
-                        </div>
-                      )}
-
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
+              </Link>
+            </motion.article>
           ))}
         </div>
       </section>
 
-      {/* Estate Features */}
-      <section className="py-32 px-6 md:px-12 bg-white relative">
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-20 space-y-4">
-            <span className="text-sky-deep font-bold text-xs uppercase tracking-[0.4em] mb-4 block underline underline-offset-[12px] decoration-sky-200">{t.amenities.tag}</span>
-            <h2 className="text-5xl md:text-6xl font-serif text-botanical">{t.amenities.title} <span className="italic font-light text-sky-deep">{t.amenities.highlight}</span></h2>
-            <p className="mt-8 text-earth/80 max-w-2xl mx-auto font-medium text-lg leading-relaxed">{t.amenities.desc}</p>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-             {[
-               { icon: <MapPin className="w-8 h-8" />, title: t.amenities.estate, desc: t.amenities.estateDesc, color: 'bg-botanical-light/30 text-botanical' },
-               { icon: <ShieldCheck className="w-8 h-8" />, title: t.amenities.secure, desc: t.amenities.secureDesc, color: 'bg-sky-deep/10 text-sky-deep' },
-               { icon: <Home className="w-8 h-8" />, title: t.amenities.privacy, desc: t.amenities.privacyDesc, color: 'bg-floral/10 text-floral' },
-               { icon: <Sun className="w-8 h-8" />, title: t.amenities.soon, desc: t.amenities.soonDesc, color: 'bg-amber-50 text-amber-600' },
-             ].map((item, i) => (
-                <div key={i} className="glass-panel p-10 rounded-[3rem] flex flex-col items-center text-center group hover:-translate-y-2 transition-all">
-                  <div className={`w-20 h-20 ${item.color} rounded-3xl flex items-center justify-center mb-8 group-hover:scale-110 transition-transform shadow-sm`}>{item.icon}</div>
-                  <h3 className="text-2xl font-serif text-botanical mb-2">{item.title}</h3>
-                  <p className="text-sm text-earth/80 font-bold tracking-tight">{item.desc}</p>
-                </div>
-             ))}
+      <section className="section-shell bg-marble-shadow/45">
+        <div className="mx-auto max-w-7xl text-center">
+          <span className="overline">{t.amenities.tag}</span>
+          <h2 className="mx-auto mt-5 max-w-4xl font-serif text-5xl leading-tight md:text-6xl">
+            {t.amenities.title} <span className="italic text-laurel">{t.amenities.highlight}</span>
+          </h2>
+          <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-obsidian/68">{t.amenities.desc}</p>
+          <div className="mt-14 grid gap-5 md:grid-cols-4">
+            {[
+              { icon: MapPin, title: t.amenities.estate, desc: t.amenities.estateDesc },
+              { icon: ShieldCheck, title: t.amenities.secure, desc: t.amenities.secureDesc },
+              { icon: Home, title: t.amenities.privacy, desc: t.amenities.privacyDesc },
+              { icon: Calendar, title: t.amenities.soon, desc: t.amenities.soonDesc },
+            ].map((item) => (
+              <div key={item.title} className="border border-obsidian/10 bg-alabaster p-8 text-left">
+                <item.icon className="mb-8 h-7 w-7 text-divine" />
+                <h3 className="font-serif text-2xl">{item.title}</h3>
+                <p className="mt-3 text-sm leading-7 text-obsidian/64">{item.desc}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
