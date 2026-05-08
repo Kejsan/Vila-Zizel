@@ -68,6 +68,29 @@
     <title>Vila Zizel | Handmade Accommodation in Analipsi, Messenia</title>
   </head>
   <body>
+    <form name="booking-request" method="POST" data-netlify="true" netlify-honeypot="bot-field" hidden>
+      <input type="hidden" name="form-name" value="booking-request" />
+      <input type="hidden" name="receiver" value="kejsancoku2@gmail.com" />
+      <input name="bot-field" />
+      <input name="name" />
+      <input name="email" type="email" />
+      <input name="phone" />
+      <input name="room" />
+      <input name="checkIn" type="date" />
+      <input name="checkOut" type="date" />
+      <input name="guests" />
+      <textarea name="message"></textarea>
+      <input name="subject" />
+    </form>
+    <form name="info-request" method="POST" data-netlify="true" netlify-honeypot="bot-field" hidden>
+      <input type="hidden" name="form-name" value="info-request" />
+      <input type="hidden" name="receiver" value="kejsancoku2@gmail.com" />
+      <input name="bot-field" />
+      <input name="name" />
+      <input name="email" type="email" />
+      <input name="subject" />
+      <textarea name="message"></textarea>
+    </form>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
