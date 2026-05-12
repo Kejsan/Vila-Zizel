@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import { Menu, X, Globe, ChevronRight } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 import { useApp, translations } from '../context/AppContext';
+import BrandIcon from './BrandIcon';
 
 export default function Navbar() {
   const { lang, setLang, t } = useApp();
@@ -13,10 +14,10 @@ export default function Navbar() {
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
   const navItems = [
-    { name: 'home', label: t.nav.home, path: '/' },
-    { name: 'about', label: t.nav.about, path: '/about' },
-    { name: 'rooms', label: t.nav.rooms, path: '/accommodation' },
-    { name: 'contact', label: t.nav.contact, path: '/contact' },
+    { name: 'home', label: t.nav.home, path: '/', icon: 'temple' as const },
+    { name: 'about', label: t.nav.about, path: '/about', icon: 'scroll' as const },
+    { name: 'rooms', label: t.nav.rooms, path: '/accommodation', icon: 'arch' as const },
+    { name: 'contact', label: t.nav.contact, path: '/contact', icon: 'letter' as const },
   ];
 
   const handleNavClick = (_path: string) => {
@@ -49,7 +50,10 @@ export default function Navbar() {
                   onClick={() => handleNavClick(item.path)}
                   className="flex items-center justify-between group"
                 >
-                  <span className="group-hover:text-divine transition-colors">{item.label}</span>
+                  <span className="flex items-center gap-4 group-hover:text-divine transition-colors">
+                    <BrandIcon name={item.icon} className="h-6 w-6 text-divine" />
+                    {item.label}
+                  </span>
                   <ChevronRight className="w-6 h-6 text-divine/40 group-hover:text-divine transition-colors" />
                 </Link>
               ))}

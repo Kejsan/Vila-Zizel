@@ -12,6 +12,7 @@ export type RoomDefinition = {
   sleeps: string;
   beds: string;
   baths: string;
+  icon: 'aphrodite' | 'hera' | 'poseidonHera' | 'zeus' | 'athina' | 'artemis';
 };
 
 export const roomDefinitions: RoomDefinition[] = [
@@ -33,6 +34,7 @@ export const roomDefinitions: RoomDefinition[] = [
     sleeps: '4 guests',
     beds: '3 beds',
     baths: '1 bath',
+    icon: 'aphrodite',
   },
   {
     id: 2,
@@ -52,6 +54,7 @@ export const roomDefinitions: RoomDefinition[] = [
     sleeps: '3 guests',
     beds: '2 beds',
     baths: '1 bath',
+    icon: 'hera',
   },
   {
     id: 4,
@@ -72,6 +75,7 @@ export const roomDefinitions: RoomDefinition[] = [
     sleeps: '6 guests',
     beds: '4 beds',
     baths: '2 baths',
+    icon: 'poseidonHera',
   },
   {
     id: 5,
@@ -85,6 +89,7 @@ export const roomDefinitions: RoomDefinition[] = [
     sleeps: '5 guests',
     beds: '4 beds',
     baths: '1 bath',
+    icon: 'zeus',
   },
   {
     id: 6,
@@ -98,6 +103,7 @@ export const roomDefinitions: RoomDefinition[] = [
     sleeps: '4 guests',
     beds: '2 beds',
     baths: '1 bath',
+    icon: 'athina',
   },
   {
     id: 7,
@@ -111,6 +117,7 @@ export const roomDefinitions: RoomDefinition[] = [
     sleeps: '3 guests',
     beds: '2 beds',
     baths: '1 bath',
+    icon: 'artemis',
   },
 ];
 

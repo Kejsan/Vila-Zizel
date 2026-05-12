@@ -114,3 +114,16 @@ body {
 @utility overline {
   @apply font-mythic text-[10px] font-bold uppercase tracking-[0.4em] text-divine;
 }
+
+@utility mythic-orb {
+  background:
+    radial-gradient(circle at 50% 45%, rgba(212, 175, 55, 0.16), transparent 34%),
+    conic-gradient(from 45deg, transparent, rgba(212, 175, 55, 0.13), transparent 32%, rgba(212, 175, 55, 0.12), transparent 70%);
+}
+
+@utility marble-veil {
+  background-image:
+    radial-gradient(circle at 12% 18%, rgba(212, 175, 55, 0.08), transparent 22rem),
+    radial-gradient(circle at 82% 28%, rgba(98, 122, 83, 0.08), transparent 18rem),
+    linear-gradient(135deg, rgba(43, 39, 35, 0.035), transparent 30%, rgba(212, 175, 55, 0.035));
+}

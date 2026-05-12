@@ -4,6 +4,7 @@ import type { Variants } from 'motion/react';
 import { Calendar, Instagram, Mail, MapPin, MessageSquare, Phone, Send, Users } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 import { localizedRoom, roomDefinitions } from '../lib/rooms';
+import { IconSeal } from '../components/BrandIcon';
 
 const fadeUp: Variants = {
   hidden: { opacity: 0, y: 40 },
@@ -93,17 +94,17 @@ export default function Contact() {
   };
 
   const contactItems = [
-    { icon: Phone, label: t.contactForm.phone, value: '+30 693 715 7283' },
-    { icon: Mail, label: t.contactForm.email, value: 'hermancoku@gmail.com' },
-    { icon: Instagram, label: 'Instagram', value: '@vilazizel' },
-    { icon: MapPin, label: t.contactForm.location, value: 'Vila Zizel, Analipsi 240 01, Messenia, Greece' },
+    { icon: Phone, brandIcon: 'letter' as const, label: t.contactForm.phone, value: '+30 693 715 7283' },
+    { icon: Mail, brandIcon: 'letter' as const, label: t.contactForm.email, value: 'hermancoku@gmail.com' },
+    { icon: Instagram, brandIcon: 'monogram' as const, label: 'Instagram', value: '@vilazizel' },
+    { icon: MapPin, brandIcon: 'mapPin' as const, label: t.contactForm.location, value: 'Vila Zizel, Analipsi 240 01, Messenia, Greece' },
   ];
 
   const isSubmitting = status === 'submitting';
 
   return (
     <div className="bg-alabaster pt-24 text-obsidian">
-      <section className="px-6 md:px-12 pt-14 pb-20 md:pt-20 md:pb-28">
+      <section className="marble-veil px-6 md:px-12 pt-14 pb-20 md:pt-20 md:pb-28">
         <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-end">
           <motion.div initial="hidden" animate="visible" variants={fadeUp}>
             <span className="overline">{t.contact.tag}</span>
@@ -125,7 +126,7 @@ export default function Contact() {
             <h2 className="font-serif text-4xl">{t.contactForm.direct}</h2>
             {contactItems.map((item) => (
               <motion.div key={item.label} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="flex gap-5 border border-obsidian/10 bg-marble-shadow/45 p-6">
-                <item.icon className="mt-1 h-6 w-6 shrink-0 text-divine" />
+                <IconSeal name={item.brandIcon} className="h-12 w-12 shrink-0" />
                 <div>
                   <p className="font-mythic text-[10px] uppercase tracking-[0.24em] text-obsidian/50">{item.label}</p>
                   <p className="mt-2 text-base font-medium text-obsidian">{item.value}</p>

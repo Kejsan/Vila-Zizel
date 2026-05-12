@@ -2,6 +2,7 @@ import { motion } from 'motion/react';
 import type { Variants } from 'motion/react';
 import { Calendar, FileText, ShieldCheck, Sparkles } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { IconSeal } from '../components/BrandIcon';
 
 const fadeUp: Variants = {
   hidden: { opacity: 0, y: 40 },
@@ -50,7 +51,7 @@ const sections = [
 export default function Policies() {
   return (
     <div className="bg-alabaster pt-24 text-obsidian">
-      <section className="px-6 md:px-12 pt-14 pb-20 md:pt-20 md:pb-28">
+      <section className="marble-veil px-6 md:px-12 pt-14 pb-20 md:pt-20 md:pb-28">
         <div className="mx-auto max-w-5xl text-center">
           <motion.span initial="hidden" animate="visible" variants={fadeUp} className="overline block">Guest Information</motion.span>
           <motion.h1 initial="hidden" animate="visible" variants={fadeUp} custom={1} className="mt-5 font-serif text-6xl leading-[0.95] md:text-8xl">
@@ -68,7 +69,7 @@ export default function Policies() {
         <div className="mx-auto grid max-w-6xl gap-6 md:grid-cols-2">
           {sections.map((section, index) => (
             <motion.article key={section.title} initial="hidden" whileInView="visible" viewport={{ once: true }} custom={index} variants={fadeUp} className="border border-obsidian/10 bg-marble-shadow/45 p-8">
-              <section.icon className="mb-8 h-7 w-7 text-divine" />
+              <IconSeal name={index === 0 ? 'calendar' : index === 1 ? 'scroll' : index === 2 ? 'letter' : 'temple'} className="mb-8 h-14 w-14" />
               <h2 className="font-serif text-3xl">{section.title}</h2>
               <div className="mt-5 space-y-4 text-sm leading-7 text-obsidian/68">
                 {section.body.map((paragraph) => (

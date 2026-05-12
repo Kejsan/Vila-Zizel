@@ -1,9 +1,10 @@
 import { motion } from 'motion/react';
 import type { Variants } from 'motion/react';
-import { ArrowLeft, BedDouble, Calendar, ChevronRight, Home, Maximize, ShieldCheck, Tv, Utensils, Wifi, Wind } from 'lucide-react';
+import { ArrowLeft, BedDouble, Calendar, ChevronRight, Home } from 'lucide-react';
 import { Link, Navigate, useParams } from 'react-router-dom';
 import { useApp } from '../context/AppContext';
 import { localizedRoom, roomBySlug } from '../lib/rooms';
+import { IconSeal } from '../components/BrandIcon';
 
 const fadeUp: Variants = {
   hidden: { opacity: 0, y: 40 },
@@ -34,12 +35,12 @@ export default function RoomDetail() {
         ];
 
   const amenities = [
-    { icon: Wifi, label: 'WiFi' },
-    { icon: Wind, label: 'A/C' },
-    { icon: Tv, label: 'Smart TV' },
-    { icon: Utensils, label: lang === 'el' ? 'Κουζίνα' : 'Kitchen' },
-    { icon: ShieldCheck, label: t.about.renovated },
-    { icon: Maximize, label: t.about.standalone },
+    { icon: 'wifi' as const, label: 'WiFi' },
+    { icon: 'wind' as const, label: 'A/C' },
+    { icon: 'temple' as const, label: 'Smart TV' },
+    { icon: 'kitchen' as const, label: lang === 'el' ? 'Κουζίνα' : 'Kitchen' },
+    { icon: 'scroll' as const, label: t.about.renovated },
+    { icon: 'arch' as const, label: t.about.standalone },
   ];
 
   return (
@@ -53,6 +54,7 @@ export default function RoomDetail() {
 
           <div className="grid gap-12 lg:grid-cols-[0.95fr_1.05fr] lg:items-end">
             <motion.div initial="hidden" animate="visible" variants={fadeUp}>
+              <IconSeal name={room.icon} className="mb-8 h-20 w-20" />
               <span className="overline">{room.greekName}</span>
               <h1 className="mt-5 font-serif text-6xl leading-[0.95] md:text-8xl">
                 {room.name}
@@ -110,7 +112,7 @@ export default function RoomDetail() {
             <div className="mt-6 grid gap-4 sm:grid-cols-2">
               {amenities.map((amenity) => (
                 <div key={amenity.label} className="border border-obsidian/10 bg-alabaster p-6">
-                  <amenity.icon className="mb-4 h-6 w-6 text-divine" />
+                  <IconSeal name={amenity.icon} className="mb-4 h-12 w-12" />
                   <p className="font-mythic text-[10px] uppercase tracking-[0.22em] text-obsidian/76">{amenity.label}</p>
                 </div>
               ))}
