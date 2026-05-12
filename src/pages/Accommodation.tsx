@@ -4,6 +4,7 @@ import { Ban, Calendar, ChevronRight, Cigarette, Clock, Home, MapPin, ShieldChec
 import { Link } from 'react-router-dom';
 import { useApp } from '../context/AppContext';
 import { localizedRoom, roomDefinitions } from '../lib/rooms';
+import { IconSeal } from '../components/BrandIcon';
 
 const fadeUp: Variants = {
   hidden: { opacity: 0, y: 40 },
@@ -81,6 +82,7 @@ export default function Accommodation() {
                   <span className="rounded-full border border-divine/25 px-3 py-1 font-mythic text-[9px] uppercase tracking-[0.2em] text-alabaster/70">{room.sleeps}</span>
                 </div>
                 <div className="absolute bottom-8 left-7 right-7">
+                  <IconSeal name={room.icon} className="mb-5 h-14 w-14 bg-obsidian/50 backdrop-blur-sm" />
                   <p className="font-mythic text-[10px] uppercase tracking-[0.34em] text-divine/80">{room.greekName}</p>
                   <h2 className="mt-3 font-serif text-4xl italic text-alabaster">{room.name}</h2>
                   <p className="mt-4 text-sm leading-7 text-alabaster/68">{room.desc}</p>

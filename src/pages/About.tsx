@@ -3,6 +3,7 @@ import type { Variants } from 'motion/react';
 import { Camera, Car, ChevronRight, Globe, Heart, Map, MapPin, ShieldCheck, Sun, Trees } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useApp } from '../context/AppContext';
+import { IconSeal } from '../components/BrandIcon';
 
 const fadeUp: Variants = {
   hidden: { opacity: 0, y: 40 },
@@ -17,9 +18,9 @@ export default function About() {
   const { lang, t } = useApp();
 
   const details = [
-    { icon: Heart, title: t.about.hospitality, desc: t.about.hospitalityDesc },
-    { icon: Trees, title: t.about.nature, desc: t.about.natureDesc },
-    { icon: Sun, title: t.about.atmosphere, desc: t.about.atmosphereDesc },
+    { icon: 'letter' as const, title: t.about.hospitality, desc: t.about.hospitalityDesc },
+    { icon: 'garden' as const, title: t.about.nature, desc: t.about.natureDesc },
+    { icon: 'temple' as const, title: t.about.atmosphere, desc: t.about.atmosphereDesc },
   ];
 
   const localGems = t.about.localGems || [
@@ -30,7 +31,7 @@ export default function About() {
 
   return (
     <div className="bg-alabaster pt-24 text-obsidian">
-      <section className="px-6 md:px-12 pt-14 pb-20 md:pt-20 md:pb-28">
+      <section className="marble-veil px-6 md:px-12 pt-14 pb-20 md:pt-20 md:pb-28">
         <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[0.95fr_1.05fr] lg:items-end">
           <motion.div initial="hidden" animate="visible" variants={fadeUp}>
             <span className="overline">{t.about.tag}</span>
@@ -77,7 +78,7 @@ export default function About() {
             { label: t.about.buildings, val: lang === 'el' ? 'Ανεξάρτητα' : 'Independent', icon: Trees },
           ].map((item) => (
             <div key={item.label} className="border border-divine/15 p-8 text-center">
-              <item.icon className="mx-auto mb-5 h-6 w-6 text-divine" />
+              <IconSeal name={item.icon === Map ? 'mapPin' : item.icon === Heart ? 'aphrodite' : item.icon === Sun ? 'zeus' : 'garden'} className="mx-auto mb-5 h-14 w-14" />
               <p className="font-serif text-3xl">{item.val}</p>
               <p className="mt-2 font-mythic text-[10px] uppercase tracking-[0.25em] text-alabaster/52">{item.label}</p>
             </div>
@@ -89,7 +90,7 @@ export default function About() {
         <div className="mx-auto grid max-w-7xl gap-6 md:grid-cols-3">
           {details.map((item, index) => (
             <motion.article key={item.title} initial="hidden" whileInView="visible" viewport={{ once: true }} custom={index} variants={fadeUp} className="border border-obsidian/10 bg-marble-shadow/45 p-8">
-              <item.icon className="mb-8 h-7 w-7 text-divine" />
+              <IconSeal name={item.icon} className="mb-8 h-14 w-14" />
               <h2 className="font-serif text-3xl">{item.title}</h2>
               <p className="mt-4 text-sm leading-7 text-obsidian/66">{item.desc}</p>
             </motion.article>
@@ -111,7 +112,8 @@ export default function About() {
                   <img src={gem.img} className="h-full w-full object-cover transition-transform duration-[1200ms] group-hover:scale-[1.08]" alt={gem.name} />
                   <div className="absolute inset-0 bg-gradient-to-t from-obsidian via-obsidian/25 to-transparent" />
                   <div className="absolute bottom-7 left-7 right-7">
-                    <p className="font-mythic text-[10px] uppercase tracking-[0.28em] text-divine">{gem.dist}</p>
+                  <IconSeal name={index === 0 ? 'beach' : index === 1 ? 'temple' : 'garden'} className="mb-5 h-12 w-12 bg-obsidian/50 backdrop-blur-sm" />
+                  <p className="font-mythic text-[10px] uppercase tracking-[0.28em] text-divine">{gem.dist}</p>
                     <h3 className="mt-3 font-serif text-3xl text-alabaster">{gem.name}</h3>
                     <p className="mt-4 text-sm leading-7 text-alabaster/66">{gem.desc}</p>
                   </div>

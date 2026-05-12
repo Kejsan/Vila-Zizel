@@ -1,9 +1,10 @@
 import { motion } from 'motion/react';
 import type { Variants } from 'motion/react';
-import { ArrowDown, ChevronRight, Instagram, ShieldCheck, Sparkles, Star, Trees, Waves } from 'lucide-react';
+import { ArrowDown, ChevronRight, Instagram, Star } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useApp } from '../context/AppContext';
 import { localizedRoom, roomDefinitions } from '../lib/rooms';
+import BrandIcon, { IconSeal } from '../components/BrandIcon';
 
 const fadeUp: Variants = {
   hidden: { opacity: 0, y: 40 },
@@ -20,9 +21,9 @@ export default function Home() {
   const rooms = roomDefinitions.map((room) => localizedRoom(room, t.roomsData));
 
   const features = [
-    { icon: Trees, title: t.home.featureNature, desc: t.home.featureNatureDesc },
-    { icon: Sparkles, title: t.home.featureHandmade, desc: t.home.featureHandmadeDesc },
-    { icon: Waves, title: t.home.featureSea, desc: t.home.featureSeaDesc },
+    { icon: 'garden' as const, title: t.home.featureNature, desc: t.home.featureNatureDesc },
+    { icon: 'temple' as const, title: t.home.featureHandmade, desc: t.home.featureHandmadeDesc },
+    { icon: 'beach' as const, title: t.home.featureSea, desc: t.home.featureSeaDesc },
   ];
 
   return (
@@ -34,6 +35,7 @@ export default function Home() {
           className="absolute inset-0 h-full w-full object-cover opacity-55"
         />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_28%,rgba(212,175,55,0.24),transparent_32%),linear-gradient(180deg,rgba(43,39,35,0.55),rgba(43,39,35,0.96))]" />
+        <div className="mythic-orb pointer-events-none absolute left-1/2 top-1/2 h-[34rem] w-[34rem] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-60" />
 
         <div className="relative z-10 mx-auto flex min-h-[94vh] max-w-7xl flex-col justify-center px-6 pt-28 pb-20 text-center">
           <motion.div initial="hidden" animate="visible" variants={fadeUp} custom={0} className="mx-auto mb-8 flex items-center gap-4">
@@ -42,7 +44,11 @@ export default function Home() {
             <span className="h-px w-12 bg-divine/70" />
           </motion.div>
 
-          <motion.h1 initial="hidden" animate="visible" variants={fadeUp} custom={1} className="mx-auto max-w-6xl font-serif text-6xl leading-[0.92] md:text-8xl lg:text-9xl">
+          <motion.div initial="hidden" animate="visible" variants={fadeUp} custom={1} className="mb-7 flex justify-center">
+            <IconSeal name="monogram" className="h-16 w-16" />
+          </motion.div>
+
+          <motion.h1 initial="hidden" animate="visible" variants={fadeUp} custom={1.5} className="mx-auto max-w-6xl font-serif text-6xl leading-[0.92] md:text-8xl lg:text-9xl">
             Vila Zizel
             <span className="block pt-4 text-3xl italic text-divine md:text-5xl">
               {t.hero.title} {t.hero.subtitle}
@@ -105,7 +111,7 @@ export default function Home() {
                 variants={fadeUp}
                 className="border border-obsidian/10 bg-marble-shadow/45 p-7 transition-all duration-700 hover:-translate-y-2 hover:border-divine/50 hover:bg-alabaster hover:shadow-divine"
               >
-                <feature.icon className="mb-8 h-7 w-7 text-divine" />
+                <IconSeal name={feature.icon} className="mb-8 h-14 w-14" />
                 <h3 className="font-mythic text-sm uppercase tracking-[0.24em]">{feature.title}</h3>
                 <p className="mt-4 text-sm leading-7 text-obsidian/68">{feature.desc}</p>
               </motion.article>
@@ -139,7 +145,7 @@ export default function Home() {
                   <div className="absolute inset-0 bg-gradient-to-t from-obsidian via-obsidian/42 to-transparent" />
                   <div className="absolute left-7 right-7 top-8 flex items-center justify-between">
                     <span className="font-mythic text-[10px] uppercase tracking-[0.3em] text-divine">{room.price}</span>
-                    <ShieldCheck className="h-5 w-5 text-divine/80" />
+                    <IconSeal name={room.icon} className="h-12 w-12 bg-obsidian/45 backdrop-blur-sm" />
                   </div>
                   <div className="absolute bottom-8 left-7 right-7">
                     <p className="font-mythic text-[10px] uppercase tracking-[0.34em] text-divine/80">{room.greekName}</p>

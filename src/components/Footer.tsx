@@ -1,6 +1,7 @@
 import { Instagram, MapPin, Phone, Mail, Facebook } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 import { Link } from 'react-router-dom';
+import { IconSeal } from './BrandIcon';
 
 export default function Footer() {
   const { t } = useApp();
@@ -12,6 +13,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-12 gap-16 mb-20">
           {/* Brand Info */}
           <div className="md:col-span-4 space-y-8">
+            <IconSeal name="monogram" className="h-16 w-16" />
             <Link to="/" className="font-mythic text-2xl tracking-[0.3em] uppercase text-divine">Vila Zizel</Link>
             <p className="text-alabaster/68 leading-relaxed max-w-sm">
               {t.footer.desc}
