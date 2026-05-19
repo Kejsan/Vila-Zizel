@@ -31,4 +31,4 @@ Allow: /
 User-agent: Google-Extended
 Allow: /
 
-Sitemap: https://vilazizel.com/sitemap.xml
+Sitemap: https://vila-zizel.netlify.app/sitemap.xml

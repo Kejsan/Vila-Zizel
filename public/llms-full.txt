@@ -50,19 +50,19 @@ Email: hermancoku@gmail.com
 
 Instagram: https://instagram.com/vilazizel
 
-Official website: https://vilazizel.com/
+Official website: https://vila-zizel.netlify.app/
 
-Booking and availability requests should be sent through https://vilazizel.com/contact or direct contact details.
+Booking and availability requests should be sent through https://vila-zizel.netlify.app/contact or direct contact details.
 
 ## Official Room URLs
 
-- Aphrodite Room: https://vilazizel.com/rooms/aphrodite
-- Hera Room: https://vilazizel.com/rooms/hera
-- Poseidon-Hera Unit: https://vilazizel.com/rooms/poseidon-hera
-- Zeus Apartment: https://vilazizel.com/rooms/zeus
-- Athina Room: https://vilazizel.com/rooms/athina
-- Artemis Room: https://vilazizel.com/rooms/artemis
+- Aphrodite Room: https://vila-zizel.netlify.app/rooms/aphrodite
+- Hera Room: https://vila-zizel.netlify.app/rooms/hera
+- Poseidon-Hera Unit: https://vila-zizel.netlify.app/rooms/poseidon-hera
+- Zeus Apartment: https://vila-zizel.netlify.app/rooms/zeus
+- Athina Room: https://vila-zizel.netlify.app/rooms/athina
+- Artemis Room: https://vila-zizel.netlify.app/rooms/artemis
 
 ## Policies
 
-Policy and guest information page: https://vilazizel.com/policies
+Policy and guest information page: https://vila-zizel.netlify.app/policies

@@ -23,11 +23,19 @@ export default function About() {
     { icon: 'temple' as const, title: t.about.atmosphere, desc: t.about.atmosphereDesc },
   ];
 
-  const localGems = t.about.localGems || [
-    { name: 'Analipsi Beach', dist: '2 min walk', desc: 'Pristine waters and golden sand just steps away from your door.', img: 'https://images.unsplash.com/photo-1590523277543-a94d2e4eb00b?w=800&q=80' },
-    { name: 'Ancient Messene', dist: '30 min drive', desc: 'One of the best-preserved archaeological sites in Greece.', img: 'https://images.unsplash.com/photo-1542840410-3092f99611a3?w=800&q=80' },
-    { name: 'Polylimnio Waterfalls', dist: '25 min drive', desc: 'A hidden natural network of many lakes and waterfalls.', img: 'https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?w=800&q=80' },
+  const localGemImages = [
+    '/Images/Garden Area.jpg',
+    '/Images/Garden view from the fence.jpg',
+    '/Images/Garden Area trees.jpg',
   ];
+  const localGems = (t.about.localGems || [
+    { name: 'Analipsi Beach', dist: '2 min walk', desc: 'Pristine waters and golden sand just steps away from your door.' },
+    { name: 'Ancient Messene', dist: '30 min drive', desc: 'One of the best-preserved archaeological sites in Greece.' },
+    { name: 'Polylimnio Waterfalls', dist: '25 min drive', desc: 'A hidden natural network of many lakes and waterfalls.' },
+  ]).map((gem: any, index: number) => ({
+    ...gem,
+    img: gem.img || localGemImages[index % localGemImages.length],
+  }));
 
   return (
     <div className="bg-alabaster pt-24 text-obsidian">
@@ -50,7 +58,7 @@ export default function About() {
       <section className="section-shell">
         <div className="mx-auto grid max-w-6xl gap-10 lg:grid-cols-[0.7fr_1.3fr] lg:items-center">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="temple-card relative aspect-[4/5] overflow-hidden">
-            <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=700&q=80" className="h-full w-full object-cover opacity-88" alt="Herman, host at Vila Zizel" />
+            <img src="/Images/Vila Zizel Entry Gate flowers.jpg" className="h-full w-full object-cover opacity-88" alt="Vila Zizel flowered entrance gate" />
             <div className="absolute inset-0 bg-gradient-to-t from-obsidian/90 to-transparent" />
             <div className="absolute bottom-8 left-8 right-8">
               <p className="overline">Host</p>

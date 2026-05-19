@@ -13,6 +13,7 @@ export type RoomDefinition = {
   beds: string;
   baths: string;
   icon: 'aphrodite' | 'hera' | 'poseidonHera' | 'zeus' | 'athina' | 'artemis';
+  amenities: string[];
 };
 
 export const roomDefinitions: RoomDefinition[] = [
@@ -35,6 +36,7 @@ export const roomDefinitions: RoomDefinition[] = [
     beds: '3 beds',
     baths: '1 bath',
     icon: 'aphrodite',
+    amenities: ['WiFi', 'Air conditioning', 'Kitchen', 'TV', 'Hot water', 'Private entrance', 'Patio or balcony', 'Free parking'],
   },
   {
     id: 2,
@@ -55,6 +57,7 @@ export const roomDefinitions: RoomDefinition[] = [
     beds: '2 beds',
     baths: '1 bath',
     icon: 'hera',
+    amenities: ['WiFi', 'Air conditioning', 'Kitchen', 'TV', 'Washer', 'Hot water', 'Outdoor table', 'Free parking'],
   },
   {
     id: 4,
@@ -76,6 +79,7 @@ export const roomDefinitions: RoomDefinition[] = [
     beds: '4 beds',
     baths: '2 baths',
     icon: 'poseidonHera',
+    amenities: ['WiFi', 'Air conditioning', 'Two kitchens', 'Two bathrooms', 'TV', 'Washer', 'Private entrance', 'Free parking'],
   },
   {
     id: 5,
@@ -83,13 +87,25 @@ export const roomDefinitions: RoomDefinition[] = [
     slug: 'zeus',
     price: 'From €140',
     greekName: 'Zeus',
-    image: '/Images/Entry gate.avif',
+    image: '/Images/Rooms/Zeus/Balcony/Balcony.avif',
     fallbackImage: '/Images/Entry gate.avif',
-    gallery: ['/Images/Entry gate.avif'],
-    sleeps: '5 guests',
-    beds: '4 beds',
+    gallery: [
+      '/Images/Rooms/Zeus/Balcony/Balcony.avif',
+      '/Images/Rooms/Zeus/Living room/Living room 1.avif',
+      '/Images/Rooms/Zeus/Living room/Living room 2.avif',
+      '/Images/Rooms/Zeus/Living room/Living room 3.avif',
+      '/Images/Rooms/Zeus/Bedroom 1/Bedroom 1-1.avif',
+      '/Images/Rooms/Zeus/Bedroom 1/Bedroom 1-2.avif',
+      '/Images/Rooms/Zeus/Bedroom 2/Bedroom 2-1.avif',
+      '/Images/Rooms/Zeus/Dining area/Dining Area 1.avif',
+      '/Images/Rooms/Zeus/Full kitchen/Full Kitchen.avif',
+      '/Images/Rooms/Zeus/Full bathroom/Full Bathroom 1.avif',
+    ],
+    sleeps: '4 guests',
+    beds: '3 beds',
     baths: '1 bath',
     icon: 'zeus',
+    amenities: ['WiFi', 'Air conditioning', 'Heating', 'Kitchen', 'TV', 'Washer', 'Crib', 'High chair', 'Baby safety gates', 'Patio or balcony', 'Backyard', 'BBQ grill', 'Free parking', 'Long-term stays allowed'],
   },
   {
     id: 6,
@@ -97,13 +113,24 @@ export const roomDefinitions: RoomDefinition[] = [
     slug: 'athina',
     price: 'From €90',
     greekName: 'Athina',
-    image: '/Images/Entry gate.avif',
+    image: '/Images/Rooms/Athina/Garden 2.avif',
     fallbackImage: '/Images/Entry gate.avif',
-    gallery: ['/Images/Entry gate.avif'],
-    sleeps: '4 guests',
-    beds: '2 beds',
+    gallery: [
+      '/Images/Rooms/Athina/Garden 2.avif',
+      '/Images/Rooms/Athina/Garden 1.avif',
+      '/Images/Rooms/Athina/Bedroom 1.avif',
+      '/Images/Rooms/Athina/Bedroom 2.avif',
+      '/Images/Rooms/Athina/Bedroom 3.avif',
+      '/Images/Rooms/Athina/Living Room 1.avif',
+      '/Images/Rooms/Athina/Kitchen 1.avif',
+      '/Images/Rooms/Athina/Bathroom 1.avif',
+      '/Images/Rooms/Athina/Bathroom 2.jpeg',
+    ],
+    sleeps: '2 guests',
+    beds: '1 bed',
     baths: '1 bath',
     icon: 'athina',
+    amenities: ['WiFi', 'Air conditioning', 'Heating', 'Kitchen', 'TV', 'Free washer in building', 'Private entrance', 'Backyard', 'Free parking', 'Free street parking', 'Single level home'],
   },
   {
     id: 7,
@@ -111,13 +138,24 @@ export const roomDefinitions: RoomDefinition[] = [
     slug: 'artemis',
     price: 'From €85',
     greekName: 'Artemis',
-    image: '/Images/Entry gate.avif',
+    image: '/Images/Rooms/Artemis/Garden 1.avif',
     fallbackImage: '/Images/Entry gate.avif',
-    gallery: ['/Images/Entry gate.avif'],
-    sleeps: '3 guests',
-    beds: '2 beds',
+    gallery: [
+      '/Images/Rooms/Artemis/Garden 1.avif',
+      '/Images/Rooms/Artemis/Garden 2.avif',
+      '/Images/Rooms/Artemis/Bedroom 1.avif',
+      '/Images/Rooms/Artemis/Bedroom 2.avif',
+      '/Images/Rooms/Artemis/Bedroom 3.avif',
+      '/Images/Rooms/Artemis/Dining Area 1.avif',
+      '/Images/Rooms/Artemis/Dining Area 2.avif',
+      '/Images/Rooms/Artemis/Bathroom 1.avif',
+      '/Images/Rooms/Artemis/Bathroom 2.avif',
+    ],
+    sleeps: '2 guests',
+    beds: '1 king bed',
     baths: '1 bath',
     icon: 'artemis',
+    amenities: ['WiFi', 'Air conditioning', 'Heating', 'Kitchen', 'TV', 'Washer', "Pack 'n play travel crib", 'Private entrance', 'Hammock', 'Free parking', 'Long-term stays allowed'],
   },
 ];
 

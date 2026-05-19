@@ -7,7 +7,9 @@ import {
   absoluteUrl,
   accommodationSchema,
   breadcrumbSchema,
+  roomSchema,
   routeForPath,
+  webpageSchema,
 } from '../lib/seo';
 
 function upsertMeta(selector: string, attrs: Record<string, string>) {
@@ -76,12 +78,22 @@ export default function SEO() {
     upsertMeta('meta[name="twitter:image"]', { name: 'twitter:image', content: image });
 
     upsertJsonLd('schema-breadcrumbs', breadcrumbSchema(route.path, route.title));
+    upsertJsonLd('schema-webpage', webpageSchema(route.path, route.title, route.description));
 
     const accommodationSchemaElement = document.getElementById('schema-accommodation');
     if (route.path === '/accommodation') {
       upsertJsonLd('schema-accommodation', accommodationSchema(t));
     } else if (accommodationSchemaElement) {
       accommodationSchemaElement.remove();
+    }
+
+    const roomSchemaElement = document.getElementById('schema-room');
+    const roomMatch = route.path.match(/^\/rooms\/([^/]+)$/);
+    const currentRoomSchema = roomMatch ? roomSchema(roomMatch[1], t) : null;
+    if (currentRoomSchema) {
+      upsertJsonLd('schema-room', currentRoomSchema);
+    } else if (roomSchemaElement) {
+      roomSchemaElement.remove();
     }
   }, [canonical, image, lang, route.description, route.path, route.title, t]);
 

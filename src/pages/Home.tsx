@@ -30,7 +30,7 @@ export default function Home() {
     <div className="flex flex-col bg-alabaster text-obsidian overflow-x-hidden">
       <section className="relative min-h-[94vh] overflow-hidden bg-obsidian text-alabaster">
         <img
-          src="/Images/Entry gate.avif"
+          src="/Images/Vila Zizel Entry Gate.jpg"
           alt="Vila Zizel entrance in Analipsi, Messenia"
           className="absolute inset-0 h-full w-full object-cover opacity-55"
         />
@@ -163,32 +163,49 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="section-shell">
-        <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:items-center">
-          <div>
+      <section className="section-shell overflow-hidden">
+        <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.34fr_0.66fr] lg:items-center">
+          <div className="max-w-md">
             <span className="overline">{t.testimonials.tag}</span>
             <h2 className="mt-5 font-serif text-5xl leading-tight md:text-6xl">
               {t.testimonials.title} <span className="italic text-laurel">{t.testimonials.highlight}</span>
             </h2>
+            <p className="mt-6 text-sm leading-7 text-obsidian/62">
+              Recent guest notes about the quiet location, clean apartments, responsive hosting, and easy beach access.
+            </p>
           </div>
-          <div className="grid gap-5 md:grid-cols-3">
-            {testimonials.slice(0, 3).map((item: any, index: number) => (
-              <motion.article key={item.name} initial="hidden" whileInView="visible" viewport={{ once: true }} custom={index} variants={fadeUp} className="border border-obsidian/10 bg-marble-shadow/45 p-7">
-                <div className="mb-5 flex gap-1 text-divine">
-                  {[...Array(5)].map((_, star) => (
-                    <Star key={star} className="h-3.5 w-3.5 fill-current" />
-                  ))}
-                </div>
-                <p className="text-sm italic leading-7 text-obsidian/72">"{item.text}"</p>
-                <p className="mt-6 font-mythic text-[10px] uppercase tracking-[0.28em] text-obsidian">{item.name}</p>
-              </motion.article>
-            ))}
+          <div className="review-marquee -mr-6 md:-mr-12 lg:mr-0">
+            <div className="review-marquee-track gap-5 py-3">
+              {[...testimonials, ...testimonials].map((item: any, index: number) => {
+                const rating = item.rating || 5;
+                return (
+                  <details
+                    key={`${item.name}-${index}`}
+                    className="review-card group border border-obsidian/10 bg-marble-shadow/45 p-7 transition-all duration-500 open:bg-alabaster hover:-translate-y-1 hover:border-divine/45 hover:shadow-divine"
+                  >
+                    <summary className="cursor-pointer list-none">
+                      <div className="mb-5 flex gap-1 text-divine">
+                        {[...Array(5)].map((_, star) => (
+                          <Star key={star} className={`h-3.5 w-3.5 ${star < rating ? 'fill-current' : 'opacity-25'}`} />
+                        ))}
+                      </div>
+                      <p className="line-clamp-5 min-h-[8.75rem] text-sm italic leading-7 text-obsidian/72">"{item.text}"</p>
+                      <div className="mt-6 border-t border-divine/20 pt-5">
+                        <p className="font-mythic text-[10px] uppercase tracking-[0.28em] text-obsidian">{item.name}</p>
+                        <p className="mt-2 text-xs text-obsidian/52">{[item.location, item.date].filter(Boolean).join(' · ')}</p>
+                      </div>
+                    </summary>
+                    <p className="mt-5 border-t border-divine/20 pt-5 text-sm italic leading-7 text-obsidian/72">"{item.text}"</p>
+                  </details>
+                );
+              })}
+            </div>
           </div>
         </div>
       </section>
 
       <section className="section-shell relative overflow-hidden bg-obsidian text-center text-alabaster">
-        <img src="https://images.unsplash.com/photo-1469796466635-455ede028aca?w=1600&q=80" alt="Greek sea at dusk" className="absolute inset-0 h-full w-full object-cover opacity-35" />
+        <img src="/Images/Garden Full View.jpg" alt="Vila Zizel garden and outdoor setting" className="absolute inset-0 h-full w-full object-cover opacity-35" />
         <div className="absolute inset-0 bg-obsidian/76" />
         <div className="relative z-10 mx-auto max-w-3xl">
           <span className="overline">{t.booking.tag}</span>

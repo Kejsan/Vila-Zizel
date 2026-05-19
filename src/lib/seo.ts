@@ -1,6 +1,6 @@
 import { roomDefinitions } from './rooms';
 
-export const SITE_URL = (import.meta.env.VITE_SITE_URL || 'https://vilazizel.com').replace(/\/$/, '');
+export const SITE_URL = (import.meta.env.VITE_SITE_URL || 'https://vila-zizel.netlify.app').replace(/\/$/, '');
 
 export const SITE_NAME = 'Vila Zizel';
 export const DEFAULT_IMAGE = '/Images/Entry gate.avif';
@@ -50,8 +50,8 @@ export const roomSlugs = [
 ] as const;
 
 export function absoluteUrl(path: string) {
-  if (/^https?:\/\//.test(path)) return path;
-  return `${SITE_URL}${path.startsWith('/') ? path : `/${path}`}`;
+  if (/^https?:\/\//.test(path)) return encodeURI(path);
+  return encodeURI(`${SITE_URL}${path.startsWith('/') ? path : `/${path}`}`);
 }
 
 export function routeForPath(pathname: string) {
@@ -65,6 +65,20 @@ export function routeForPath(pathname: string) {
   }
 
   return routes.find((route) => route.path === pathname) || routes[0];
+}
+
+export function webpageSchema(pathname: string, title: string, description: string) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    '@id': absoluteUrl(`${pathname === '/' ? '/' : pathname}#webpage`),
+    url: absoluteUrl(pathname),
+    name: title,
+    description,
+    isPartOf: { '@id': absoluteUrl('/#website') },
+    about: { '@id': absoluteUrl('/#lodgingbusiness') },
+    inLanguage: ['en', 'el', 'it', 'de', 'es', 'fr'],
+  };
 }
 
 export function lodgingBusinessSchema() {
@@ -162,9 +176,46 @@ export function accommodationSchema(t: any) {
           '@type': 'Accommodation',
           name: data.name || `${room.greekName} at Vila Zizel`,
           description: data.longDesc || data.desc || `${room.greekName} at Vila Zizel in Analipsi, Messenia.`,
+          image: room.gallery.map((image) => absoluteUrl(image)),
+          occupancy: {
+            '@type': 'QuantitativeValue',
+            value: Number.parseInt(room.sleeps, 10) || undefined,
+          },
+          amenityFeature: (room.amenities || []).map((amenity) => ({
+            '@type': 'LocationFeatureSpecification',
+            name: amenity,
+            value: true,
+          })),
           containedInPlace: { '@id': absoluteUrl('/#lodgingbusiness') },
         },
       };
     }),
+  };
+}
+
+export function roomSchema(slug: string, t: any) {
+  const room = roomDefinitions.find((item) => item.slug === slug);
+  if (!room) return null;
+
+  const data = t.roomsData?.[room.key] || {};
+
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Accommodation',
+    '@id': absoluteUrl(`/rooms/${room.slug}#accommodation`),
+    url: absoluteUrl(`/rooms/${room.slug}`),
+    name: data.name || `${room.greekName} at Vila Zizel`,
+    description: data.longDesc || data.desc || `${room.greekName} accommodation at Vila Zizel in Analipsi, Messenia.`,
+    image: room.gallery.map((image) => absoluteUrl(image)),
+    containedInPlace: { '@id': absoluteUrl('/#lodgingbusiness') },
+    occupancy: {
+      '@type': 'QuantitativeValue',
+      value: Number.parseInt(room.sleeps, 10) || undefined,
+    },
+    amenityFeature: (room.amenities || []).map((amenity) => ({
+      '@type': 'LocationFeatureSpecification',
+      name: amenity,
+      value: true,
+    })),
   };
 }
