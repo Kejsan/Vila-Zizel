@@ -13,3 +13,36 @@
 /sitemap.xml
   Content-Type: application/xml; charset=utf-8
   Cache-Control: public, max-age=3600
+
+/
+  Link: <https://vila-zizel.netlify.app/>; rel="canonical"
+
+/about
+  Link: <https://vila-zizel.netlify.app/about>; rel="canonical"
+
+/accommodation
+  Link: <https://vila-zizel.netlify.app/accommodation>; rel="canonical"
+
+/contact
+  Link: <https://vila-zizel.netlify.app/contact>; rel="canonical"
+
+/policies
+  Link: <https://vila-zizel.netlify.app/policies>; rel="canonical"
+
+/rooms/aphrodite
+  Link: <https://vila-zizel.netlify.app/rooms/aphrodite>; rel="canonical"
+
+/rooms/hera
+  Link: <https://vila-zizel.netlify.app/rooms/hera>; rel="canonical"
+
+/rooms/poseidon-hera
+  Link: <https://vila-zizel.netlify.app/rooms/poseidon-hera>; rel="canonical"
+
+/rooms/zeus
+  Link: <https://vila-zizel.netlify.app/rooms/zeus>; rel="canonical"
+
+/rooms/athina
+  Link: <https://vila-zizel.netlify.app/rooms/athina>; rel="canonical"
+
+/rooms/artemis
+  Link: <https://vila-zizel.netlify.app/rooms/artemis>; rel="canonical"

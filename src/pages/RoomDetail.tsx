@@ -42,6 +42,7 @@ export default function RoomDetail() {
     { icon: 'scroll' as const, label: t.about.renovated },
     { icon: 'arch' as const, label: t.about.standalone },
   ];
+  const roomAmenities = room.amenities || [];
 
   return (
     <div className="bg-alabaster pt-24 text-obsidian">
@@ -117,10 +118,16 @@ export default function RoomDetail() {
                 </div>
               ))}
             </div>
-            <div className="mt-8 border-t border-divine/20 pt-8 text-sm leading-7 text-obsidian/62">
-              <p>{t.amenitiesList.bathroom}, {t.amenitiesList.laundry}</p>
-              <p className="mt-2">{t.amenitiesList.kitchen}</p>
-              <p className="mt-2">{t.amenitiesList.outdoor}, {t.amenitiesList.parking}</p>
+            <div className="mt-8 border-t border-divine/20 pt-8">
+              <h3 className="font-mythic text-[10px] uppercase tracking-[0.24em] text-divine">{t.rooms.amenitiesTitle}</h3>
+              <div className="mt-5 flex flex-wrap gap-2">
+                {roomAmenities.map((amenity: string) => (
+                  <span key={amenity} className="rounded-full border border-obsidian/10 bg-marble-shadow/45 px-4 py-2 text-xs text-obsidian/68">
+                    {amenity}
+                  </span>
+                ))}
+              </div>
+              <p className="mt-6 text-sm leading-7 text-obsidian/62">{t.rooms.hostGreets}. {t.rooms.smoking}. {t.rooms.amenitiesSubtitle}</p>
             </div>
           </motion.div>
         </div>

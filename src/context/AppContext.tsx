@@ -33,9 +33,9 @@ export const translations: any = {
       readyDiscover: 'Ready to discover',
       checkRooms: 'Check Accommodations',
       localGems: [
-        { name: 'Analipsi Beach', dist: '2 min walk', desc: 'Pristine waters and golden sand just steps away from your door.' },
-        { name: 'Ancient Messene', dist: '30 min drive', desc: 'One of the best-preserved archaeological sites in Greece.' },
-        { name: 'Polylimnio Waterfalls', dist: '25 min drive', desc: 'A hidden natural network of many lakes and waterfalls.' }
+        { name: 'Garden Estate', dist: 'On site', desc: 'Quiet paths, flowers, shade, and open outdoor corners around the Vila Zizel grounds.' },
+        { name: 'Analipsi Beach', dist: '2 min walk', desc: 'A flat walk to the sandy coast, nearby beach bars, restaurants, and evening strolls.' },
+        { name: 'Messinian Day Trips', dist: '25-30 min drive', desc: 'Use Vila Zizel as a calm base for Ancient Messene, Polylimnio Waterfalls, Kalamata, and local villages.' }
       ]
     },
     rooms: { 
@@ -97,21 +97,21 @@ export const translations: any = {
       },
       zeus: {
         name: 'Zeus Apartment',
-        desc: 'Entire condo in Analipsi with a large terrace and incredible views.',
+        desc: 'Two-bedroom apartment with a fully equipped kitchen, large built-in living room, and terrace views.',
         longDesc: 'In the Vila Zizel rental complex, the apartment of Zeus contains: a fully equipped kitchen, dining room, comfortable large built-in living room with TV and air conditioning, 2 bedrooms (the first has a large double built-in bed with TV and air conditioning and the second has 2 single beds with air conditioning), bathroom with full toiletries, drying rack and finally the large terrace with the incredible view.',
-        features: ['5 Guests', '2 Bedrooms', '4 Beds', '1 Bath']
+        features: ['4 Guests', '2 Bedrooms', '3 Beds', 'Large Terrace']
       },
       athina: {
         name: 'Athina Room',
-        desc: 'A cozy retreat with a super double built-in bed and nature views.',
+        desc: 'A calm studio-style apartment with a super double built-in bed, kitchen, bathroom, and outdoor nature area.',
         longDesc: 'In our apartment complex Vila Zizel, the apartment Athina has: 1 super double built-in comfortable bed that is connected to the dining room and kitchen, bathroom. There is also an outdoor area where you can relax in nature. Finally, there is wifi and also air conditioning.',
-        features: ['4 Guests', '1 Bedroom', '2 Beds', '1 Bath']
+        features: ['2 Guests', '1 Bed', 'Kitchen', 'Outdoor Area']
       },
       artemis: {
         name: 'Artemis Room',
-        desc: 'A king-size haven in Messinia surrounded by nature.',
+        desc: 'A nature-facing king-size stay with kitchen essentials, bathroom, and a quiet outdoor setting.',
         longDesc: 'In our rental complex Vila Zizel, in the Artemis apartment there is a king size comfortable bed, a kitchen that is connected to the bedroom and contains all the necessities and a bathroom. Outside you can enjoy nature.',
-        features: ['3 Guests', '1 Bedroom', '2 Beds', '1 Bath']
+        features: ['2 Guests', 'King Bed', 'Kitchen', 'Hammock']
       }
     },
     amenities: { 
@@ -182,11 +182,15 @@ export const translations: any = {
       send: 'SEND REQUEST'
     },
     testimonialsList: [
-      { name: "Sharon", text: "Great place to stay. Beach bar and restaurant very friendly and well worth a visit. Wouldn't hesitate to return." },
-      { name: "Maria", text: "Spacious studio with all comforts. Beautiful shared garden, ample parking, and even cookies! Well-functioning AC and fridge. Everything was super!" },
-      { name: "Christine", text: "Spotlessly clean and many things seemed brand new. The bedroom felt separated from the kitchen area because of the layout, and it felt very spacious." },
-      { name: "Amanda", text: "Lovely week staying here. Beautifully clean and modern in a perfect location. The apartment had everything we needed for self-catering." },
-      { name: "Tanja", text: "Very friendly hosts. They always responded immediately and were very helpful! The apartment is not far from the beach and equipped with everything you need." }
+      { name: "Alenka", date: "August 2025", rating: 5, text: "Great location, quiet surroundings. Proximity to the beach and good restaurants. Friendly host. Clean apartment. Great for families and extended stay." },
+      { name: "Kai", location: "Malmköping, Sweden", date: "October 2025", rating: 4, text: "Very nice area with several good restaurants. Close to a fantastic beach. Many walking paths. Nearby, there is a fruit and vegetable shop." },
+      { name: "Claire", date: "August 2025", rating: 5, text: "From the first reach out to the host, they have been responsive, informative and very helpful. The place was spotless with a very comfy bed, hot shower, clean fluffy towels, and a peaceful, safe setting close to the beach and bars." },
+      { name: "Christine", location: "England, United Kingdom", date: "July 2025", rating: 5, text: "Vila Zizel is a lovely place to stay. My accommodation was spotlessly clean and many of the things inside seemed to be brand new. The aircon worked really well and the location was close to restaurants, a sandy beach, and a beach bar." },
+      { name: "Amanda", date: "July 2025", rating: 5, text: "We had a lovely week staying here. It was beautifully clean and modern and in the perfect location, with everything needed for self-catering, restaurants and a beach bar within a 10-minute walk, and Ancient Messini worth a visit." },
+      { name: "Tanja", date: "July 2025", rating: 5, text: "Very friendly hosts. They always responded immediately and were very helpful. The apartment is not far from the beach and equipped with everything you might need to have a pleasant stay." },
+      { name: "Chloe", location: "Langoat, France", date: "May 2025", rating: 5, text: "Great little studio to stay in, between the beach and the closest little town and both at walking distance. Herman was very helpful and always responded quickly. Would highly recommend staying." },
+      { name: "Gregory", location: "Athens, Greece", date: "August 2024", rating: 5, text: "Great experience in a clean functional apartment surrounded by a lovely garden. The owner and her girls were kind and welcoming. We are looking forward to visiting again soon." },
+      { name: "Denisa", location: "Pratteln, Switzerland", date: "July 2024", rating: 5, text: "Everything was perfect. We had a wonderful time. The house is beautiful, clean, and spacious, with a very nice garden near the beach. We will definitely come back." }
     ]
   },
   el: {
