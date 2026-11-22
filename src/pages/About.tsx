@@ -1,181 +1,100 @@
-import { motion } from 'motion/react';
-import type { Variants } from 'motion/react';
-import { Camera, Car, ChevronRight, Globe, Heart, Map, MapPin, ShieldCheck, Sun, Trees } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Car, MapPin, Plane, Sun, Trees } from 'lucide-react';
+import { ActionLink, BookingCallout, ParallaxPhoto, Reveal } from '../components/Editorial';
 import { useApp } from '../context/AppContext';
-import { IconSeal } from '../components/BrandIcon';
+import { directionsUrl, editorial, mapUrl } from '../lib/editorial';
 
-const fadeUp: Variants = {
-  hidden: { opacity: 0, y: 40 },
-  visible: (i = 0) => ({
-    opacity: 1,
-    y: 0,
-    transition: { duration: 1, delay: i * 0.1, ease: [0.22, 1, 0.36, 1] as const },
-  }),
-};
+const gemPhotos = ['/Images/Garden Area.jpg', '/Images/Analipsi Beach/2.jpg', '/Images/Analipsi Beach/7.jpg'];
+
+type LocalGem = { name: string; dist: string; desc: string; img?: string };
 
 export default function About() {
-  const { lang, t } = useApp();
-
-  const details = [
-    { icon: 'letter' as const, title: t.about.hospitality, desc: t.about.hospitalityDesc },
-    { icon: 'garden' as const, title: t.about.nature, desc: t.about.natureDesc },
-    { icon: 'temple' as const, title: t.about.atmosphere, desc: t.about.atmosphereDesc },
-  ];
-
-  const localGemImages = [
-    '/Images/Garden Area.jpg',
-    '/Images/Garden view from the fence.jpg',
-    '/Images/Garden Area trees.jpg',
-  ];
-  const localGems = (t.about.localGems || [
-    { name: 'Analipsi Beach', dist: '2 min walk', desc: 'Pristine waters and golden sand just steps away from your door.' },
-    { name: 'Ancient Messene', dist: '30 min drive', desc: 'One of the best-preserved archaeological sites in Greece.' },
-    { name: 'Polylimnio Waterfalls', dist: '25 min drive', desc: 'A hidden natural network of many lakes and waterfalls.' },
-  ]).map((gem: any, index: number) => ({
-    ...gem,
-    img: gem.img || localGemImages[index % localGemImages.length],
-  }));
+  const { lang, t, weather } = useApp();
+  const copy = editorial(lang);
+  const gems: LocalGem[] = t.about.localGems || [];
+  const temperature = weather?.current_weather?.temperature;
+  const humidity = weather?.relative_humidity_2m?.[0] ?? weather?.current?.relative_humidity_2m;
+  const wind = weather?.current_weather?.windspeed;
 
   return (
-    <div className="bg-alabaster pt-24 text-obsidian">
-      <section className="marble-veil px-6 md:px-12 pt-14 pb-20 md:pt-20 md:pb-28">
-        <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[0.95fr_1.05fr] lg:items-end">
-          <motion.div initial="hidden" animate="visible" variants={fadeUp}>
-            <span className="overline">{t.about.tag}</span>
-            <h1 className="mt-5 font-serif text-6xl leading-[0.95] md:text-8xl">
-              {t.nav.about} & <span className="italic text-laurel">{t.about.handmade}</span>
-            </h1>
-          </motion.div>
-          <motion.p initial="hidden" animate="visible" variants={fadeUp} custom={1} className="text-lg leading-8 text-obsidian/72">
-            {t.about.desc}
-          </motion.p>
+    <>
+      <section className="shell about-intro">
+        <div className="intro-arrival">
+          <p className="eyebrow">{t.about.tag}</p>
+          <h1 className="display">{copy.garden[0]} <em>{copy.garden[1]}</em></h1>
+          <p>{t.about.desc}</p>
+          <ActionLink to="/about#location" variant="text">{copy.directions}</ActionLink>
+        </div>
+        <div className="intro-arrival intro-deferred">
+          <ParallaxPhoto src="/Images/Garden Full View.jpg" alt={t.home.featureNature} eager />
         </div>
       </section>
 
-      <div className="meander-divider mx-6 md:mx-16" />
-
-      <section className="section-shell">
-        <div className="mx-auto grid max-w-6xl gap-10 lg:grid-cols-[0.7fr_1.3fr] lg:items-center">
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="temple-card relative aspect-[4/5] overflow-hidden">
-            <img src="/Images/Vila Zizel Entry Gate flowers.jpg" className="h-full w-full object-cover opacity-88" alt="Vila Zizel flowered entrance gate" />
-            <div className="absolute inset-0 bg-gradient-to-t from-obsidian/90 to-transparent" />
-            <div className="absolute bottom-8 left-8 right-8">
-              <p className="overline">Host</p>
-              <h2 className="mt-3 font-serif text-4xl text-alabaster">{t.about.hostTitle}</h2>
-            </div>
-          </motion.div>
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} custom={1} className="space-y-6">
-            <span className="inline-flex border border-divine/25 px-4 py-2 font-mythic text-[10px] uppercase tracking-[0.24em] text-divine">Superhost · 6 Years</span>
-            <p className="text-xl leading-9 text-obsidian/76">{t.about.hostDesc}</p>
-            <p className="text-base italic leading-8 text-obsidian/64">{t.about.hostExtra}</p>
-            <div className="flex flex-wrap gap-4 pt-4">
-              <div className="flex items-center gap-2 font-mythic text-[10px] uppercase tracking-[0.22em] text-obsidian/68"><Globe className="h-4 w-4 text-divine" /> {t.about.speaks}: IT, EL, EN</div>
-              <div className="flex items-center gap-2 font-mythic text-[10px] uppercase tracking-[0.22em] text-obsidian/68"><MapPin className="h-4 w-4 text-divine" /> {t.about.schools}</div>
-            </div>
-          </motion.div>
+      <section className="section-space host-section">
+        <div className="shell host-layout">
+          <Reveal className="host-photo">
+            <ParallaxPhoto src="/Images/Entry gate.avif" alt="Vila Zizel" />
+          </Reveal>
+          <Reveal className="host-copy" delay={0.13}>
+            <p className="eyebrow">{t.about.handmade}</p>
+            <h2 className="display">{t.about.hostTitle}</h2>
+            <p>{t.about.hostDesc}</p><p>{t.about.hostExtra}</p>
+            <ul><li>{t.about.schools}</li><li>{t.about.speaks} · EL / EN / IT</li></ul>
+          </Reveal>
         </div>
-      </section>
-
-      <section className="section-shell bg-obsidian text-alabaster">
-        <div className="mx-auto grid max-w-7xl gap-5 md:grid-cols-4">
+        <div className="shell story-facts">
           {[
-            { label: t.about.estateSize, val: '4,000 m2', icon: Map },
-            { label: t.about.design, val: lang === 'el' ? 'Χειροποίητο' : 'Handmade', icon: Heart },
-            { label: t.about.theme, val: '12 Gods', icon: Sun },
-            { label: t.about.buildings, val: lang === 'el' ? 'Ανεξάρτητα' : 'Independent', icon: Trees },
-          ].map((item) => (
-            <div key={item.label} className="border border-divine/15 p-8 text-center">
-              <IconSeal name={item.icon === Map ? 'mapPin' : item.icon === Heart ? 'aphrodite' : item.icon === Sun ? 'zeus' : 'garden'} className="mx-auto mb-5 h-14 w-14" />
-              <p className="font-serif text-3xl">{item.val}</p>
-              <p className="mt-2 font-mythic text-[10px] uppercase tracking-[0.25em] text-alabaster/52">{item.label}</p>
-            </div>
+            [t.about.hospitality, t.about.hospitalityDesc],
+            [t.about.nature, t.about.natureDesc],
+            [t.about.atmosphere, t.about.atmosphereDesc],
+          ].map(([title, text], index) => <Reveal key={title} delay={index * 0.1}><h3>{title}</h3><p>{text}</p></Reveal>)}
+        </div>
+      </section>
+
+      <section className="shell section-space" aria-labelledby="surroundings-title">
+        <Reveal className="section-lead">
+          <div><p className="eyebrow">{t.explore.tag}</p><h2 id="surroundings-title" className="display">{t.explore.title} <em>{t.explore.highlight}</em></h2></div>
+          <p>{t.explore.desc}</p>
+        </Reveal>
+        <div className="destination-grid">
+          {gems.map((gem, index) => (
+            <Reveal key={gem.name} className="destination-item" delay={index * 0.1}>
+              <ParallaxPhoto src={gem.img || gemPhotos[index % gemPhotos.length]} alt="" />
+              <div><p className="eyebrow">{gem.dist}</p><h3>{gem.name}</h3><p>{gem.desc}</p></div>
+            </Reveal>
           ))}
         </div>
       </section>
 
-      <section className="section-shell">
-        <div className="mx-auto grid max-w-7xl gap-6 md:grid-cols-3">
-          {details.map((item, index) => (
-            <motion.article key={item.title} initial="hidden" whileInView="visible" viewport={{ once: true }} custom={index} variants={fadeUp} className="border border-obsidian/10 bg-marble-shadow/45 p-8">
-              <IconSeal name={item.icon} className="mb-8 h-14 w-14" />
-              <h2 className="font-serif text-3xl">{item.title}</h2>
-              <p className="mt-4 text-sm leading-7 text-obsidian/66">{item.desc}</p>
-            </motion.article>
-          ))}
-        </div>
-      </section>
-
-      <section className="section-shell bg-marble-shadow/45">
-        <div className="mx-auto max-w-7xl">
-          <div className="mx-auto mb-14 max-w-3xl text-center">
-            <span className="overline">{t.explore.tag}</span>
-            <h2 className="mt-5 font-serif text-5xl leading-tight md:text-6xl">{t.explore.title} <span className="italic text-laurel">{t.explore.highlight}</span></h2>
-            <p className="mt-6 text-lg leading-8 text-obsidian/68">{t.explore.desc}</p>
-          </div>
-          <div className="grid gap-6 md:grid-cols-3">
-            {localGems.map((gem: any, index: number) => (
-              <motion.article key={gem.name} initial="hidden" whileInView="visible" viewport={{ once: true }} custom={index} variants={fadeUp} className="group">
-                <div className="temple-card temple-card-hover relative h-[430px] overflow-hidden">
-                  <img src={gem.img} className="h-full w-full object-cover transition-transform duration-[1200ms] group-hover:scale-[1.08]" alt={gem.name} />
-                  <div className="absolute inset-0 bg-gradient-to-t from-obsidian via-obsidian/25 to-transparent" />
-                  <div className="absolute bottom-7 left-7 right-7">
-                  <IconSeal name={index === 0 ? 'beach' : index === 1 ? 'temple' : 'garden'} className="mb-5 h-12 w-12 bg-obsidian/50 backdrop-blur-sm" />
-                  <p className="font-mythic text-[10px] uppercase tracking-[0.28em] text-divine">{gem.dist}</p>
-                    <h3 className="mt-3 font-serif text-3xl text-alabaster">{gem.name}</h3>
-                    <p className="mt-4 text-sm leading-7 text-alabaster/66">{gem.desc}</p>
-                  </div>
-                </div>
-              </motion.article>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section id="location" className="section-shell">
-        <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-2 lg:items-center">
-          <div>
-            <span className="overline">{t.about.reachTag}</span>
-            <h2 className="mt-5 font-serif text-5xl leading-tight md:text-6xl">{t.about.reachTitle} <span className="italic text-laurel">Messenia.</span></h2>
-            <div className="mt-10 space-y-5">
+      <section id="location" className="location-section section-space">
+        <div className="shell location-grid">
+          <Reveal>
+            <p className="eyebrow">{t.about.reachTag}</p>
+            <h2 className="display">{t.about.reachTitle} <em>Messenia.</em></h2>
+            <dl className="travel-list">
               {[
-                { icon: Map, title: t.about.reachAir, desc: t.about.reachAirDesc },
-                { icon: Car, title: t.about.reachCar, desc: t.about.reachCarDesc },
-                { icon: MapPin, title: t.about.reachBeach, desc: t.about.reachBeachDesc },
-              ].map((item) => (
-                <div key={item.title} className="flex gap-5 border border-obsidian/10 bg-marble-shadow/45 p-6">
-                  <item.icon className="mt-1 h-6 w-6 shrink-0 text-divine" />
-                  <div>
-                    <h3 className="font-serif text-2xl">{item.title}</h3>
-                    <p className="mt-2 text-sm leading-7 text-obsidian/66">{item.desc}</p>
-                  </div>
-                </div>
+                { Icon: Plane, title: t.about.reachAir, desc: t.about.reachAirDesc },
+                { Icon: Car, title: t.about.reachCar, desc: t.about.reachCarDesc },
+                { Icon: Trees, title: t.about.reachBeach, desc: t.about.reachBeachDesc },
+              ].map(({ Icon, title, desc }) => (
+                <div key={title}><Icon aria-hidden="true" /><dt>{title}</dt><dd>{desc}</dd></div>
               ))}
-            </div>
-          </div>
-          <div className="h-[520px] overflow-hidden border border-divine/20 shadow-divine">
-            <iframe
-              title="Vila Zizel location map"
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d569.9365048221592!2d21.969529643030935!3d37.008445596599785!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1361a53d7b7ee5c5%3A0xbf624f39cfcf596e!2sVila%20Zizel!5e1!3m2!1sen!2s!4v1777359928261!5m2!1sen!2s"
-              width="100%"
-              height="100%"
-              style={{ border: 0 }}
-              allowFullScreen
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-            />
-          </div>
+            </dl>
+            <a href={directionsUrl} className="action action--dark">{copy.directions}<MapPin aria-hidden="true" /></a>
+            {Number.isFinite(temperature) && (
+              <div className="location-weather">
+                <Sun aria-hidden="true" /> <span>{t.weather.title} · <strong>{Math.round(temperature)} °C</strong></span>
+                {Number.isFinite(humidity) && <span>{t.weather.humidity} {humidity}%</span>}
+                {Number.isFinite(wind) && <span>{t.weather.wind} {Math.round(wind)} km/h</span>}
+              </div>
+            )}
+          </Reveal>
+          <Reveal delay={0.14} className="location-map">
+            <iframe title={`Vila Zizel · ${copy.location}`} src={mapUrl} loading="lazy" referrerPolicy="no-referrer-when-downgrade" allowFullScreen />
+            <a href={directionsUrl}>Vila Zizel · Analipsi 240 01 <MapPin aria-hidden="true" /></a>
+          </Reveal>
         </div>
       </section>
-
-      <section className="section-shell bg-obsidian text-center text-alabaster">
-        <Camera className="mx-auto mb-6 h-8 w-8 text-divine" />
-        <h2 className="mx-auto max-w-3xl font-serif text-5xl leading-tight">{t.about.readyDiscover} <span className="italic text-divine">Messenia</span>?</h2>
-        <Link to="/accommodation" className="summon-button mt-10 bg-alabaster text-obsidian hover:bg-alabaster">
-          {t.about.checkRooms}
-          <ChevronRight className="h-4 w-4" />
-        </Link>
-      </section>
-    </div>
+      <BookingCallout />
+    </>
   );
 }

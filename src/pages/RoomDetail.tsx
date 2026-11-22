@@ -1,176 +1,112 @@
-import { motion } from 'motion/react';
-import type { Variants } from 'motion/react';
-import { ArrowLeft, BedDouble, Calendar, ChevronRight, Home } from 'lucide-react';
-import { Link, Navigate, useParams } from 'react-router-dom';
+import { useState } from 'react';
+import { ArrowLeft, ArrowRight, Bath, BedDouble, Users } from 'lucide-react';
+import { motion, useReducedMotion } from 'motion/react';
+import { Navigate, useParams } from 'react-router-dom';
+import { ActionLink, BackToStays, BookingCallout, Reveal } from '../components/Editorial';
 import { useApp } from '../context/AppContext';
-import { localizedRoom, roomBySlug } from '../lib/rooms';
-import { IconSeal } from '../components/BrandIcon';
+import { brandAssets, editorial, roomMotifs } from '../lib/editorial';
+import { localizedRoom, roomBySlug, type RoomDefinition } from '../lib/rooms';
 
-const fadeUp: Variants = {
-  hidden: { opacity: 0, y: 40 },
-  visible: (i = 0) => ({
-    opacity: 1,
-    y: 0,
-    transition: { duration: 1, delay: i * 0.1, ease: [0.22, 1, 0.36, 1] as const },
-  }),
-};
+function RoomGallery({ room, name }: { room: RoomDefinition; name: string }) {
+  const { lang } = useApp();
+  const copy = editorial(lang);
+  const [index, setIndex] = useState(0);
+  const reduced = useReducedMotion();
+  const photos = room.gallery;
+
+  function step(delta: number) {
+    setIndex((current) => (current + delta + photos.length) % photos.length);
+  }
+
+  function description(photo: string) {
+    return lang === 'en' ? `${name} · ${photo.split('/').at(-1)?.replace(/\.(avif|jpe?g|webp)$/i, '')}` : name;
+  }
+
+  return (
+    <section className="room-gallery" aria-label={copy.gallery}>
+      <figure>
+        <div className="room-gallery-stage">
+          <motion.img
+            key={photos[index]}
+            src={photos[index]}
+            alt={description(photos[index])}
+            initial={reduced ? false : { opacity: 0.5, scale: 1.035 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: reduced ? 0 : 0.55 }}
+          />
+        </div>
+        <div className="gallery-bar">
+          <button type="button" className="icon-button" aria-label={copy.previousPhoto} onClick={() => step(-1)}><ArrowLeft /></button>
+          <figcaption aria-live="polite">{index + 1} / {photos.length} <span>· {description(photos[index])}</span></figcaption>
+          <button type="button" className="icon-button" aria-label={copy.nextPhoto} onClick={() => step(1)}><ArrowRight /></button>
+        </div>
+      </figure>
+      <div className="gallery-thumbnails">
+        {photos.map((photo, position) => (
+          <button type="button" key={photo} aria-label={`${copy.showPhoto} ${position + 1}`} aria-pressed={index === position} onClick={() => setIndex(position)}>
+            <img src={photo} alt="" loading="lazy" />
+          </button>
+        ))}
+      </div>
+    </section>
+  );
+}
 
 export default function RoomDetail() {
   const { slug } = useParams();
   const { lang, t } = useApp();
+  const copy = editorial(lang);
   const definition = roomBySlug(slug);
-
   if (!definition) return <Navigate to="/accommodation" replace />;
 
   const room = localizedRoom(definition, t.roomsData);
-  const sleeping =
-    room.slug === 'poseidon-hera'
-      ? [
-          lang === 'el' ? 'Υπνοδωμάτιο 1: 1 διπλό κρεβάτι & 1 μονό κρεβάτι' : 'Bedroom 1: 1 double bed and 1 single bed',
-          lang === 'el' ? 'Υπνοδωμάτιο 2: 1 διπλό κρεβάτι & 1 κρεβάτι-συρτάρι' : 'Bedroom 2: 1 double bed and 1 drawer bed',
-        ]
-      : [
-          room.beds,
-          lang === 'el' ? 'Ιδιωτικός χώρος ύπνου' : 'Private sleeping area',
-        ];
-
-  const amenities = [
-    { icon: 'wifi' as const, label: 'WiFi' },
-    { icon: 'wind' as const, label: 'A/C' },
-    { icon: 'temple' as const, label: 'Smart TV' },
-    { icon: 'kitchen' as const, label: lang === 'el' ? 'Κουζίνα' : 'Kitchen' },
-    { icon: 'scroll' as const, label: t.about.renovated },
-    { icon: 'arch' as const, label: t.about.standalone },
-  ];
-  const roomAmenities = room.amenities || [];
+  const request = `/contact?room=${room.slug}`;
+  const sleeping = room.key === 'poseidonHera'
+    ? [
+      lang === 'el' ? 'Υπνοδωμάτιο 1: 1 διπλό κρεβάτι & 1 μονό κρεβάτι' : 'Bedroom 1: 1 double bed and 1 single bed',
+      lang === 'el' ? 'Υπνοδωμάτιο 2: 1 διπλό κρεβάτι & 1 κρεβάτι-συρτάρι' : 'Bedroom 2: 1 double bed and 1 drawer bed',
+    ]
+    : [room.beds];
 
   return (
-    <div className="bg-alabaster pt-24 text-obsidian">
-      <section className="px-6 md:px-12 pt-14 pb-20 md:pt-20 md:pb-28">
-        <div className="mx-auto max-w-7xl">
-          <Link to="/accommodation" className="mb-10 inline-flex items-center gap-2 font-mythic text-[10px] uppercase tracking-[0.24em] text-divine">
-            <ArrowLeft className="h-4 w-4" />
-            {t.nav.rooms}
-          </Link>
+    <>
+      <section className="shell room-layout" key={slug}>
+        <div className="room-intro intro-arrival">
+          <BackToStays>{t.nav.rooms}</BackToStays>
+          <img className="room-motif" src={`${brandAssets}/symbol-${room.slug}.svg`} width="70" height="70" alt="" />
+          <p className="eyebrow">{copy[room.kind]}</p>
+          <h1 className="display">{room.name}</h1>
+          <p className="room-description">{room.desc}</p>
+          <ul className="room-facts">
+            <li><Users aria-hidden="true" />{room.capacity} {copy.guests}</li>
+            <li><BedDouble aria-hidden="true" />{room.beds}</li>
+            <li><Bath aria-hidden="true" />{room.baths}</li>
+          </ul>
+          <div className="room-actions"><ActionLink to={request}>{copy.requestRoom}</ActionLink><span>{room.price}</span></div>
+        </div>
+        <RoomGallery room={room} name={room.name} />
+      </section>
 
-          <div className="grid gap-12 lg:grid-cols-[0.95fr_1.05fr] lg:items-end">
-            <motion.div initial="hidden" animate="visible" variants={fadeUp}>
-              <IconSeal name={room.icon} className="mb-8 h-20 w-20" />
-              <span className="overline">{room.greekName}</span>
-              <h1 className="mt-5 font-serif text-6xl leading-[0.95] md:text-8xl">
-                {room.name}
-              </h1>
-              <p className="mt-8 max-w-2xl text-lg italic leading-8 text-obsidian/72">{room.desc}</p>
-              <div className="mt-8 flex flex-wrap gap-3">
-                {[room.price, room.sleeps, room.beds, room.baths].map((item) => (
-                  <span key={item} className="rounded-full border border-divine/25 px-4 py-2 font-mythic text-[10px] uppercase tracking-[0.2em] text-obsidian/70">
-                    {item}
-                  </span>
-                ))}
-              </div>
-            </motion.div>
-
-            <motion.div initial="hidden" animate="visible" variants={fadeUp} custom={1} className="temple-card relative h-[560px] overflow-hidden">
-              <img
-                src={room.image}
-                alt={room.name}
-                className="absolute inset-0 h-full w-full object-cover"
-                onError={(event) => {
-                  event.currentTarget.src = room.fallbackImage;
-                }}
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-obsidian/88 via-transparent to-transparent" />
-            </motion.div>
-          </div>
+      <section className="room-story section-space">
+        <div className="shell room-story-grid">
+          <Reveal>
+            <p className="eyebrow">{t.rooms.olympianExp}</p>
+            <h2 className="display">{room.greekName}<em>.</em></h2>
+            <p>{room.longDesc}</p>
+            {room.features.length > 0 && <ul className="room-features">{room.features.map((feature: string) => <li key={feature}>{feature}</li>)}</ul>}
+            {lang === 'en' && <p className="motif-note">{roomMotifs[room.key]}</p>}
+            <h3>{lang === 'el' ? 'Πού θα κοιμηθείτε' : "Where you'll sleep"}</h3>
+            <ul className="room-detail-list">{sleeping.map((item) => <li key={item}><BedDouble aria-hidden="true" />{item}</li>)}</ul>
+          </Reveal>
+          <Reveal delay={0.12} className="room-amenities">
+            <h2>{t.rooms.amenitiesTitle}</h2>
+            <ul>{room.amenities.map((amenity) => <li key={amenity}>{amenity}</li>)}</ul>
+            <p>{t.rooms.hostGreets}. {t.rooms.amenitiesSubtitle}</p>
+            <ActionLink to="/policies" variant="text">{copy.policies}</ActionLink>
+          </Reveal>
         </div>
       </section>
-
-      <div className="meander-divider mx-6 md:mx-16" />
-
-      <section className="section-shell">
-        <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[0.9fr_1.1fr]">
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="space-y-8">
-            <div>
-              <span className="overline">{t.rooms.olympianExp}</span>
-              <p className="mt-5 text-lg leading-8 text-obsidian/72">{room.longDesc}</p>
-            </div>
-
-            <div className="border-t border-divine/20 pt-8">
-              <h2 className="font-serif text-3xl">{lang === 'el' ? 'Πού θα κοιμηθείτε' : "Where you'll sleep"}</h2>
-              <div className="mt-6 grid gap-4 sm:grid-cols-2">
-                {sleeping.map((item) => (
-                  <div key={item} className="border border-obsidian/10 bg-marble-shadow/45 p-6">
-                    <BedDouble className="mb-4 h-6 w-6 text-divine" />
-                    <p className="text-sm leading-7 text-obsidian/70">{item}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </motion.div>
-
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} custom={1}>
-            <h2 className="font-serif text-3xl">{t.rooms.roomAmenities}</h2>
-            <div className="mt-6 grid gap-4 sm:grid-cols-2">
-              {amenities.map((amenity) => (
-                <div key={amenity.label} className="border border-obsidian/10 bg-alabaster p-6">
-                  <IconSeal name={amenity.icon} className="mb-4 h-12 w-12" />
-                  <p className="font-mythic text-[10px] uppercase tracking-[0.22em] text-obsidian/76">{amenity.label}</p>
-                </div>
-              ))}
-            </div>
-            <div className="mt-8 border-t border-divine/20 pt-8">
-              <h3 className="font-mythic text-[10px] uppercase tracking-[0.24em] text-divine">{t.rooms.amenitiesTitle}</h3>
-              <div className="mt-5 flex flex-wrap gap-2">
-                {roomAmenities.map((amenity: string) => (
-                  <span key={amenity} className="rounded-full border border-obsidian/10 bg-marble-shadow/45 px-4 py-2 text-xs text-obsidian/68">
-                    {amenity}
-                  </span>
-                ))}
-              </div>
-              <p className="mt-6 text-sm leading-7 text-obsidian/62">{t.rooms.hostGreets}. {t.rooms.smoking}. {t.rooms.amenitiesSubtitle}</p>
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
-      <section className="section-shell bg-obsidian text-alabaster">
-        <div className="mx-auto max-w-7xl">
-          <div className="mb-10 flex flex-col justify-between gap-5 md:flex-row md:items-end">
-            <div>
-              <span className="overline">{lang === 'el' ? 'Φωτογραφίες' : 'Photo Gallery'}</span>
-              <h2 className="mt-4 font-serif text-5xl">{room.name}</h2>
-            </div>
-            <Link to="/contact" className="summon-button bg-alabaster text-obsidian hover:bg-alabaster">
-              {t.home.ctaBook}
-              <Calendar className="h-4 w-4" />
-            </Link>
-          </div>
-          <div className="grid gap-5 md:grid-cols-3">
-            {room.gallery.map((image, index) => (
-              <div key={`${image}-${index}`} className="relative aspect-[4/3] overflow-hidden border border-divine/15">
-                <img
-                  src={image}
-                  alt={`${room.name} ${index + 1}`}
-                  className="h-full w-full object-cover"
-                  onError={(event) => {
-                    event.currentTarget.src = room.fallbackImage;
-                  }}
-                />
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="section-shell text-center">
-        <Home className="mx-auto mb-6 h-8 w-8 text-divine" />
-        <h2 className="mx-auto max-w-3xl font-serif text-5xl leading-tight">{t.home.ctaTitle}</h2>
-        <p className="mx-auto mt-6 max-w-xl text-obsidian/68">{t.home.ctaDesc}</p>
-        <Link to="/contact" className="summon-button mt-10">
-          {t.contact.title}
-          <ChevronRight className="h-4 w-4" />
-        </Link>
-      </section>
-    </div>
+      <BookingCallout to={request} />
+    </>
   );
 }

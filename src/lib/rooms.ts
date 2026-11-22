@@ -5,6 +5,8 @@ export type RoomDefinition = {
   key: RoomKey;
   slug: string;
   price: string;
+  capacity: number;
+  kind: 'room' | 'apartment' | 'unit';
   greekName: string;
   image: string;
   fallbackImage: string;
@@ -22,6 +24,8 @@ export const roomDefinitions: RoomDefinition[] = [
     key: 'aphrodite',
     slug: 'aphrodite',
     price: 'From €80',
+    capacity: 4,
+    kind: 'room',
     greekName: 'Aphrodite',
     image: '/Images/Rooms/Aphrodite/Exterior 1.avif',
     fallbackImage: '/Images/Entry gate.avif',
@@ -43,6 +47,8 @@ export const roomDefinitions: RoomDefinition[] = [
     key: 'hera',
     slug: 'hera',
     price: 'From €85',
+    capacity: 3,
+    kind: 'room',
     greekName: 'Hera',
     image: '/Images/Rooms/Hera/Exterior 1.avif',
     fallbackImage: '/Images/Entry gate.avif',
@@ -64,6 +70,8 @@ export const roomDefinitions: RoomDefinition[] = [
     key: 'poseidonHera',
     slug: 'poseidon-hera',
     price: 'From €150',
+    capacity: 6,
+    kind: 'unit',
     greekName: 'Poseidon-Hera',
     image: '/Images/Rooms/Poseidon-Hera/Bedroom A 1.avif',
     fallbackImage: '/Images/Entry gate.avif',
@@ -86,6 +94,8 @@ export const roomDefinitions: RoomDefinition[] = [
     key: 'zeus',
     slug: 'zeus',
     price: 'From €140',
+    capacity: 4,
+    kind: 'apartment',
     greekName: 'Zeus',
     image: '/Images/Rooms/Zeus/Balcony/Balcony.avif',
     fallbackImage: '/Images/Entry gate.avif',
@@ -112,6 +122,8 @@ export const roomDefinitions: RoomDefinition[] = [
     key: 'athina',
     slug: 'athina',
     price: 'From €90',
+    capacity: 2,
+    kind: 'room',
     greekName: 'Athina',
     image: '/Images/Rooms/Athina/Garden 2.avif',
     fallbackImage: '/Images/Entry gate.avif',
@@ -137,6 +149,8 @@ export const roomDefinitions: RoomDefinition[] = [
     key: 'artemis',
     slug: 'artemis',
     price: 'From €85',
+    capacity: 2,
+    kind: 'room',
     greekName: 'Artemis',
     image: '/Images/Rooms/Artemis/Garden 1.avif',
     fallbackImage: '/Images/Entry gate.avif',
@@ -162,6 +176,10 @@ export const roomDefinitions: RoomDefinition[] = [
 export function roomBySlug(slug?: string) {
   return roomDefinitions.find((room) => room.slug === slug);
 }
+
+export const featuredRooms = ['aphrodite', 'zeus', 'artemis'].map(
+  (slug) => roomDefinitions.find((room) => room.slug === slug)!,
+);
 
 export function localizedRoom(room: RoomDefinition, roomsData: any) {
   const data = roomsData?.[room.key] || {};

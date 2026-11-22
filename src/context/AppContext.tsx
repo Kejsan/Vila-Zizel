@@ -929,10 +929,25 @@ interface AppContextType {
 const AppContext = createContext<AppContextType | undefined>(undefined);
 
 export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [lang, setLang] = useState('en');
+  const [lang, setLang] = useState(() => {
+    try {
+      const saved = localStorage.getItem('vila-zizel-language');
+      return saved && Object.hasOwn(translations, saved) ? saved : 'en';
+    } catch {
+      return 'en';
+    }
+  });
   const [weather, setWeather] = useState<any>(null);
 
   const t = translations[lang] || translations.en;
+
+  useEffect(() => {
+    try {
+      localStorage.setItem('vila-zizel-language', lang);
+    } catch {
+      // The language remains available for this visit when storage is disabled.
+    }
+  }, [lang]);
 
   useEffect(() => {
     const fetchWeather = async () => {

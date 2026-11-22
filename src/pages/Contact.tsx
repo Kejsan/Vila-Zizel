@@ -1,286 +1,190 @@
-import React, { useState } from 'react';
-import { motion } from 'motion/react';
-import type { Variants } from 'motion/react';
-import { Calendar, Instagram, Mail, MapPin, MessageSquare, Phone, Send, Users } from 'lucide-react';
+import { useRef, useState, type FormEvent } from 'react';
+import { ArrowUpRight, Instagram, Mail, MapPin, Phone } from 'lucide-react';
+import { useSearchParams } from 'react-router-dom';
+import { PageIntro, ParallaxPhoto } from '../components/Editorial';
 import { useApp } from '../context/AppContext';
-import { localizedRoom, roomDefinitions } from '../lib/rooms';
-import { IconSeal } from '../components/BrandIcon';
+import { brandAssets, directionsUrl, editorial, propertyContact } from '../lib/editorial';
+import { localizedRoom, roomBySlug, roomDefinitions } from '../lib/rooms';
 
-const fadeUp: Variants = {
-  hidden: { opacity: 0, y: 40 },
-  visible: (i = 0) => ({
-    opacity: 1,
-    y: 0,
-    transition: { duration: 1, delay: i * 0.1, ease: [0.22, 1, 0.36, 1] as const },
-  }),
-};
+const booking = 'booking-request';
+const information = 'info-request';
+type FormMode = typeof booking | typeof information;
+type FormStatus = 'idle' | 'sending' | 'success' | 'error' | 'capacity';
+const receiver = 'kejsancoku2@gmail.com';
 
-type FormMode = 'booking-request' | 'info-request';
-const FORM_RECEIVER_EMAIL = 'kejsancoku2@gmail.com';
+function localDate() {
+  return new Intl.DateTimeFormat('sv-SE', {
+    timeZone: 'Europe/Athens', year: 'numeric', month: '2-digit', day: '2-digit',
+  }).format(new Date());
+}
 
-const encodeForm = (data: Record<string, string>) =>
-  new URLSearchParams(data).toString();
+function followingDate(date: string) {
+  const day = new Date(`${date}T12:00:00Z`);
+  day.setUTCDate(day.getUTCDate() + 1);
+  return day.toISOString().slice(0, 10);
+}
 
-export default function Contact() {
+function ContactForm({ preferred }: { preferred?: string }) {
   const { lang, t } = useApp();
-  const rooms = roomDefinitions.map((room) => localizedRoom(room, t.roomsData));
-  const [mode, setMode] = useState<FormMode>('booking-request');
-  const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
-  const [bookingData, setBookingData] = useState({
-    checkIn: '',
-    checkOut: '',
-    guests: '2',
-    room: 'Not sure yet',
-    name: '',
-    email: '',
-    phone: '',
-    message: '',
-    botField: '',
-  });
-  const [infoData, setInfoData] = useState({
-    name: '',
-    email: '',
-    subject: '',
-    message: '',
-    botField: '',
-  });
+  const copy = editorial(lang);
+  const [mode, setMode] = useState<FormMode>(booking);
+  const [status, setStatus] = useState<FormStatus>('idle');
+  const [arrival, setArrival] = useState('');
+  const submitting = useRef(false);
+  const today = localDate();
+  const busy = status === 'sending';
 
-  const submitToNetlify = async (formName: FormMode, data: Record<string, string>) => {
-    if (data['bot-field']) return;
+  async function submit(event: FormEvent<HTMLFormElement>, formName: FormMode) {
+    event.preventDefault();
+    const form = event.currentTarget;
+    const formData = new FormData(form);
+    if (submitting.current || formData.get('bot-field')) return;
 
-    setStatus('submitting');
+    const body = new URLSearchParams();
+    for (const [name, value] of formData) body.append(name, String(value));
+
+    if (formName === booking) {
+      const room = roomBySlug(body.get('room') || undefined);
+      if (room && Number(body.get('guests')) > room.capacity) {
+        setStatus('capacity');
+        form.querySelector<HTMLSelectElement>('select[name="room"]')?.focus();
+        return;
+      }
+      body.set('room', room ? localizedRoom(room, t.roomsData).name : 'Not sure yet');
+      body.set('subject', `Booking request from ${body.get('name')}`);
+    } else if (!body.get('subject')?.trim()) {
+      body.set('subject', `Info request from ${body.get('name')}`);
+    }
+
+    submitting.current = true;
+    setStatus('sending');
     try {
       const response = await fetch('/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: encodeForm({ 'form-name': formName, ...data }),
+        body: body.toString(),
       });
-
-      if (!response.ok) throw new Error(`Netlify form failed with ${response.status}`);
+      if (!response.ok) throw new Error(`Form submission failed with HTTP ${response.status}`);
+      form.reset();
+      if (formName === booking) setArrival('');
       setStatus('success');
-    } catch (error) {
-      console.error(error);
+    } catch {
       setStatus('error');
+    } finally {
+      submitting.current = false;
     }
-  };
+  }
 
-  const handleBookingSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    submitToNetlify('booking-request', {
-      receiver: FORM_RECEIVER_EMAIL,
-      name: bookingData.name,
-      email: bookingData.email,
-      phone: bookingData.phone,
-      room: bookingData.room,
-      checkIn: bookingData.checkIn,
-      checkOut: bookingData.checkOut,
-      guests: bookingData.guests,
-      message: bookingData.message,
-      subject: `Booking request from ${bookingData.name || 'Vila Zizel website'}`,
-      'bot-field': bookingData.botField,
-    });
-  };
+  function switchForm(next: FormMode) {
+    setMode(next);
+    setStatus('idle');
+  }
 
-  const handleInfoSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    submitToNetlify('info-request', {
-      receiver: FORM_RECEIVER_EMAIL,
-      name: infoData.name,
-      email: infoData.email,
-      subject: infoData.subject || `Info request from ${infoData.name || 'Vila Zizel website'}`,
-      message: infoData.message,
-      'bot-field': infoData.botField,
-    });
-  };
-
-  const contactItems = [
-    { icon: Phone, brandIcon: 'letter' as const, label: t.contactForm.phone, value: '+30 693 715 7283' },
-    { icon: Mail, brandIcon: 'letter' as const, label: t.contactForm.email, value: 'hermancoku@gmail.com' },
-    { icon: Instagram, brandIcon: 'monogram' as const, label: 'Instagram', value: '@vilazizel' },
-    { icon: MapPin, brandIcon: 'mapPin' as const, label: t.contactForm.location, value: 'Vila Zizel, Analipsi 240 01, Messenia, Greece' },
-  ];
-
-  const isSubmitting = status === 'submitting';
+  function formHiddenFields(name: FormMode) {
+    return (
+      <>
+        <input type="hidden" name="form-name" value={name} />
+        <input type="hidden" name="receiver" value={receiver} />
+        <div hidden><label>Leave this field blank <input name="bot-field" tabIndex={-1} autoComplete="off" /></label></div>
+      </>
+    );
+  }
 
   return (
-    <div className="bg-alabaster pt-24 text-obsidian">
-      <section className="marble-veil px-6 md:px-12 pt-14 pb-20 md:pt-20 md:pb-28">
-        <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-end">
-          <motion.div initial="hidden" animate="visible" variants={fadeUp}>
-            <span className="overline">{t.contact.tag}</span>
-            <h1 className="mt-5 font-serif text-6xl leading-[0.95] md:text-8xl">
-              {t.contact.title} <span className="italic text-laurel">{t.contact.highlight}</span>
-            </h1>
-          </motion.div>
-          <motion.p initial="hidden" animate="visible" variants={fadeUp} custom={1} className="text-lg leading-8 text-obsidian/72">
-            Request a stay for owner approval, or send a simpler message for directions, amenities, and local questions.
-          </motion.p>
-        </div>
-      </section>
+    <div className="contact-form-panel">
+      <div className="form-switch" role="group" aria-label={t.contact.tag}>
+        <button type="button" aria-pressed={mode === booking} disabled={busy} onClick={() => switchForm(booking)}>{copy.request}</button>
+        <button type="button" aria-pressed={mode === information} disabled={busy} onClick={() => switchForm(information)}>{copy.question}</button>
+      </div>
+      <h2>{mode === booking ? copy.request : copy.question}</h2>
+      {mode === booking && <p className="form-help">{copy.arrivalNote}</p>}
+      {import.meta.env.DEV && <p className="form-help">Local preview · Live delivery is handled by Netlify after deployment.</p>}
+      <div aria-live="polite" className="form-status">
+        {status === 'success' && <p className="form-success">{t.booking.success}</p>}
+        {status === 'error' && <p className="form-error">{copy.error}</p>}
+        {status === 'capacity' && <p className="form-error" id="capacity-error">{copy.tooMany}</p>}
+      </div>
 
-      <div className="meander-divider mx-6 md:mx-16" />
-
-      <section className="section-shell pt-14">
-        <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-12">
-          <aside className="space-y-5 lg:col-span-5">
-            <h2 className="font-serif text-4xl">{t.contactForm.direct}</h2>
-            {contactItems.map((item) => (
-              <motion.div key={item.label} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="flex gap-5 border border-obsidian/10 bg-marble-shadow/45 p-6">
-                <IconSeal name={item.brandIcon} className="h-12 w-12 shrink-0" />
-                <div>
-                  <p className="font-mythic text-[10px] uppercase tracking-[0.24em] text-obsidian/50">{item.label}</p>
-                  <p className="mt-2 text-base font-medium text-obsidian">{item.value}</p>
-                </div>
-              </motion.div>
-            ))}
-            <div className="border border-divine/20 bg-alabaster p-6 text-sm leading-7 text-obsidian/68">
-              Booking requests are reviewed by the owner before confirmation. This avoids double-booking and keeps availability accurate.
+      <form name={booking} method="post" hidden={mode !== booking || status === 'success'} onSubmit={(event) => submit(event, booking)}>
+        {formHiddenFields(booking)}
+        <fieldset disabled={busy}>
+          <div className="fields-grid">
+            <label>{t.contactForm.checkIn}
+              <input type="date" name="checkIn" required min={today} value={arrival} onChange={(event) => setArrival(event.target.value)} />
+            </label>
+            <label>{t.contactForm.checkOut}
+              <input type="date" name="checkOut" required min={followingDate(arrival || today)} />
+            </label>
+            <div className="select-field">
+              <label htmlFor="booking-guests">{t.contactForm.guests}</label>
+              <select id="booking-guests" name="guests" defaultValue="2" onChange={() => { if (status === 'capacity') setStatus('idle'); }}>
+                {Array.from({ length: 6 }, (_, index) => index + 1).map((count) => <option key={count} value={count}>{count} {count === 1 ? copy.guest : copy.guests}</option>)}
+              </select>
             </div>
-          </aside>
-
-          <motion.div initial="hidden" animate="visible" variants={fadeUp} custom={1} className="lg:col-span-7">
-            <div className="border border-divine/20 bg-obsidian p-8 text-alabaster shadow-divine md:p-12">
-              <div className="mb-8">
-                <span className="overline">{mode === 'booking-request' ? t.booking.tag : 'Message'}</span>
-                <h2 className="mt-4 font-serif text-4xl">
-                  {mode === 'booking-request' ? (
-                    <>
-                      {t.booking.title} <span className="italic text-divine">{t.booking.highlight}</span>
-                    </>
-                  ) : (
-                    <>
-                      Ask a <span className="italic text-divine">Question.</span>
-                    </>
-                  )}
-                </h2>
-              </div>
-
-              <div className="mb-8 grid grid-cols-2 border border-divine/20 p-1">
-                {[
-                  { id: 'booking-request' as const, label: 'Booking Request' },
-                  { id: 'info-request' as const, label: 'Info Request' },
-                ].map((item) => (
-                  <button
-                    key={item.id}
-                    type="button"
-                    onClick={() => {
-                      setMode(item.id);
-                      setStatus('idle');
-                    }}
-                    className={`px-4 py-3 font-mythic text-[10px] uppercase tracking-[0.2em] transition ${mode === item.id ? 'bg-alabaster text-obsidian' : 'text-alabaster/62 hover:text-divine'}`}
-                  >
-                    {item.label}
-                  </button>
-                ))}
-              </div>
-
-              {status === 'success' && (
-                <div className="mb-8 border border-divine/30 bg-divine/10 p-4 text-sm text-alabaster">
-                  Thank you. Your request has been sent to Vila Zizel and the owner will reply directly.
-                </div>
-              )}
-              {status === 'error' && (
-                <div className="mb-8 border border-red-400/40 bg-red-500/10 p-4 text-sm text-alabaster">
-                  Something went wrong. Please try again, or contact Vila Zizel directly by email or phone.
-                </div>
-              )}
-
-              {mode === 'booking-request' ? (
-                <form name="booking-request" method="POST" data-netlify="true" netlify-honeypot="bot-field" onSubmit={handleBookingSubmit}>
-                  <input type="hidden" name="form-name" value="booking-request" />
-                  <input type="hidden" name="receiver" value={FORM_RECEIVER_EMAIL} />
-                  <p className="hidden">
-                    <label>Do not fill this out: <input name="bot-field" value={bookingData.botField} onChange={(e) => setBookingData({ ...bookingData, botField: e.target.value })} /></label>
-                  </p>
-
-                  <div className="grid gap-6 md:grid-cols-2">
-                    <label className="space-y-2">
-                      <span className="flex items-center gap-2 font-mythic text-[10px] uppercase tracking-[0.22em] text-divine"><Calendar className="h-3.5 w-3.5" /> {t.contactForm.checkIn}</span>
-                      <input name="checkIn" type="date" value={bookingData.checkIn} onChange={(e) => setBookingData({ ...bookingData, checkIn: e.target.value })} required className="w-full border border-divine/20 bg-alabaster/10 p-4 text-alabaster outline-none transition focus:border-divine" />
-                    </label>
-                    <label className="space-y-2">
-                      <span className="flex items-center gap-2 font-mythic text-[10px] uppercase tracking-[0.22em] text-divine"><Calendar className="h-3.5 w-3.5" /> {t.contactForm.checkOut}</span>
-                      <input name="checkOut" type="date" value={bookingData.checkOut} onChange={(e) => setBookingData({ ...bookingData, checkOut: e.target.value })} required className="w-full border border-divine/20 bg-alabaster/10 p-4 text-alabaster outline-none transition focus:border-divine" />
-                    </label>
-                    <label className="space-y-2">
-                      <span className="flex items-center gap-2 font-mythic text-[10px] uppercase tracking-[0.22em] text-divine"><Users className="h-3.5 w-3.5" /> {t.contactForm.guests}</span>
-                      <select name="guests" value={bookingData.guests} onChange={(e) => setBookingData({ ...bookingData, guests: e.target.value })} className="w-full border border-divine/20 bg-obsidian p-4 text-alabaster outline-none transition focus:border-divine">
-                        <option value="1">1 {lang === 'el' ? 'Επισκέπτης' : 'Guest'}</option>
-                        <option value="2">2 {lang === 'el' ? 'Επισκέπτες' : 'Guests'}</option>
-                        <option value="3">3 {lang === 'el' ? 'Επισκέπτες' : 'Guests'}</option>
-                        <option value="4+">4+ {lang === 'el' ? 'Επισκέπτες' : 'Guests'}</option>
-                      </select>
-                    </label>
-                    <label className="space-y-2">
-                      <span className="font-mythic text-[10px] uppercase tracking-[0.22em] text-divine">Preferred Room</span>
-                      <select name="room" value={bookingData.room} onChange={(e) => setBookingData({ ...bookingData, room: e.target.value })} className="w-full border border-divine/20 bg-obsidian p-4 text-alabaster outline-none transition focus:border-divine">
-                        <option value="Not sure yet">Not sure yet</option>
-                        {rooms.map((room) => (
-                          <option key={room.slug} value={room.name}>{room.name}</option>
-                        ))}
-                      </select>
-                    </label>
-                    <label className="space-y-2">
-                      <span className="font-mythic text-[10px] uppercase tracking-[0.22em] text-divine">{t.contactForm.name}</span>
-                      <input name="name" type="text" placeholder={t.contactForm.placeholderName} value={bookingData.name} onChange={(e) => setBookingData({ ...bookingData, name: e.target.value })} required className="w-full border border-divine/20 bg-alabaster/10 p-4 text-alabaster outline-none transition placeholder:text-alabaster/35 focus:border-divine" />
-                    </label>
-                    <label className="space-y-2">
-                      <span className="font-mythic text-[10px] uppercase tracking-[0.22em] text-divine">Phone / WhatsApp</span>
-                      <input name="phone" type="tel" placeholder="+30 ..." value={bookingData.phone} onChange={(e) => setBookingData({ ...bookingData, phone: e.target.value })} className="w-full border border-divine/20 bg-alabaster/10 p-4 text-alabaster outline-none transition placeholder:text-alabaster/35 focus:border-divine" />
-                    </label>
-                  </div>
-
-                  <label className="mt-6 block space-y-2">
-                    <span className="font-mythic text-[10px] uppercase tracking-[0.22em] text-divine">{t.contactForm.emailLabel}</span>
-                    <input name="email" type="email" placeholder={t.contactForm.placeholderEmail} value={bookingData.email} onChange={(e) => setBookingData({ ...bookingData, email: e.target.value })} required className="w-full border border-divine/20 bg-alabaster/10 p-4 text-alabaster outline-none transition placeholder:text-alabaster/35 focus:border-divine" />
-                  </label>
-
-                  <label className="mt-6 block space-y-2">
-                    <span className="flex items-center gap-2 font-mythic text-[10px] uppercase tracking-[0.22em] text-divine"><MessageSquare className="h-3.5 w-3.5" /> {t.contactForm.message}</span>
-                    <textarea name="message" rows={5} placeholder={t.contactForm.placeholderMessage} value={bookingData.message} onChange={(e) => setBookingData({ ...bookingData, message: e.target.value })} className="w-full resize-none border border-divine/20 bg-alabaster/10 p-4 text-alabaster outline-none transition placeholder:text-alabaster/35 focus:border-divine" />
-                  </label>
-
-                  <p className="mt-5 text-xs leading-6 text-alabaster/52">Submitting this form sends an availability request only. A reservation is confirmed after the owner replies.</p>
-                  <button type="submit" disabled={isSubmitting} className="summon-button mt-8 w-full bg-alabaster text-obsidian hover:bg-alabaster disabled:cursor-wait disabled:opacity-60">
-                    <Send className="h-4 w-4" />
-                    {isSubmitting ? 'Sending...' : t.contactForm.send}
-                  </button>
-                </form>
-              ) : (
-                <form name="info-request" method="POST" data-netlify="true" netlify-honeypot="bot-field" onSubmit={handleInfoSubmit}>
-                  <input type="hidden" name="form-name" value="info-request" />
-                  <input type="hidden" name="receiver" value={FORM_RECEIVER_EMAIL} />
-                  <p className="hidden">
-                    <label>Do not fill this out: <input name="bot-field" value={infoData.botField} onChange={(e) => setInfoData({ ...infoData, botField: e.target.value })} /></label>
-                  </p>
-                  <div className="grid gap-6 md:grid-cols-2">
-                    <label className="space-y-2">
-                      <span className="font-mythic text-[10px] uppercase tracking-[0.22em] text-divine">{t.contactForm.name}</span>
-                      <input name="name" type="text" placeholder={t.contactForm.placeholderName} value={infoData.name} onChange={(e) => setInfoData({ ...infoData, name: e.target.value })} required className="w-full border border-divine/20 bg-alabaster/10 p-4 text-alabaster outline-none transition placeholder:text-alabaster/35 focus:border-divine" />
-                    </label>
-                    <label className="space-y-2">
-                      <span className="font-mythic text-[10px] uppercase tracking-[0.22em] text-divine">{t.contactForm.emailLabel}</span>
-                      <input name="email" type="email" placeholder={t.contactForm.placeholderEmail} value={infoData.email} onChange={(e) => setInfoData({ ...infoData, email: e.target.value })} required className="w-full border border-divine/20 bg-alabaster/10 p-4 text-alabaster outline-none transition placeholder:text-alabaster/35 focus:border-divine" />
-                    </label>
-                  </div>
-                  <label className="mt-6 block space-y-2">
-                    <span className="font-mythic text-[10px] uppercase tracking-[0.22em] text-divine">Subject</span>
-                    <input name="subject" type="text" placeholder="Question about Vila Zizel" value={infoData.subject} onChange={(e) => setInfoData({ ...infoData, subject: e.target.value })} className="w-full border border-divine/20 bg-alabaster/10 p-4 text-alabaster outline-none transition placeholder:text-alabaster/35 focus:border-divine" />
-                  </label>
-                  <label className="mt-6 block space-y-2">
-                    <span className="flex items-center gap-2 font-mythic text-[10px] uppercase tracking-[0.22em] text-divine"><MessageSquare className="h-3.5 w-3.5" /> {t.contactForm.message}</span>
-                    <textarea name="message" rows={6} placeholder={t.contactForm.placeholderMessage} value={infoData.message} onChange={(e) => setInfoData({ ...infoData, message: e.target.value })} required className="w-full resize-none border border-divine/20 bg-alabaster/10 p-4 text-alabaster outline-none transition placeholder:text-alabaster/35 focus:border-divine" />
-                  </label>
-                  <button type="submit" disabled={isSubmitting} className="summon-button mt-8 w-full bg-alabaster text-obsidian hover:bg-alabaster disabled:cursor-wait disabled:opacity-60">
-                    <Send className="h-4 w-4" />
-                    {isSubmitting ? 'Sending...' : 'Send Message'}
-                  </button>
-                </form>
-              )}
+            <div className="select-field">
+              <label htmlFor="booking-room">{copy.preferred}</label>
+              <select id="booking-room" name="room" defaultValue={preferred || ''} aria-invalid={status === 'capacity' || undefined} aria-describedby={status === 'capacity' ? 'capacity-error' : undefined} onChange={() => { if (status === 'capacity') setStatus('idle'); }}>
+                <option value="">{copy.noPreference}</option>
+                {roomDefinitions.map((room) => <option key={room.slug} value={room.slug}>{localizedRoom(room, t.roomsData).name}</option>)}
+              </select>
             </div>
-          </motion.div>
-        </div>
-      </section>
+            <label>{t.contactForm.name}<input name="name" autoComplete="name" required /></label>
+            <label>{copy.phone}<input name="phone" type="tel" autoComplete="tel" /></label>
+          </div>
+          <label>{t.contactForm.emailLabel}<input name="email" type="email" autoComplete="email" required /></label>
+          <label>{t.contactForm.message}<textarea name="message" rows={4} /></label>
+          <button type="submit" className="action action--dark">{busy ? copy.sending : t.contactForm.send}<ArrowUpRight aria-hidden="true" /></button>
+        </fieldset>
+      </form>
+
+      <form name={information} method="post" hidden={mode !== information || status === 'success'} onSubmit={(event) => submit(event, information)}>
+        {formHiddenFields(information)}
+        <fieldset disabled={busy}>
+          <div className="fields-grid">
+            <label>{t.contactForm.name}<input name="name" autoComplete="name" required /></label>
+            <label>{t.contactForm.emailLabel}<input name="email" type="email" autoComplete="email" required /></label>
+          </div>
+          <label>{copy.subject}<input name="subject" /></label>
+          <label>{copy.message}<textarea name="message" rows={6} required /></label>
+          <button type="submit" className="action action--dark">{busy ? copy.sending : copy.sendMessage}<ArrowUpRight aria-hidden="true" /></button>
+        </fieldset>
+      </form>
     </div>
+  );
+}
+
+export default function Contact() {
+  const { lang, t } = useApp();
+  const copy = editorial(lang);
+  const [query] = useSearchParams();
+  const preferred = roomBySlug(query.get('room') || undefined)?.slug;
+  const contacts = [
+    { Icon: Phone, label: t.contactForm.phone, text: propertyContact.phone, href: propertyContact.phoneHref },
+    { Icon: Mail, label: t.contactForm.email, text: propertyContact.email, href: `mailto:${propertyContact.email}` },
+    { Icon: Instagram, label: 'Instagram', text: '@vilazizel', href: propertyContact.instagram },
+    { Icon: MapPin, label: t.contactForm.location, text: 'Vila Zizel, Analipsi 240 01, Messenia, Greece', href: directionsUrl },
+  ];
+
+  return (
+    <>
+      <PageIntro label={t.contact.tag} title={lang === 'en' ? 'Plan your' : t.contact.title} accent={lang === 'en' ? 'stay.' : t.contact.highlight}>
+        <p>{t.contact.desc}</p>
+      </PageIntro>
+      <section className="shell contact-layout">
+        <aside className="contact-sidebar intro-arrival">
+          <div className="contact-art">
+            <ParallaxPhoto src={`${brandAssets}/olive-and-sea.webp`} alt="" />
+            <small>{copy.artwork}</small>
+          </div>
+          <h2>{t.contactForm.direct}</h2>
+          <ul>
+            {contacts.map(({ Icon, label, text, href }) => (
+              <li key={label}><Icon aria-hidden="true" /><div><p className="eyebrow">{label}</p><a href={href}>{text}</a></div></li>
+            ))}
+          </ul>
+        </aside>
+        <ContactForm key={preferred || 'any'} preferred={preferred} />
+      </section>
+    </>
   );
 }

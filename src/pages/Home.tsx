@@ -1,232 +1,133 @@
-import { motion } from 'motion/react';
-import type { Variants } from 'motion/react';
-import { ArrowDown, ChevronRight, Instagram, Star } from 'lucide-react';
+import { useRef } from 'react';
+import { ArrowDown, ArrowUpRight, Quote } from 'lucide-react';
+import { motion, useReducedMotion, useScroll, useTransform } from 'motion/react';
 import { Link } from 'react-router-dom';
+import { ActionLink, BookingCallout, ParallaxPhoto, Reveal, RoomCard } from '../components/Editorial';
 import { useApp } from '../context/AppContext';
-import { localizedRoom, roomDefinitions } from '../lib/rooms';
-import BrandIcon, { IconSeal } from '../components/BrandIcon';
+import { brandAssets, editorial } from '../lib/editorial';
+import { featuredRooms } from '../lib/rooms';
 
-const fadeUp: Variants = {
-  hidden: { opacity: 0, y: 40 },
-  visible: (i = 0) => ({
-    opacity: 1,
-    y: 0,
-    transition: { duration: 1, delay: i * 0.12, ease: [0.22, 1, 0.36, 1] as const },
-  }),
-};
+type Testimonial = { name: string; text: string; location?: string; date?: string };
 
-export default function Home() {
-  const { t } = useApp();
-  const testimonials = t.testimonialsList || [];
-  const rooms = roomDefinitions.map((room) => localizedRoom(room, t.roomsData));
-
-  const features = [
-    { icon: 'garden' as const, title: t.home.featureNature, desc: t.home.featureNatureDesc },
-    { icon: 'temple' as const, title: t.home.featureHandmade, desc: t.home.featureHandmadeDesc },
-    { icon: 'beach' as const, title: t.home.featureSea, desc: t.home.featureSeaDesc },
-  ];
+function HomeHero() {
+  const { lang, t } = useApp();
+  const copy = editorial(lang);
+  const hero = useRef<HTMLElement>(null);
+  const reduced = useReducedMotion();
+  const { scrollYProgress } = useScroll({ target: hero, offset: ['start start', 'end start'] });
+  const artY = useTransform(scrollYProgress, [0, 1], ['0%', '29%']);
+  const copyY = useTransform(scrollYProgress, [0, 1], [0, 125]);
 
   return (
-    <div className="flex flex-col bg-alabaster text-obsidian overflow-x-hidden">
-      <section className="relative min-h-[94vh] overflow-hidden bg-obsidian text-alabaster">
-        <img
-          src="/Images/Vila Zizel Entry Gate.jpg"
-          alt="Vila Zizel entrance in Analipsi, Messenia"
-          className="absolute inset-0 h-full w-full object-cover opacity-55"
-        />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_28%,rgba(212,175,55,0.24),transparent_32%),linear-gradient(180deg,rgba(43,39,35,0.55),rgba(43,39,35,0.96))]" />
-        <div className="mythic-orb pointer-events-none absolute left-1/2 top-1/2 h-[34rem] w-[34rem] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-60" />
-
-        <div className="relative z-10 mx-auto flex min-h-[94vh] max-w-7xl flex-col justify-center px-6 pt-28 pb-20 text-center">
-          <motion.div initial="hidden" animate="visible" variants={fadeUp} custom={0} className="mx-auto mb-8 flex items-center gap-4">
-            <span className="h-px w-12 bg-divine/70" />
-            <span className="overline">{t.home.heroBadge}</span>
-            <span className="h-px w-12 bg-divine/70" />
-          </motion.div>
-
-          <motion.div initial="hidden" animate="visible" variants={fadeUp} custom={1} className="mb-7 flex justify-center">
-            <IconSeal name="monogram" className="h-16 w-16" />
-          </motion.div>
-
-          <motion.h1 initial="hidden" animate="visible" variants={fadeUp} custom={1.5} className="mx-auto max-w-6xl font-serif text-6xl leading-[0.92] md:text-8xl lg:text-9xl">
-            Vila Zizel
-            <span className="block pt-4 text-3xl italic text-divine md:text-5xl">
-              {t.hero.title} {t.hero.subtitle}
-            </span>
-          </motion.h1>
-
-          <motion.p initial="hidden" animate="visible" variants={fadeUp} custom={2} className="mx-auto mt-8 max-w-2xl text-base leading-8 text-alabaster/78 md:text-lg">
-            {t.hero.desc}
-          </motion.p>
-
-          <motion.div initial="hidden" animate="visible" variants={fadeUp} custom={3} className="mt-10 flex flex-wrap justify-center gap-4">
-            <Link to="/accommodation" className="summon-button">
-              {t.hero.explore}
-              <ChevronRight className="h-4 w-4" />
-            </Link>
-            <Link to="/contact" className="summon-button bg-alabaster text-obsidian hover:bg-alabaster">
-              {t.home.ctaBook}
-            </Link>
-          </motion.div>
-
-          <motion.div initial="hidden" animate="visible" variants={fadeUp} custom={4} className="mx-auto mt-16 grid w-full max-w-3xl grid-cols-3 border-y border-divine/20">
-            {[
-              { val: '500+', label: t.home.statsGuests },
-              { val: '4.9', label: t.home.statsAward },
-              { val: '6+', label: t.home.statsYears },
-            ].map((item) => (
-              <div key={item.label} className="px-4 py-6">
-                <p className="font-mythic text-3xl text-divine md:text-4xl">{item.val}</p>
-                <p className="mt-2 text-[10px] uppercase tracking-[0.28em] text-alabaster/54">{item.label}</p>
-              </div>
-            ))}
-          </motion.div>
-        </div>
-
-        <motion.div animate={{ y: [0, 8, 0] }} transition={{ repeat: Infinity, duration: 2.4 }} className="absolute bottom-8 left-1/2 z-10 flex -translate-x-1/2 flex-col items-center gap-2 text-alabaster/45">
-          <span className="font-mythic text-[9px] uppercase tracking-[0.32em]">{t.home.scrollDiscover}</span>
-          <ArrowDown className="h-4 w-4" />
+    <section className="home-hero" ref={hero} aria-labelledby="home-title">
+      <motion.div className="hero-art-plane" style={{ y: reduced ? 0 : artY }}>
+        <picture>
+          <source media="(max-width: 650px)" srcSet={`${brandAssets}/ionic-capital-mobile.webp`} />
+          <img src={`${brandAssets}/ionic-capital.webp`} alt="" fetchPriority="high" width="1536" height="1024" />
+        </picture>
+      </motion.div>
+      <div className="hero-scrim" />
+      <div className="shell hero-inner">
+        <motion.div className="hero-copy" style={{ y: reduced ? 0 : copyY }}>
+          <p className="eyebrow hero-place hero-enter">{t.home.heroBadge}</p>
+          <h1 className="display" id="home-title">
+            <span className="hero-title-line"><span className="hero-enter">{copy.hero[0]}</span></span>
+            <span className="hero-title-line"><em className="hero-enter">{copy.hero[1]}</em></span>
+          </h1>
+          <div className="hero-enter hero-summary">
+            <p>{copy.heroIntro}</p>
+            <ActionLink to="/accommodation" variant="stone">{copy.explore}</ActionLink>
+          </div>
         </motion.div>
-      </section>
+        <div className="hero-foot">
+          <small>{copy.artwork}</small>
+          <a className="hero-scroll" href="#the-stays" aria-label={t.home.scrollDiscover}><ArrowDown aria-hidden="true" /></a>
+        </div>
+      </div>
+    </section>
+  );
+}
 
-      <div className="meander-divider mx-6 my-10 md:mx-16" />
+export default function Home() {
+  const { lang, t } = useApp();
+  const copy = editorial(lang);
+  const testimonials: Testimonial[] = t.testimonialsList || [];
 
-      <section className="section-shell">
-        <div className="mx-auto grid max-w-7xl gap-16 lg:grid-cols-[0.9fr_1.1fr] lg:items-end">
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
-            <span className="overline">{t.home.featuresTitle}</span>
-            <h2 className="mt-5 font-serif text-5xl leading-tight md:text-7xl">
-              {t.about.title} <span className="italic text-laurel">{t.about.highlight}</span>
-            </h2>
-          </motion.div>
-
-          <div className="grid gap-5 md:grid-cols-3">
-            {features.map((feature, index) => (
-              <motion.article
-                key={feature.title}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-                custom={index}
-                variants={fadeUp}
-                className="border border-obsidian/10 bg-marble-shadow/45 p-7 transition-all duration-700 hover:-translate-y-2 hover:border-divine/50 hover:bg-alabaster hover:shadow-divine"
-              >
-                <IconSeal name={feature.icon} className="mb-8 h-14 w-14" />
-                <h3 className="font-mythic text-sm uppercase tracking-[0.24em]">{feature.title}</h3>
-                <p className="mt-4 text-sm leading-7 text-obsidian/68">{feature.desc}</p>
-              </motion.article>
-            ))}
+  return (
+    <>
+      <HomeHero />
+      <section className="section-space shell" id="the-stays" aria-labelledby="collection-title">
+        <Reveal className="section-lead">
+          <div>
+            <p className="eyebrow">{t.rooms.tag}</p>
+            <h2 id="collection-title" className="display">{copy.collection[0]} <em>{copy.collection[1]}</em></h2>
           </div>
+          <div>
+            <p>{copy.collectionIntro}</p>
+            <ActionLink to="/accommodation" variant="text">{copy.explore}</ActionLink>
+          </div>
+        </Reveal>
+        <div className="stay-grid">
+          {featuredRooms.map((definition, index) => <RoomCard key={definition.slug} definition={definition} index={index} />)}
         </div>
       </section>
 
-      <section className="section-shell bg-obsidian text-alabaster">
-        <div className="mx-auto max-w-7xl">
-          <div className="mb-16 text-center">
-            <span className="overline">{t.rooms.tag}</span>
-            <h2 className="mt-5 font-serif text-5xl leading-tight md:text-7xl">
-              {t.rooms.title} <span className="italic text-divine">{t.rooms.highlight}</span>
-            </h2>
-            <p className="mx-auto mt-6 max-w-xl font-mythic text-[10px] uppercase tracking-[0.28em] text-alabaster/52">{t.home.roomsTagline}</p>
-          </div>
+      <section className="garden-chapter" aria-labelledby="garden-chapter-title">
+        <div className="chapter-media">
+          <ParallaxPhoto src={`${brandAssets}/olive-and-sea.webp`} alt="" />
+          <small>{copy.artwork}</small>
+        </div>
+        <Reveal className="chapter-copy">
+          <img src={`${brandAssets}/ionic-olive-mark-reversed.svg`} width="64" height="72" alt="" />
+          <p className="eyebrow">{t.about.tag}</p>
+          <h2 id="garden-chapter-title" className="display">{copy.garden[0]} <em>{copy.garden[1]}</em></h2>
+          <p>{copy.gardenIntro}</p>
+          <ActionLink to="/about" variant="outline">{copy.gardenLink}</ActionLink>
+        </Reveal>
+      </section>
 
-          <div className="grid gap-7 md:grid-cols-2 xl:grid-cols-3">
-            {rooms.map((room, index) => (
-              <motion.div key={room.slug} initial="hidden" whileInView="visible" viewport={{ once: true }} custom={index % 3} variants={fadeUp}>
-                <Link to={`/rooms/${room.slug}`} className="temple-card temple-card-hover group relative block h-[470px] overflow-hidden">
-                  <img
-                    src={room.image}
-                    alt={room.name}
-                    className="absolute inset-0 h-full w-full object-cover opacity-80 transition-transform duration-[1200ms] group-hover:scale-[1.08]"
-                    onError={(event) => {
-                      event.currentTarget.src = room.fallbackImage;
-                    }}
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-obsidian via-obsidian/42 to-transparent" />
-                  <div className="absolute left-7 right-7 top-8 flex items-center justify-between">
-                    <span className="font-mythic text-[10px] uppercase tracking-[0.3em] text-divine">{room.price}</span>
-                    <IconSeal name={room.icon} className="h-12 w-12 bg-obsidian/45 backdrop-blur-sm" />
-                  </div>
-                  <div className="absolute bottom-8 left-7 right-7">
-                    <p className="font-mythic text-[10px] uppercase tracking-[0.34em] text-divine/80">{room.greekName}</p>
-                    <h3 className="mt-3 font-serif text-3xl italic text-alabaster">{room.name}</h3>
-                    <p className="mt-4 line-clamp-3 text-sm leading-7 text-alabaster/68">{room.desc}</p>
-                    <div className="mt-6 flex items-center gap-2 font-mythic text-[10px] uppercase tracking-[0.26em] text-divine opacity-70 transition-opacity group-hover:opacity-100">
-                      {t.rooms.learnMore}
-                      <ChevronRight className="h-3.5 w-3.5" />
-                    </div>
-                  </div>
-                </Link>
-              </motion.div>
-            ))}
-          </div>
+      <section className="section-space shell overview">
+        <Reveal>
+          <p className="eyebrow">{t.home.heroBadge}</p>
+          <h2 className="display">{t.about.reachTitle} <em>Messenia.</em></h2>
+          <ActionLink to="/about#location" variant="text">{copy.directions}</ActionLink>
+        </Reveal>
+        <div className="overview-facts">
+          {[
+            [t.home.featureNature, t.home.featureNatureDesc],
+            [t.home.featureHandmade, t.home.featureHandmadeDesc],
+            [t.home.featureSea, t.about.reachBeachDesc],
+          ].map(([title, description], index) => (
+            <Reveal key={title} delay={index * 0.1} className="overview-fact">
+              <h3>{title}</h3><p>{description}</p>
+            </Reveal>
+          ))}
         </div>
       </section>
 
-      <section className="section-shell overflow-hidden">
-        <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.34fr_0.66fr] lg:items-center">
-          <div className="max-w-md">
-            <span className="overline">{t.testimonials.tag}</span>
-            <h2 className="mt-5 font-serif text-5xl leading-tight md:text-6xl">
-              {t.testimonials.title} <span className="italic text-laurel">{t.testimonials.highlight}</span>
-            </h2>
-            <p className="mt-6 text-sm leading-7 text-obsidian/62">
-              Recent guest notes about the quiet location, clean apartments, responsive hosting, and easy beach access.
-            </p>
-          </div>
-          <div className="review-marquee -mr-6 md:-mr-12 lg:mr-0">
-            <div className="review-marquee-track gap-5 py-3">
-              {[...testimonials, ...testimonials].map((item: any, index: number) => {
-                const rating = item.rating || 5;
-                return (
-                  <details
-                    key={`${item.name}-${index}`}
-                    className="review-card group border border-obsidian/10 bg-marble-shadow/45 p-7 transition-all duration-500 open:bg-alabaster hover:-translate-y-1 hover:border-divine/45 hover:shadow-divine"
-                  >
-                    <summary className="cursor-pointer list-none">
-                      <div className="mb-5 flex gap-1 text-divine">
-                        {[...Array(5)].map((_, star) => (
-                          <Star key={star} className={`h-3.5 w-3.5 ${star < rating ? 'fill-current' : 'opacity-25'}`} />
-                        ))}
-                      </div>
-                      <p className="line-clamp-5 min-h-[8.75rem] text-sm italic leading-7 text-obsidian/72">"{item.text}"</p>
-                      <div className="mt-6 border-t border-divine/20 pt-5">
-                        <p className="font-mythic text-[10px] uppercase tracking-[0.28em] text-obsidian">{item.name}</p>
-                        <p className="mt-2 text-xs text-obsidian/52">{[item.location, item.date].filter(Boolean).join(' · ')}</p>
-                      </div>
-                    </summary>
-                    <p className="mt-5 border-t border-divine/20 pt-5 text-sm italic leading-7 text-obsidian/72">"{item.text}"</p>
+      {testimonials.length > 0 && (
+        <section className="reviews section-space">
+          <div className="shell">
+            <Reveal className="section-lead">
+              <div><p className="eyebrow">{t.testimonials.tag}</p><h2 className="display">{t.testimonials.title} <em>{t.testimonials.highlight}</em></h2></div>
+              <a className="action action--text" href="#guest-notes">{t.home.reviews}<ArrowUpRight aria-hidden="true" /></a>
+            </Reveal>
+            <div className="review-grid" id="guest-notes">
+              {testimonials.map((review, index) => (
+                <Reveal key={`${review.name}-${review.date}`} delay={(index % 3) * 0.07}>
+                  <details className="review">
+                    <summary><Quote aria-hidden="true" /><span>{review.name}</span><span>{review.date}</span></summary>
+                    <blockquote>{review.text}</blockquote>
+                    {review.location && <p>{review.location}</p>}
                   </details>
-                );
-              })}
+                </Reveal>
+              ))}
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
-      <section className="section-shell relative overflow-hidden bg-obsidian text-center text-alabaster">
-        <img src="/Images/Garden Full View.jpg" alt="Vila Zizel garden and outdoor setting" className="absolute inset-0 h-full w-full object-cover opacity-35" />
-        <div className="absolute inset-0 bg-obsidian/76" />
-        <div className="relative z-10 mx-auto max-w-3xl">
-          <span className="overline">{t.booking.tag}</span>
-          <h2 className="mt-5 font-serif text-5xl leading-tight md:text-7xl">{t.home.ctaTitle}</h2>
-          <p className="mx-auto mt-6 max-w-xl text-alabaster/68">{t.home.ctaDesc}</p>
-          <div className="mt-10 flex flex-wrap justify-center gap-4">
-            <Link to="/contact" className="summon-button bg-alabaster text-obsidian hover:bg-alabaster">{t.home.ctaBook}</Link>
-            <Link to="/about" className="summon-button">{t.home.themeLink}</Link>
-          </div>
-        </div>
-      </section>
-
-      <section className="section-shell bg-alabaster">
-        <div className="mx-auto max-w-6xl text-center">
-          <Instagram className="mx-auto mb-5 h-9 w-9 text-divine" />
-          <h2 className="font-serif text-4xl italic">{t.home.socialTitle}</h2>
-          <a href="https://instagram.com/vilazizel" target="_blank" rel="noopener noreferrer" className="summon-button mt-10">
-            @vilazizel
-          </a>
-        </div>
-      </section>
-    </div>
+      <BookingCallout />
+    </>
   );
 }
