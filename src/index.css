@@ -263,6 +263,7 @@ main:focus { outline: none; }
 .location-map > a svg { width: 17px; height: 17px; }
 .location-weather { display: flex; flex-wrap: wrap; align-items: center; gap: 7px 9px; color: var(--leaf); font-size: 13px; margin-top: 13px; }
 .location-weather svg { width: 17px; height: 17px; }
+.location-weather a { text-decoration: underline; text-underline-offset: 3px; }
 
 .contact-layout { display: grid; grid-template-columns: minmax(0,.74fr) minmax(0,1.26fr); gap: clamp(24px, 5.2vw, 76px); align-items: start; padding: 8px 0 clamp(70px,8vw,115px); }
 .contact-art { min-height: 260px; }

@@ -1,6 +1,7 @@
 import type { RoomKey } from './rooms';
 
 export const brandAssets = '/design-assets/ionic-olive';
+export const weatherAttribution = 'https://docs.api.met.no/doc/License.html';
 export const directionsUrl = 'https://www.google.com/maps/dir/?api=1&destination=37.008445596599785%2C21.969529643030935';
 export const mapUrl = 'https://www.google.com/maps?q=37.008445596599785,21.969529643030935&output=embed';
 export const propertyContact = {

@@ -1,7 +1,7 @@
 import { Car, MapPin, Plane, Sun, Trees } from 'lucide-react';
 import { ActionLink, BookingCallout, ParallaxPhoto, Reveal } from '../components/Editorial';
 import { useApp } from '../context/AppContext';
-import { directionsUrl, editorial, mapUrl } from '../lib/editorial';
+import { directionsUrl, editorial, mapUrl, weatherAttribution } from '../lib/editorial';
 
 const gemPhotos = ['/Images/Garden Area.jpg', '/Images/Analipsi Beach/2.jpg', '/Images/Analipsi Beach/7.jpg'];
 
@@ -80,8 +80,9 @@ export default function About() {
             {weather && (
               <div className="location-weather">
                 <Sun aria-hidden="true" /> <span>{t.weather.title} · <strong>{Math.round(weather.temperature)} °C</strong></span>
-                {weather.humidity !== null && <span>{t.weather.humidity} {weather.humidity}%</span>}
-                {weather.windSpeed !== null && <span>{t.weather.wind} {Math.round(weather.windSpeed)} km/h</span>}
+                <span>{t.weather.humidity} {Math.round(weather.humidity)}%</span>
+                <span>{t.weather.wind} {Math.round(weather.windSpeed)} km/h</span>
+                <a href={weatherAttribution} target="_blank" rel="noreferrer">MET Norway</a>
               </div>
             )}
           </Reveal>

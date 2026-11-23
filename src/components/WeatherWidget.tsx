@@ -1,40 +1,21 @@
 import { useEffect, useId, useRef, useState } from 'react';
 import { ChevronDown, Cloud, CloudFog, CloudLightning, CloudMoon, CloudRain, CloudSnow, CloudSun, Droplets, Moon, Sun, Wind } from 'lucide-react';
 import { useApp } from '../context/AppContext';
+import { weatherAttribution } from '../lib/editorial';
 
 type PanelState = 'closed' | 'hover' | 'pinned' | 'dismissed';
 
-function weatherIcon(code: number | null, isDay: boolean) {
-  switch (code) {
-    case 0: return isDay ? Sun : Moon;
-    case 1:
-    case 2: return isDay ? CloudSun : CloudMoon;
-    case 45:
-    case 48: return CloudFog;
-    case 51:
-    case 53:
-    case 55:
-    case 56:
-    case 57:
-    case 61:
-    case 63:
-    case 65:
-    case 66:
-    case 67:
-    case 80:
-    case 81:
-    case 82: return CloudRain;
-    case 71:
-    case 73:
-    case 75:
-    case 77:
-    case 85:
-    case 86: return CloudSnow;
-    case 95:
-    case 96:
-    case 99: return CloudLightning;
-    default: return Cloud;
-  }
+function weatherIcon(symbol: string | null) {
+  if (!symbol) return Cloud;
+  const [condition, light] = symbol.split('_');
+  const isDay = light !== 'night';
+  if (condition === 'clearsky') return isDay ? Sun : Moon;
+  if (condition === 'fair' || condition === 'partlycloudy') return isDay ? CloudSun : CloudMoon;
+  if (condition === 'fog') return CloudFog;
+  if (condition.includes('thunder')) return CloudLightning;
+  if (condition.includes('snow') || condition.includes('sleet')) return CloudSnow;
+  if (condition.includes('rain')) return CloudRain;
+  return Cloud;
 }
 
 export default function WeatherWidget() {
@@ -72,7 +53,7 @@ export default function WeatherWidget() {
 
   const format = new Intl.NumberFormat(lang, { maximumFractionDigits: 0 });
   const temperature = `${format.format(weather.temperature)} °C`;
-  const Icon = weatherIcon(weather.code, weather.isDay);
+  const Icon = weatherIcon(weather.symbol);
 
   return (
     <div
@@ -105,14 +86,10 @@ export default function WeatherWidget() {
       <section className="weather-panel" id={panelId} aria-label={t.weather.title} hidden={!expanded}>
         <p className="eyebrow weather-panel-title">{t.weather.title}</p>
         <dl>
-          {weather.humidity !== null && (
-            <div><dt><Droplets aria-hidden="true" />{t.weather.humidity}</dt><dd>{format.format(weather.humidity)}%</dd></div>
-          )}
-          {weather.windSpeed !== null && (
-            <div><dt><Wind aria-hidden="true" />{t.weather.wind}</dt><dd>{format.format(weather.windSpeed)} km/h</dd></div>
-          )}
+          <div><dt><Droplets aria-hidden="true" />{t.weather.humidity}</dt><dd>{format.format(weather.humidity)}%</dd></div>
+          <div><dt><Wind aria-hidden="true" />{t.weather.wind}</dt><dd>{format.format(weather.windSpeed)} km/h</dd></div>
         </dl>
-        <a href="https://open-meteo.com/" target="_blank" rel="noreferrer">Open-Meteo</a>
+        <a href={weatherAttribution} target="_blank" rel="noreferrer">MET Norway</a>
       </section>
     </div>
   );

@@ -921,16 +921,16 @@ export const translations: any = {
 
 type WeatherReading = {
   temperature: number;
-  humidity: number | null;
-  windSpeed: number | null;
-  code: number | null;
-  isDay: boolean;
+  humidity: number;
+  windSpeed: number;
+  symbol: string | null;
 };
 
-const currentWeatherUrl = 'https://api.open-meteo.com/v1/forecast?latitude=37.008&longitude=21.969&current=temperature_2m,relative_humidity_2m,wind_speed_10m,weather_code,is_day';
-
-function measurement(value: unknown) {
-  return typeof value === 'number' && Number.isFinite(value) ? value : null;
+function isWeatherReading(value: unknown): value is WeatherReading {
+  if (!value || typeof value !== 'object') return false;
+  const { temperature, humidity, windSpeed, symbol } = value as Partial<WeatherReading>;
+  return Number.isFinite(temperature) && Number.isFinite(humidity) && Number.isFinite(windSpeed)
+    && (symbol === null || typeof symbol === 'string');
 }
 
 interface AppContextType {
@@ -967,18 +967,10 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     const controller = new AbortController();
     const fetchWeather = async () => {
       try {
-        const response = await fetch(currentWeatherUrl, { signal: controller.signal });
+        const response = await fetch('/api/weather', { signal: controller.signal });
         if (!response.ok) return;
-        const { current } = await response.json() as { current?: Record<string, unknown> };
-        const temperature = measurement(current?.temperature_2m);
-        if (temperature === null || controller.signal.aborted) return;
-        setWeather({
-          temperature,
-          humidity: measurement(current?.relative_humidity_2m),
-          windSpeed: measurement(current?.wind_speed_10m),
-          code: measurement(current?.weather_code),
-          isDay: current?.is_day !== 0,
-        });
+        const reading: unknown = await response.json();
+        if (isWeatherReading(reading) && !controller.signal.aborted) setWeather(reading);
       } catch {
         // Weather is optional when the forecast service is unavailable.
       }
@@ -988,7 +980,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   }, []);
 
   return (
-    <AppContext.Provider value={{ lang, setLang, t, weather }}>
+    <AppContext.Provider value={{ lang, setLang, t, weather: isWeatherReading(weather) ? weather : null }}>
       {children}
     </AppContext.Provider>
   );
