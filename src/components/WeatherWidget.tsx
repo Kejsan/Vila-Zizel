@@ -1,65 +1,119 @@
-import { motion, AnimatePresence } from 'motion/react';
-import { Sun, CloudSun, Cloud, CloudRain, CloudLightning, Droplets, Wind } from 'lucide-react';
+import { useEffect, useId, useRef, useState } from 'react';
+import { ChevronDown, Cloud, CloudFog, CloudLightning, CloudMoon, CloudRain, CloudSnow, CloudSun, Droplets, Moon, Sun, Wind } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 
+type PanelState = 'closed' | 'hover' | 'pinned' | 'dismissed';
+
+function weatherIcon(code: number | null, isDay: boolean) {
+  switch (code) {
+    case 0: return isDay ? Sun : Moon;
+    case 1:
+    case 2: return isDay ? CloudSun : CloudMoon;
+    case 45:
+    case 48: return CloudFog;
+    case 51:
+    case 53:
+    case 55:
+    case 56:
+    case 57:
+    case 61:
+    case 63:
+    case 65:
+    case 66:
+    case 67:
+    case 80:
+    case 81:
+    case 82: return CloudRain;
+    case 71:
+    case 73:
+    case 75:
+    case 77:
+    case 85:
+    case 86: return CloudSnow;
+    case 95:
+    case 96:
+    case 99: return CloudLightning;
+    default: return Cloud;
+  }
+}
+
 export default function WeatherWidget() {
-  const { weather, t } = useApp();
+  const { lang, weather, t } = useApp();
+  const [panel, setPanel] = useState<PanelState>('closed');
+  const root = useRef<HTMLDivElement>(null);
+  const trigger = useRef<HTMLButtonElement>(null);
+  const panelId = useId();
+  const expanded = panel === 'hover' || panel === 'pinned';
+
+  useEffect(() => {
+    if (!expanded) return;
+
+    function dismissOutside(event: PointerEvent) {
+      if (event.target instanceof Node && !root.current?.contains(event.target)) {
+        setPanel('closed');
+      }
+    }
+
+    function dismissOnEscape(event: KeyboardEvent) {
+      if (event.key !== 'Escape') return;
+      if (root.current?.contains(document.activeElement)) trigger.current?.focus();
+      setPanel('dismissed');
+    }
+
+    document.addEventListener('pointerdown', dismissOutside);
+    document.addEventListener('keydown', dismissOnEscape);
+    return () => {
+      document.removeEventListener('pointerdown', dismissOutside);
+      document.removeEventListener('keydown', dismissOnEscape);
+    };
+  }, [expanded]);
+
+  if (!weather) return null;
+
+  const format = new Intl.NumberFormat(lang, { maximumFractionDigits: 0 });
+  const temperature = `${format.format(weather.temperature)} °C`;
+  const Icon = weatherIcon(weather.code, weather.isDay);
 
   return (
-    <AnimatePresence>
-      {weather && (
-        <motion.div 
-          initial={{ opacity: 0, x: 50 }}
-          animate={{ opacity: 1, x: 0 }}
-          className="fixed right-10 top-28 z-[140] hidden flex-col gap-2 pointer-events-auto sm:flex"
-        >
-          <motion.div 
-            whileHover={{ scale: 1.05 }}
-            className="bg-alabaster/85 backdrop-blur-xl border border-divine/20 p-3 sm:p-5 rounded-[2rem] shadow-glass flex flex-col gap-3 min-w-[112px] sm:min-w-[180px]"
-          >
-            <div className="flex items-center justify-between gap-3">
-              <div className="flex flex-col">
-                <span className="font-mythic text-[7px] sm:text-[8px] uppercase tracking-widest text-laurel opacity-80 leading-none mb-1">
-                  {t.weather.title}
-                </span>
-                <div className="flex items-baseline gap-1">
-                  <span className="text-xl sm:text-3xl font-serif text-obsidian leading-none">
-                    {Math.round(weather.current_weather.temp_c || weather.current_weather.temperature)}
-                  </span>
-                  <span className="text-base sm:text-xl font-serif text-divine">°C</span>
-                </div>
-              </div>
-              <div className="w-10 h-10 sm:w-14 sm:h-14 bg-divine/10 rounded-2xl sm:rounded-3xl flex items-center justify-center">
-                {(() => {
-                  const code = weather.current_weather.weathercode;
-                  if (code <= 1) return <Sun className="w-5 h-5 sm:w-7 sm:h-7 text-divine" />;
-                  if (code <= 3) return <CloudSun className="w-5 h-5 sm:w-7 sm:h-7 text-laurel" />;
-                  if (code <= 48) return <Cloud className="w-5 h-5 sm:w-7 sm:h-7 text-laurel" />;
-                  if (code <= 67) return <CloudRain className="w-5 h-5 sm:w-7 sm:h-7 text-laurel" />;
-                  return <CloudLightning className="w-5 h-5 sm:w-7 sm:h-7 text-divine" />;
-                })()}
-              </div>
-            </div>
-            
-            <div className="hidden sm:flex flex-col gap-2 pt-3 border-t border-obsidian/10">
-              <div className="flex items-center justify-between text-[7px] font-bold uppercase tracking-widest">
-                <div className="flex items-center gap-1.5 text-laurel">
-                  <Droplets className="w-2.5 h-2.5" />
-                  <span>{t.weather.humidity}</span>
-                </div>
-                <span className="text-obsidian">{weather.relative_humidity_2m || 65}%</span>
-              </div>
-              <div className="flex items-center justify-between text-[7px] font-bold uppercase tracking-widest">
-                <div className="flex items-center gap-1.5 text-laurel">
-                  <Wind className="w-2.5 h-2.5" />
-                  <span>{t.weather.wind}</span>
-                </div>
-                <span className="text-obsidian">{Math.round(weather.current_weather.windspeed || 5)} km/h</span>
-              </div>
-            </div>
-          </motion.div>
-        </motion.div>
-      )}
-    </AnimatePresence>
+    <div
+      ref={root}
+      className="weather-widget"
+      onPointerEnter={(event) => {
+        if (event.pointerType === 'mouse') setPanel((state) => state === 'closed' ? 'hover' : state);
+      }}
+      onPointerLeave={(event) => {
+        if (event.pointerType === 'mouse') setPanel((state) => state === 'pinned' ? state : 'closed');
+      }}
+    >
+      <button
+        ref={trigger}
+        type="button"
+        className="weather-trigger"
+        aria-label={`${t.weather.title}, ${temperature}`}
+        aria-expanded={expanded}
+        aria-controls={panelId}
+        onClick={() => setPanel((state) => state === 'pinned' ? 'dismissed' : 'pinned')}
+      >
+        <span className="weather-symbol"><Icon aria-hidden="true" /></span>
+        <span className="weather-trigger-copy">
+          <span className="eyebrow">{t.weather.title}</span>
+          <span className="weather-temperature">{temperature}</span>
+        </span>
+        <ChevronDown className="weather-chevron" aria-hidden="true" />
+      </button>
+
+      <section className="weather-panel" id={panelId} aria-label={t.weather.title} hidden={!expanded}>
+        <p className="eyebrow weather-panel-title">{t.weather.title}</p>
+        <dl>
+          {weather.humidity !== null && (
+            <div><dt><Droplets aria-hidden="true" />{t.weather.humidity}</dt><dd>{format.format(weather.humidity)}%</dd></div>
+          )}
+          {weather.windSpeed !== null && (
+            <div><dt><Wind aria-hidden="true" />{t.weather.wind}</dt><dd>{format.format(weather.windSpeed)} km/h</dd></div>
+          )}
+        </dl>
+        <a href="https://open-meteo.com/" target="_blank" rel="noreferrer">Open-Meteo</a>
+      </section>
+    </div>
   );
 }

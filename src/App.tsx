@@ -3,6 +3,7 @@ import { useEffect, useRef } from 'react';
 import { MotionConfig, useReducedMotion } from 'motion/react';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
+import WeatherWidget from './components/WeatherWidget';
 import SEO from './components/SEO';
 import Home from './pages/Home';
 import About from './pages/About';
@@ -56,6 +57,7 @@ function Site() {
       <SEO />
       <a className="skip-link" href="#main-content">{copy.skip}</a>
       <Navbar />
+      <WeatherWidget key={pathname} />
       <main id="main-content" tabIndex={-1}>
         <Routes>
           <Route path="/" element={<Home />} />

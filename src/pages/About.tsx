@@ -11,9 +11,6 @@ export default function About() {
   const { lang, t, weather } = useApp();
   const copy = editorial(lang);
   const gems: LocalGem[] = t.about.localGems || [];
-  const temperature = weather?.current_weather?.temperature;
-  const humidity = weather?.relative_humidity_2m?.[0] ?? weather?.current?.relative_humidity_2m;
-  const wind = weather?.current_weather?.windspeed;
 
   return (
     <>
@@ -80,11 +77,11 @@ export default function About() {
               ))}
             </dl>
             <a href={directionsUrl} className="action action--dark">{copy.directions}<MapPin aria-hidden="true" /></a>
-            {Number.isFinite(temperature) && (
+            {weather && (
               <div className="location-weather">
-                <Sun aria-hidden="true" /> <span>{t.weather.title} · <strong>{Math.round(temperature)} °C</strong></span>
-                {Number.isFinite(humidity) && <span>{t.weather.humidity} {humidity}%</span>}
-                {Number.isFinite(wind) && <span>{t.weather.wind} {Math.round(wind)} km/h</span>}
+                <Sun aria-hidden="true" /> <span>{t.weather.title} · <strong>{Math.round(weather.temperature)} °C</strong></span>
+                {weather.humidity !== null && <span>{t.weather.humidity} {weather.humidity}%</span>}
+                {weather.windSpeed !== null && <span>{t.weather.wind} {Math.round(weather.windSpeed)} km/h</span>}
               </div>
             )}
           </Reveal>

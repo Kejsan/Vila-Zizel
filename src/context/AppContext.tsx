@@ -919,11 +919,25 @@ export const translations: any = {
   }
 };
 
+type WeatherReading = {
+  temperature: number;
+  humidity: number | null;
+  windSpeed: number | null;
+  code: number | null;
+  isDay: boolean;
+};
+
+const currentWeatherUrl = 'https://api.open-meteo.com/v1/forecast?latitude=37.008&longitude=21.969&current=temperature_2m,relative_humidity_2m,wind_speed_10m,weather_code,is_day';
+
+function measurement(value: unknown) {
+  return typeof value === 'number' && Number.isFinite(value) ? value : null;
+}
+
 interface AppContextType {
   lang: string;
   setLang: (lang: string) => void;
   t: any;
-  weather: any;
+  weather: WeatherReading | null;
 }
 
 const AppContext = createContext<AppContextType | undefined>(undefined);
@@ -937,7 +951,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       return 'en';
     }
   });
-  const [weather, setWeather] = useState<any>(null);
+  const [weather, setWeather] = useState<WeatherReading | null>(null);
 
   const t = translations[lang] || translations.en;
 
@@ -950,16 +964,27 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   }, [lang]);
 
   useEffect(() => {
+    const controller = new AbortController();
     const fetchWeather = async () => {
       try {
-        const res = await fetch('https://api.open-meteo.com/v1/forecast?latitude=37.008&longitude=21.969&current_weather=true&relative_humidity_2m=true');
-        const data = await res.json();
-        setWeather(data);
-      } catch (e) {
-        console.error("Weather fetch failed", e);
+        const response = await fetch(currentWeatherUrl, { signal: controller.signal });
+        if (!response.ok) return;
+        const { current } = await response.json() as { current?: Record<string, unknown> };
+        const temperature = measurement(current?.temperature_2m);
+        if (temperature === null || controller.signal.aborted) return;
+        setWeather({
+          temperature,
+          humidity: measurement(current?.relative_humidity_2m),
+          windSpeed: measurement(current?.wind_speed_10m),
+          code: measurement(current?.weather_code),
+          isDay: current?.is_day !== 0,
+        });
+      } catch {
+        // Weather is optional when the forecast service is unavailable.
       }
     };
-    fetchWeather();
+    void fetchWeather();
+    return () => controller.abort();
   }, []);
 
   return (

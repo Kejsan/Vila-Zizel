@@ -2,7 +2,17 @@ import { ArrowUpRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useApp } from '../context/AppContext';
 import { brandAssets, directionsUrl, editorial, propertyContact } from '../lib/editorial';
-import { localizedRoom, roomDefinitions } from '../lib/rooms';
+import { localizedRoom, roomDefinitions, type RoomKey } from '../lib/rooms';
+
+const olympianOrder: Record<RoomKey, number> = {
+  zeus: 1,
+  hera: 2,
+  poseidonHera: 3,
+  athina: 4,
+  artemis: 5,
+  aphrodite: 6,
+};
+const footerStays = [...roomDefinitions].sort((first, second) => olympianOrder[first.key] - olympianOrder[second.key]);
 
 export default function Footer() {
   const { lang, t } = useApp();
@@ -26,7 +36,7 @@ export default function Footer() {
         </div>
         <div>
           <h2 className="eyebrow">{t.footer.stay}</h2>
-          <ul>{roomDefinitions.map((room) => (
+          <ul>{footerStays.map((room) => (
             <li key={room.slug}><Link to={`/rooms/${room.slug}`}>{localizedRoom(room, t.roomsData).name}</Link></li>
           ))}</ul>
         </div>
