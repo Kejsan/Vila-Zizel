@@ -100,7 +100,7 @@ main:focus { outline: none; }
 .hero-summary > p { max-width: 34ch; font-size: 16px; color: #f2e9db; }
 .hero-summary .action { margin-top: 25px; }
 .hero-foot { position: absolute; inset: auto 0 24px; display: flex; align-items: center; justify-content: space-between; }
-.hero-foot small, .chapter-media small, .contact-art small { background: #20241de8; color: var(--stone); padding: 3px 9px; font-size: 11px; }
+.hero-foot small { background: #20241de8; color: var(--stone); padding: 3px 9px; font-size: 11px; }
 .hero-scroll { display: grid; place-items: center; width: 52px; height: 52px; border: 1px solid var(--stone); border-radius: 50%; background: #20241da8; transition: background-color .3s var(--ease), color .3s var(--ease); }
 .hero-scroll svg { width: 21px; height: 21px; }
 .hero-enter { animation: hero-rise .93s var(--ease) both; }
@@ -144,7 +144,6 @@ main:focus { outline: none; }
 .parallax-photo img { position: absolute; inset: -12% 0; height: 124%; width: 100%; object-fit: cover; }
 .chapter-media, .contact-art { position: relative; min-height: 530px; }
 .chapter-media > .parallax-photo, .contact-art > .parallax-photo { position: absolute; inset: 0; min-height: 0; }
-.chapter-media small, .contact-art small { position: absolute; bottom: 13px; left: 13px; }
 .chapter-copy { align-self: center; padding: clamp(48px, 6.8vw, 110px); }
 .chapter-copy .eyebrow { margin: 22px 0 16px; color: var(--pale); }
 .chapter-copy .display { font-size: clamp(52px, 5.9vw, 95px); }

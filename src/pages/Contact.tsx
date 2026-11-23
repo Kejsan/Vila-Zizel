@@ -3,7 +3,7 @@ import { ArrowUpRight, Instagram, Mail, MapPin, Phone } from 'lucide-react';
 import { useSearchParams } from 'react-router-dom';
 import { PageIntro, ParallaxPhoto } from '../components/Editorial';
 import { useApp } from '../context/AppContext';
-import { brandAssets, directionsUrl, editorial, propertyContact } from '../lib/editorial';
+import { directionsUrl, editorial, propertyContact } from '../lib/editorial';
 import { localizedRoom, roomBySlug, roomDefinitions } from '../lib/rooms';
 
 const booking = 'booking-request';
@@ -173,8 +173,7 @@ export default function Contact() {
       <section className="shell contact-layout">
         <aside className="contact-sidebar intro-arrival">
           <div className="contact-art">
-            <ParallaxPhoto src={`${brandAssets}/olive-and-sea.webp`} alt="" />
-            <small>{copy.artwork}</small>
+            <ParallaxPhoto src="/Images/Entry gate.avif" alt="Vila Zizel" />
           </div>
           <h2>{t.contactForm.direct}</h2>
           <ul>

@@ -74,8 +74,7 @@ export default function Home() {
 
       <section className="garden-chapter" aria-labelledby="garden-chapter-title">
         <div className="chapter-media">
-          <ParallaxPhoto src={`${brandAssets}/olive-and-sea.webp`} alt="" />
-          <small>{copy.artwork}</small>
+          <ParallaxPhoto src="/Images/Garden Area.jpg" alt={`Vila Zizel · ${t.home.featureNature}`} />
         </div>
         <Reveal className="chapter-copy">
           <img src={`${brandAssets}/ionic-olive-mark-reversed.svg`} width="64" height="72" alt="" />
