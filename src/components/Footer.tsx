@@ -1,7 +1,9 @@
 import { ArrowUpRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useApp } from '../context/AppContext';
+import { usePrivacy } from '../context/PrivacyContext';
 import { brandAssets, directionsUrl, editorial, propertyContact } from '../lib/editorial';
+import { privacyCopy } from '../lib/privacy';
 import { localizedRoom, roomDefinitions, type RoomKey } from '../lib/rooms';
 
 const olympianOrder: Record<RoomKey, number> = {
@@ -16,6 +18,7 @@ const footerStays = [...roomDefinitions].sort((first, second) => olympianOrder[f
 
 export default function Footer() {
   const { lang, t } = useApp();
+  const { openPreferences } = usePrivacy();
   const copy = editorial(lang);
   return (
     <footer className="site-footer">
@@ -32,6 +35,7 @@ export default function Footer() {
             <li><Link to="/about">{t.nav.about}</Link></li>
             <li><Link to="/contact">{t.nav.contact}</Link></li>
             <li><Link to="/policies">{copy.policies}</Link></li>
+            <li><button type="button" aria-haspopup="dialog" onClick={openPreferences}>{privacyCopy(lang).manage}</button></li>
           </ul>
         </div>
         <div>

@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <meta name="description" content="An interactive concept for Vila Zizel, a garden stay in Analipsi, Messenia.">
+  <title>Vila Zizel · A stay among the myths</title>
+  <link rel="icon" href="identity/ionic-olive-mark.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css">
+  <script src="prototype.js" defer></script>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="masthead" id="top">
+    <div class="nav-inner shell">
+      <a href="#top" aria-label="Vila Zizel, home" class="brand"><img src="identity/vila-zizel-horizontal-reversed.svg" width="186" height="38" alt="Vila Zizel"></a>
+      <nav class="desktop-nav" aria-label="Main navigation">
+        <a href="#stays">The stays</a><a href="#garden">The garden</a><a href="#analipsi">Analipsi</a>
+      </nav>
+      <button class="button button-outline nav-request" data-inquire>Request a stay <span aria-hidden="true">↗</span></button>
+      <button class="menu-trigger" type="button" aria-haspopup="dialog" aria-controls="menu"><span>Menu</span><span class="menu-lines" aria-hidden="true"></span></button>
+    </div>
+  </header>
+  <main id="main">
+    <section class="hero" aria-labelledby="hero-title">
+      <picture>
+        <source media="(max-width: 680px)" srcset="assets/ionic-capital-mobile.webp">
+        <img class="hero-art" src="assets/ionic-capital.webp" alt="" width="1536" height="1024" fetchpriority="high">
+      </picture>
+      <div class="hero-scrim"></div>
+      <div class="hero-content shell">
+        <div class="hero-copy">
+          <p class="eyebrow hero-location"><span aria-hidden="true"></span> Analipsi, Messenia · Greece</p>
+          <h1 id="hero-title">A stay among<br><em>the myths.</em></h1>
+          <p class="hero-intro">Handmade rooms and apartments named for the Greek gods, set in a garden near the sea.</p>
+          <div class="hero-actions">
+            <a href="#stays" class="button button-stone">Explore the stays <span aria-hidden="true">↗</span></a>
+          </div>
+        </div>
+        <div class="hero-foot">
+          <span class="art-credit">Ionic capital &amp; olive · Concept artwork</span>
+          <a href="#stays" aria-label="Scroll to the stays" class="scroll-link"><span aria-hidden="true">↓</span></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="stays shell section-gap" id="stays" aria-labelledby="stays-title">
+      <div class="section-heading reveal">
+        <div><p class="eyebrow">The collection</p><h2 id="stays-title">Six stays, <em>six stories.</em></h2></div>
+        <p>From a room for two to a stay for six, each has its own name, character and place in the garden.</p>
+      </div>
+      <div class="stays-controls">
+        <div class="filters" role="group" aria-label="Filter stays by maximum occupancy">
+          <button type="button" data-filter="all" aria-pressed="true">All stays</button>
+          <button type="button" data-filter="2" aria-pressed="false">Sleeps 2</button>
+          <button type="button" data-filter="3-4" aria-pressed="false">Sleeps 3–4</button>
+          <button type="button" data-filter="6" aria-pressed="false">Sleeps 6</button>
+        </div>
+        <span id="stay-count" class="stay-count" role="status"></span>
+      </div>
+      <div id="room-grid" class="room-grid"></div>
+      <noscript><p>Explore the full collection on the <a href="https://vila-zizel.netlify.app/accommodation">Vila Zizel accommodation page</a>.</p></noscript>
+    </section>
+
+    <section class="chapter" id="garden" aria-labelledby="garden-title">
+      <div class="chapter-photo" aria-hidden="true"><img src="assets/olive-and-sea.webp" width="1536" height="1024" loading="lazy" alt=""></div>
+      <div class="chapter-copy">
+        <div class="chapter-inner reveal">
+          <img class="chapter-mark" src="identity/ionic-olive-mark-reversed.svg" width="63" height="70" loading="lazy" alt="">
+          <p class="eyebrow">The garden &amp; the shore</p>
+          <h2 id="garden-title">The slower side<br> <em>of Greece.</em></h2>
+          <p>Wake to the garden, spend the afternoon at Chrysi Ammos, and come back to your own little corner of Messenia.</p>
+          <a class="text-link" href="#analipsi">Discover Analipsi <span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+      <span class="chapter-credit">Olive &amp; sea · Concept artwork</span>
+    </section>
+
+    <section class="location shell section-gap" id="analipsi" aria-labelledby="location-title">
+      <figure class="estate-photo reveal">
+        <img src="assets/garden.webp" width="1280" height="853" alt="Trees and paths between the garden accommodations at Vila Zizel" loading="lazy">
+        <figcaption>The grounds at Vila Zizel</figcaption>
+      </figure>
+      <div class="location-copy reveal">
+        <p class="eyebrow">Plan your visit</p>
+        <h2 id="location-title">Find us in <em>Analipsi.</em></h2>
+        <p>In Messenia on Greece’s Peloponnese peninsula, the vila sits in 4,000 m² of garden near the sandy shore. Kalamata International Airport is a short drive away.</p>
+        <dl class="travel-facts"><div><dt>On site</dt><dd>Garden and free parking</dd></div><div><dt>Nearby</dt><dd>Chrysi Ammos beach</dd></div></dl>
+        <a class="text-link" href="https://www.google.com/maps/search/?api=1&amp;query=37.0084455966%2C21.9695296430">Get directions <span aria-hidden="true">↗</span></a>
+      </div>
+    </section>
+
+    <section class="closing" aria-labelledby="closing-title">
+      <div class="closing-content reveal">
+        <img src="identity/meander.svg" alt="" width="90" height="20">
+        <h2 id="closing-title">Make it <em>your stay.</em></h2>
+        <p>Share your dates and we’ll get back to you about availability.</p>
+        <button class="button button-dark" data-inquire>Request a stay <span aria-hidden="true">↗</span></button>
+      </div>
+    </section>
+  </main>
+  <footer class="footer">
+    <div class="shell footer-inner">
+      <a class="brand" href="#top"><img src="identity/vila-zizel-horizontal-reversed.svg" width="180" height="37" alt="Vila Zizel, back to top"></a>
+      <span>Analipsi, Messenia · Greece</span>
+      <div class="footer-links"><a href="mailto:hermancoku@gmail.com">Email</a><a href="https://instagram.com/vilazizel">Instagram</a></div>
+    </div>
+  </footer>
+  <div class="mobile-dock"><button class="button button-dark" data-inquire>Request a stay <span aria-hidden="true">↗</span></button></div>
+
+  <dialog class="menu-dialog" id="menu" aria-labelledby="menu-title">
+    <div class="dialog-top"><h2 class="eyebrow" id="menu-title">Vila Zizel</h2><button type="button" class="close" data-close aria-label="Close menu">×</button></div>
+    <nav aria-label="Mobile navigation"><a href="#stays">The stays <span aria-hidden="true">↗</span></a><a href="#garden">The garden <span aria-hidden="true">↗</span></a><a href="#analipsi">Analipsi <span aria-hidden="true">↗</span></a></nav>
+    <button class="button button-dark" data-inquire>Request a stay <span aria-hidden="true">↗</span></button>
+  </dialog>
+
+  <dialog class="room-dialog" id="room" aria-labelledby="room-title">
+    <button type="button" class="close room-close" data-close aria-label="Close stay details" autofocus>×</button>
+    <div class="room-detail-grid">
+      <figure class="gallery">
+        <img id="gallery-photo" width="960" height="720" alt="">
+        <div class="gallery-controls">
+          <button id="gallery-prev" type="button" aria-label="Previous photo">←</button>
+          <figcaption id="gallery-caption" aria-live="polite"></figcaption>
+          <button id="gallery-next" type="button" aria-label="Next photo">→</button>
+        </div>
+      </figure>
+      <div class="room-detail-copy">
+        <img id="room-symbol" width="52" height="52" alt="">
+        <p class="eyebrow" id="room-type"></p><h2 id="room-title"></h2>
+        <p id="room-facts" class="room-facts"></p>
+        <p id="room-description"></p>
+        <p id="room-motif" class="room-motif"></p>
+        <button class="button button-dark" id="room-request" data-inquire>Request this stay <span aria-hidden="true">↗</span></button>
+      </div>
+    </div>
+  </dialog>
+
+  <dialog class="inquiry-dialog" id="inquiry" aria-labelledby="inquiry-title">
+    <div class="inquiry-grid">
+      <div class="inquiry-photo" aria-hidden="true"></div>
+      <div class="inquiry-content">
+        <button type="button" class="close" data-close aria-label="Close request form" autofocus>×</button>
+        <div id="inquiry-fields">
+          <p class="eyebrow">Availability request</p><h2 id="inquiry-title">Request a <em>stay.</em></h2>
+          <p>Share your dates and guest count. Your host will reply to confirm availability.</p>
+          <form id="request-form">
+            <div class="form-row"><div class="form-field"><label for="arrival">Check-in</label><input id="arrival" name="arrival" type="date" required></div><div class="form-field"><label for="departure">Check-out</label><input id="departure" name="departure" type="date" required></div></div>
+            <div class="form-row"><div class="form-field"><label for="guests">Guests</label><select id="guests" name="guests" required><option value="1">1 guest</option><option value="2" selected>2 guests</option><option value="3">3 guests</option><option value="4">4 guests</option><option value="5">5 guests</option><option value="6">6 guests</option></select></div><div class="form-field"><label for="preferred-stay">Preferred stay</label><select id="preferred-stay" name="stay"><option value="">No preference</option></select></div></div>
+            <div class="form-row"><div class="form-field"><label for="guest-name">Name</label><input id="guest-name" name="name" autocomplete="name" required></div><div class="form-field"><label for="guest-email">Email</label><input id="guest-email" name="email" type="email" autocomplete="email" required></div></div>
+            <p class="prototype-note">Prototype only. Form entries stay in this tab.</p>
+            <button class="button button-dark" type="submit">Preview request <span aria-hidden="true">↗</span></button>
+          </form>
+        </div>
+        <div id="inquiry-confirmation" hidden>
+          <p class="eyebrow">Request preview</p>
+          <h2 tabindex="-1">Your stay <em>at a glance.</em></h2>
+          <p id="request-summary"></p>
+          <p>In the live experience, you’ll receive a reply from the host about availability. This prototype keeps your request in this tab.</p>
+          <button class="button button-dark" type="button" id="edit-request">Edit request <span aria-hidden="true">↗</span></button>
+        </div>
+      </div>
+    </div>
+  </dialog>
+</body>
+</html>

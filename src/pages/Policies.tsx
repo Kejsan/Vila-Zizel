@@ -1,5 +1,8 @@
 import { Calendar, FileText, ShieldCheck, Sparkles } from 'lucide-react';
 import { ActionLink, PageIntro, Reveal } from '../components/Editorial';
+import { useApp } from '../context/AppContext';
+import { usePrivacy } from '../context/PrivacyContext';
+import { privacyCopy } from '../lib/privacy';
 
 const sections = [
   {
@@ -19,14 +22,6 @@ const sections = [
     ],
   },
   {
-    icon: FileText,
-    title: 'Privacy',
-    body: [
-      'Contact form details are used only to answer booking, availability, and guest-service requests.',
-      'The site may load third-party services such as Google Maps, weather data, and externally hosted images. Those providers may process technical data according to their own policies.',
-    ],
-  },
-  {
     icon: Sparkles,
     title: 'Accessibility and Accuracy',
     body: [
@@ -37,6 +32,9 @@ const sections = [
 ];
 
 export default function Policies() {
+  const { lang } = useApp();
+  const { openPreferences } = usePrivacy();
+  const privacy = privacyCopy(lang);
   return (
     <div lang="en">
       <PageIntro label="Guest information" title="Policies &" accent="practical details.">
@@ -44,6 +42,20 @@ export default function Policies() {
       </PageIntro>
       <section className="shell policy-layout">
         <div className="policies-grid">
+          <article id="privacy" tabIndex={-1} lang={lang} className="policy-card policy-privacy" aria-labelledby="policy-privacy-title">
+            <FileText aria-hidden="true" />
+            <h2 id="policy-privacy-title">{privacy.policy}</h2>
+            <p>{privacy.summary}</p>
+            <dl>
+              {Object.values(privacy.sections).map(({ title, description, details }) => (
+                <div key={title}>
+                  <dt>{title}</dt>
+                  <dd>{description} {details}</dd>
+                </div>
+              ))}
+            </dl>
+            <button type="button" className="action action--dark" aria-haspopup="dialog" onClick={openPreferences}>{privacy.manage}</button>
+          </article>
           {sections.map(({ title, body, icon: Icon }, index) => (
             <Reveal key={title} className="policy-card" delay={(index % 2) * 0.1}>
               <Icon aria-hidden="true" />

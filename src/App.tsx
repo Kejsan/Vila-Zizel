@@ -3,6 +3,7 @@ import { useEffect, useRef } from 'react';
 import { MotionConfig, useReducedMotion } from 'motion/react';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
+import PrivacyPrompt from './components/PrivacyPrompt';
 import WeatherWidget from './components/WeatherWidget';
 import SEO from './components/SEO';
 import Home from './pages/Home';
@@ -12,6 +13,7 @@ import Contact from './pages/Contact';
 import RoomDetail from './pages/RoomDetail';
 import Policies from './pages/Policies';
 import { AppProvider, useApp } from './context/AppContext';
+import { PrivacyProvider } from './context/PrivacyContext';
 import { brandAssets, editorial } from './lib/editorial';
 import { ActionLink } from './components/Editorial';
 
@@ -70,6 +72,7 @@ function Site() {
       </main>
       <Footer />
       {pathname !== '/contact' && <div className="mobile-request"><ActionLink to={requestTo}>{room ? copy.requestRoom : copy.request}</ActionLink></div>}
+      <PrivacyPrompt />
     </div>
   );
 }
@@ -78,7 +81,7 @@ export default function App() {
   return (
     <AppProvider>
       <MotionConfig reducedMotion="user">
-        <Router><Site /></Router>
+        <Router><PrivacyProvider><Site /></PrivacyProvider></Router>
       </MotionConfig>
     </AppProvider>
   );

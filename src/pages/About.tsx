@@ -1,7 +1,9 @@
 import { Car, MapPin, Plane, Sun, Trees } from 'lucide-react';
 import { ActionLink, BookingCallout, ParallaxPhoto, Reveal } from '../components/Editorial';
 import { useApp } from '../context/AppContext';
+import { usePrivacy } from '../context/PrivacyContext';
 import { directionsUrl, editorial, mapUrl, weatherAttribution } from '../lib/editorial';
+import { privacyCopy } from '../lib/privacy';
 
 const gemPhotos = ['/Images/Garden Area.jpg', '/Images/Analipsi Beach/2.jpg', '/Images/Analipsi Beach/7.jpg'];
 
@@ -9,7 +11,9 @@ type LocalGem = { name: string; dist: string; desc: string; img?: string };
 
 export default function About() {
   const { lang, t, weather } = useApp();
+  const { choices, openPreferences } = usePrivacy();
   const copy = editorial(lang);
+  const privacy = privacyCopy(lang);
   const gems: LocalGem[] = t.about.localGems || [];
 
   return (
@@ -87,7 +91,15 @@ export default function About() {
             )}
           </Reveal>
           <Reveal delay={0.14} className="location-map">
-            <iframe title={`Vila Zizel · ${copy.location}`} src={mapUrl} loading="lazy" referrerPolicy="no-referrer-when-downgrade" allowFullScreen />
+            {choices?.maps ? (
+              <iframe title={`Vila Zizel · ${copy.location}`} src={mapUrl} loading="lazy" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen />
+            ) : (
+              <div className="location-map-placeholder">
+                <MapPin aria-hidden="true" />
+                <p>{privacy.mapPlaceholder}</p>
+                <button className="action action--dark" type="button" aria-haspopup="dialog" onClick={openPreferences}>{privacy.manage}</button>
+              </div>
+            )}
             <a href={directionsUrl}>Vila Zizel · Analipsi 240 01 <MapPin aria-hidden="true" /></a>
           </Reveal>
         </div>
